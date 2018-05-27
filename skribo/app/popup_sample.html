@@ -1,0 +1,511 @@
+<!doctype html>
+<html data-ng-app="JuntasApp" data-ng-csp>
+
+<head>
+    <title></title>
+    <link href="css/popup.css" rel="stylesheet" />
+    <link href="../css/themes/paper/bootstrap.min.css" rel="stylesheet" id="mainthemefile" />
+    <!--<link href="../js/angular-tour/angular-tour.css" rel="stylesheet" />-->
+    <!-- inject:style:css -->
+    <link rel="stylesheet" href="/bower_components/components-font-awesome/css/font-awesome.css">
+    <!-- endinject -->
+    <!-- inject:head:js -->
+    <script src="/bower_components/moment/moment.js"></script>
+    <script src="/bower_components/recordrtc/RecordRTC.js"></script>
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/bower_components/angular-aria/angular-aria.js"></script>
+    <script src="/bower_components/angular-gettext/dist/angular-gettext.js"></script>
+    <script src="/bower_components/angular-base64-upload/src/angular-base64-upload.js"></script>
+    <script src="/bower_components/angular-tour/dist/angular-tour-tpls.min.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <!-- endinject -->
+
+    <link rel="stylesheet" href="" id="rtlbootstrapfile">
+    <link rel="stylesheet" href="" id="rtlfile">
+    <link href="../css/bootstrap-social.css" rel="stylesheet" />
+    <link href="../css/bootstrap-switch.css" rel="stylesheet" />
+
+    <script src="config/config.js"></script>
+    <script src="../js/oauth2/oauth2.js"></script>
+    <script type="text/javascript" src="../js/dialogs.js"></script>
+    <script type="text/javascript" src="../js/bootstrap-switch.js"></script>
+    <script type="text/javascript" src="../languages/translations.js"></script>
+    <script type="text/javascript" src="js/popup.js"></script>
+    <script type="text/javascript" src="popup_panels/popup_panels.js"></script>
+    <script type="text/javascript" src="directives/progress-bar.js"></script>
+    <script type="text/javascript" src="services/languageservice.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
+
+</head>
+
+<body data-ng-csp>
+
+    <div data-ng-controller="JuntasCtrl" id="JuntasCtrl" ng-init="init()" class="container">
+        <nav class="navbar-fixed-top" role="navigation">
+            <div class="navbar-default navbar-inverse topbar">
+                <div class="container-fluid">
+                    <div class="navbar-header fleft">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                            aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                        <a class="navbar-brand">
+                            {{"Our Work" | translate}}
+                            <span class="badge">
+                                <img src="../icons/ourwork_48.png" class="brandlogo" />
+                            </span>
+                            <small>{{"Working together" | translate}}</small>
+                        </a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav pull-right">
+                            <li ng-if="!notLogedIn" class="well login-info">
+
+                                <img ng-src="{{User.Picture.data.url}}" class="pull-left popup-avatar img-rounded" />
+
+                                <div class="pull-left">
+
+                                    <lable>{{User.FirstName}} {{User.LastName}}</lable>
+                                    <br />
+                                    <label> {{User.Email}}</label>
+                                    <br />
+                                </div>
+                                <div class="pull-left">
+                                    <a ng-click="Logout()" class="btn btn-default btn-xs">
+                                        <i class="fa fa-sign-out"></i> {{"Sign out" | translate}}</a>
+                                </div>
+                            </li>
+                            <!--<li ng-if="!notLogedIn">
+                                        <a>
+                                            <div>
+                                                {{"connected as" | translate}}:<br />
+                                                          </div>
+                                        </a>
+                                    </li>-->
+                            <li class="pull-right" ng-if="!notLogedIn">
+                                <a href="#" id="settingsBtn" class="fa fa-cog settings-icon" data-toggle="modal" data-target="#myModal">{{page}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <juntas md-mode="indeterminate" ng-show="true"></juntas>
+
+
+
+        <div ng-if="notLogedIn" class="container-fluid">
+            <div ng-show="socialLogin">
+                <br/>
+                <br/>
+                <br/>
+                <!-- <a class="btn btn-block btn-social btn-facebook" ng-click="initFacebook()" id="btn-facebook">
+                    <i class="fa fa-facebook"></i> {{"Sign in with Facebook" | translate}} <juntas-loader ng-if="LoaderState['facebook']"></juntas-loader>
+                </a> -->
+                <a class="btn btn-block btn-social btn-google" data-ng-click="googleLogin()" id="btn-google">
+                    <i class="fa fa-google-plus"></i>{{"Sign in with Google" | translate}}
+                    <juntas-loader ng-if="LoaderState['google']"></juntas-loader>
+                </a>
+            </div>
+
+            <div class="row" ng-hide="socialLogin">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div class="panel panel-success panelheight" ng-hide="RemindPassword">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <span class="glyphicon glyphicon-user"></span> {{"Sign in"| translate}}
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <form class="form">
+                                <div class="form-group">
+                                    <label for="Email">{{"Email" | translate}}:</label>
+                                    <input type="email" class="form-control" id="Email" data-ng-model="LoginInformation.Email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="Password">{{"Password" | translate}}:</label>
+                                    <input type="password" class="form-control" id="Password" data-ng-model="LoginInformation.Password">
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        <a ng-click="RemindPassword = true">
+                                            {{"Forgot password?" | translate}}
+                                        </a>
+                                    </label>
+                                </div>
+                                <a class="btn btn-primary " id="signinBtn" ng-click="Login()">{{"Sign in" | translate}}
+                                    <juntas-loader ng-if="LoaderState['login']"></juntas-loader>
+                                </a>
+                                <div class="panel pull-right bg-danger errorpanel" ng-show="LoginInformation.Error !== undefined">
+                                    <div class="panel-body bg-danger">
+                                        {{LoginInformation.Error | translate}}
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="panel panel-success panelheight" ng-show="RemindPassword">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <span class="glyphicon glyphicon-user"></span> {{"Password reminder"| translate}}
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <form class="form" name="passwordFrm">
+                                <div class="form-group">
+                                    {{passwordFrm.Email.$invalid}}
+                                    <label for="Email">{{"Email" | translate}}:</label>
+                                    <input type="email" class="form-control" name="Email" data-ng-model="RemindPasswordInformation.Email">
+                                    <span ng-show="passwordFrm.Email.$touched && passwordFrm.Email.$invalid">Email is required.</span>
+
+                                </div>
+                            </form>
+                            <a class="btn btn-primary " id="signinBtn" ng-click="ResetPassword()">{{"Reset password" | translate}}</a>
+                            <div class="panel pull-right bg-danger errorpanel" ng-show="RemindPasswordInformation.Error !== undefined">
+                                <div class="panel-body bg-danger">
+                                    {{RemindPasswordInformation.Error | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <div class="panel panel-info panelheight">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <span class="glyphicon glyphicon-pencil"></span> {{"Sign up" | translate}}
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <form class="form" id="RegisterPanel">
+                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <label for="FirstName">{{"First name" | translate}}:</label>
+                                    <input type="text" class="form-control" id="FirstName" data-ng-model="RegistrationInformation.FirstName">
+                                </div>
+                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <label for="LastName">{{"Last name" | translate}}:</label>
+                                    <input type="text" class="form-control" id="LastName" data-ng-model="RegistrationInformation.LastName">
+                                </div>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <label for="Email">{{"Email" | translate}}:</label>
+                                    <input type="email" class="form-control" id="Email" data-ng-model="RegistrationInformation.Email">
+                                </div>
+                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <label for="Password">{{"Password" | translate}}:</label>
+                                    <input type="password" class="form-control" id="Password" data-ng-model="RegistrationInformation.Password">
+                                </div>
+                                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <label for="PasswordMatch">{{"Repeat Password" | translate}}:</label>
+                                    <input type="password" class="form-control" id="RepeatPassword" data-ng-model="RegistrationInformation.RepeatPassword">
+                                </div>
+                                <a class="btn btn-primary" ng-click="Register()">{{"Sign up" | translate}}
+                                    <juntas-loader ng-if="LoaderState['register']"></juntas-loader>
+                                </a>
+                                <div class="panel pull-right bg-danger errorpanel" ng-show="RegistrationInformation.Error !== undefined">
+                                    <div class="panel-body bg-danger">
+                                        {{RegistrationInformation.Error | translate}}
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a data-ng-show="socialLogin" data-ng-click="socialLogin = false;" id="btn-email">{{"i want to use email and password for registration or login"| translate}}</a>
+            <a data-ng-show="!socialLogin" data-ng-click="socialLogin = true;">{{"Facebook or Google login"| translate}}</a>
+        </div>
+
+
+
+
+        <div ng-if="!notLogedIn">
+            <div class="page-header">
+                <h3 class="hide-fade" ng-hide="UImode !== ''">
+                    {{"juntas_slogen" | translate}}
+                </h3>
+                <a class="btn btn-primary" id="managebtn" ng-class="{'active': UImode == 'Manage'}" ng-click="UImode = 'Manage.List'">
+                    <i class="fa fa-users"></i> {{"My groups" | translate}}</a>
+                <a class="btn btn-primary" id="contactsbtn" ng-class="{'active': UImode == 'Contacts'}" ng-click="LoadContacts(); UImode = 'Contacts.List';">
+                    <i class="fa fa-address-book"></i> {{"Contacts" | translate}}</a>
+                <a class="btn btn-primary" id="blogsbtn" ng-class="{'active': UImode == 'Blogs'}" ng-click="LoadBlogs(); UImode = 'Blogs.List';">
+                    <i class="fa fa-rss"></i> {{"Blogs" | translate}}</a>
+
+
+
+
+            </div>
+
+
+            <juntas-groups></juntas-groups>
+            <juntas-contacts></juntas-contacts>
+            <juntas-blogs></juntas-blogs>
+
+
+
+
+
+        </div>
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">{{"General settings"| translate}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>{{"Language"| translate}}</label>
+                            <select data-ng-model="InterfaceLanguage" ng-options="language as language.name for language in Languages" class="form-control"></select>
+                        </div>
+                        <div class="form-group">
+                            <label>{{"Theme"| translate}}</label>
+                            <select data-ng-model="Theme" ng-options="theme as theme for theme in Themes" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">{{"Save changes"| translate}}</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+        <div class="modal fade" id="subscriptionConfigurationModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">{{EditSettings.Name}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>{{"Language"| translate}}</label>
+                            <select data-ng-model="Language" ng-options="language as language.name for language in Languages" class="form-control"></select>
+                        </div>
+                        <div class="form-group">
+                            <label>{{"Theme"| translate}}</label>
+                            <select data-ng-model="EditSettings.Theme" ng-options="theme as theme for theme in Themes" class="form-control"></select>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" data-ng-model="EditSettings.AllowPop" /> {{"Allow pop"| translate}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{"Close"| translate}}</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" data-ng-click="PersistConfiguration()">{{"Save changes"| translate}}</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+        <div class="modal fade" id="groupConfigurationModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">{{EditSettings.Name}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>{{"Presence"| translate}}</label>
+                            <select data-ng-model="EditSettings.Discovery" class="form-control">
+                                <option value="public">{{"Public"| translate}}</option>
+                                <option value="private">{{"Private"| translate}}</option>
+                                <option value="p2p">{{"Peer"| translate}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>{{"Rating"| translate}}</label>
+                            <select data-ng-model="EditSettings.Rating" class="form-control">
+                                <option value="all">{{"All ages"| translate}}</option>
+                                <option value="adult">{{"Adults only"| translate}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>{{"Theme"| translate}}</label>
+                            <select data-ng-model="EditSettings.Theme" ng-options="theme as theme for theme in Themes" class="form-control"></select>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" data-ng-model="EditSettings.AllowPop" /> {{"Allow pop"| translate}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{"Close"| translate}}</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" data-ng-click="PersistGroupConfiguration()">{{"Save changes"| translate}}</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+        <div class="modal fade" id="ConfirmDialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">
+                            <span class="fa fa-send"></span> Confirm operation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>{{"Confirm deletion?" | translate}}:</label>
+                            <textarea data-ng-model="ShareUrl" id="ShareUrl" class="form-control sharebox"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal">{{"Cancel" | translate}}</button>
+                        <button class="btn btn-primary" clip-copy="ShareUrl">{{"Confirm" | translate}}</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <div class="modal fade" id="UserFeedsDialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div class="avatar-frame pull-left">
+                            <img ng-src="{{UserSearchFeeds.Picture.data.url}}" />
+                        </div>
+                        <h4 class="modal-title">
+                            <span class="fa fa-gamepad"></span> {{UserSearchFeeds.Name}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="list-group scrolled-list">
+                            <li class="list-group-item" ng-repeat="item in UserSearchFeeds.Feeds">
+                                <div>
+                                    <label class="padding5">
+                                        <strong> {{item.Name}}</strong>
+                                        <small>
+                                            {{item.Description}}
+                                        </small>
+                                        <span class="fa fa-gamepad icon-big"></span>
+                                    </label>
+                                    {{"by" | translate}}
+                                    <label>{{item.User.Name}}</label>
+                                    <a class="btn btn-info pull-right" data-ng-click="ConnectToFeed(item)">
+                                        <span class="fa fa-eye icon-big"></span>
+                                        <span class="badge">{{item.Followers.length}}</span>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                        <!--<ul>
+                            <li ng-repeat="feed in UserSearchFeeds.Feeds">
+                                <a data-ng-click="ConnectToFeed(feed)">
+                                    {{feed.Name}}
+                                </a>
+                            </li>
+                        </ul>-->
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal">{{"Close" | translate}}</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <tour step="currentTourStep" ng-if="notLogedIn">
+            <virtual-step tourtip="{{'tour - login - Welcome to juntas' | translate}}" tourtip-element="#JuntasCtrl" tourtip-next-label="{{'Start' | translate}}"
+                tourtip-placement="center"></virtual-step>
+            <virtual-step tourtip="{{'tour - login - login tour' | translate}}" tourtip-element="#JuntasCtrl" tourtip-next-label="{{'Next' | translate}}"
+                tourtip-placement="center"></virtual-step>
+            <virtual-step tourtip="{{'tour - login - facebook' | translate}}" tourtip-element="#btn-facebook" tourtip-next-label="{{'Next' | translate}}"
+                tourtip-placement="bottom"></virtual-step>
+            <virtual-step tourtip="{{'tour - login - google' | translate}}" tourtip-element="#btn-google" tourtip-next-label="{{'Next' | translate}}"
+                tourtip-placement="bottom"></virtual-step>
+            <virtual-step tourtip="{{'tour - login - registration' | translate}}" tourtip-element="#btn-email" tourtip-next-label="{{'Next' | translate}}"
+                tourtip-placement="bottom"></virtual-step>
+            <virtual-step tourtip="{{'tour - login - finish' | translate}}" tourtip-next-label="{{'Finish' | translate}}" tourtip-element="#JuntasCtrl"
+                tourtip-placement="center"></virtual-step>
+        </tour>
+        <tour step="currentTourStep" ng-if="!notLogedIn">
+            <virtual-step tourtip="{{'tour - manage - Welcome to juntas' | translate}}" tourtip-element="body" tourtip-next-label="{{'Start' | translate}}"
+                tourtip-placement="center"></virtual-step>
+            <virtual-step tourtip="{{'tour - manage - join' | translate}}" on-show="UImode = 'Join'" tourtip-element="#joinbtn" tourtip-placement="bottom"
+                tourtip-margin="10" tourtip-next-label="{{'Next' | translate}}"></virtual-step>
+            <virtual-step tourtip="{{'tour - manage - create' | translate}}" tourtip-element="#createbtn" on-show="UImode = 'Create'"
+                tourtip-next-label="{{'Next' | translate}}" tourtip-placement="bottom"></virtual-step>
+            <virtual-step tourtip="{{'tour - manage - mygroups' | translate}}" tourtip-element="#managebtn" on-show="UImode = 'Manage'"
+                tourtip-next-label="{{'Next' | translate}}" tourtip-placement="bottom"></virtual-step>
+            <virtual-step tourtip="{{'tour - manage - contacts' | translate}}" tourtip-element="#contactsbtn" on-show="UImode = 'Contacts'"
+                tourtip-next-label="{{'Next' | translate}}" tourtip-placement="bottom"></virtual-step>
+            <virtual-step tourtip="{{'tour - manage - settings' | translate}}" tourtip-element="#settingsBtn" tourtip-next-label="{{'Next' | translate}}"
+                tourtip-placement="left"></virtual-step>
+            <virtual-step tourtip="{{'tour - manage - finish' | translate}}" tourtip-next-label="{{'Finish' | translate}}" tourtip-element="#JuntasCtrl"
+                tourtip-placement="center"></virtual-step>
+        </tour>
+        <script id="tour/tour.tpl.html" type="text/ng-template">
+            <div class="tour-tip">
+                <span class="tour-arrow tt-{{ ttPlacement }}" ng-hide="centered"></span>
+                <div class="tour-content-wrapper">
+                    <pre ng-bind="ttContent"></pre>
+                    <a ng-click="proceed()" ng-bind="ttNextLabel" class="btn btn-primary btn-sm pull-right "></a>
+                    <a ng-click="restart()" ng-bind="ttRestartLabel" class="btn btn-default btn-sm" ng-show="last">{{"Restart" | translate}}</a>
+                    <a ng-click="closeTour()" class="tour-close-tip">&times;</a>
+                </div>
+            </div>
+        </script>
+        <nav class="navbar-fixed-bottom" role="navigation">
+            <div class="navbar-default navbar-inverse">
+                <div class="container-fluid">
+                    <ul class="nav navbar-nav container-fluid">
+                        <!-- <li class="col-md-4 col-lg-4">
+                            <a href="https://www.juntason.com" class="btn-footer" ng-bind-html='"juntason.com 2017"| translate'></a>
+                        </li> -->
+                        <li class="col-md-4 col-lg-4">
+                            <a ng-click="StartTour()" class="btn-footer">
+                                <i class="fa fa-map-signs"></i> {{"Take the tour" | translate}}
+                            </a>
+                        </li>
+                        <li class="col-md-2 col-lg-2">
+                            <a class="btn-footer"> V{{Version}}</a>
+                        </li>
+                        <li class="col-md-2 col-lg-2">
+                            <a class="btn-footer">
+                                <span ng-repeat="line in ActivityStatus">{{line}}</span>
+                            </a>
+
+                        </li>
+
+
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</body>
+
+</html>

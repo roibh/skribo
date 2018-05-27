@@ -1,0 +1,69 @@
+{
+  "name": "our-work",
+  "version": "0.0.5",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "tsc",
+    "build": "tsc && gulp dev",
+    "build:dist": "npm version patch && tsc && gulp production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true
+    }
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/angular": "^1.6.10",
+    "@types/chrome": "0.0.43",
+    "@types/socket.io-client": "^1.4.29",
+    "del": "^2.2.0",
+    "eslint": "^3.18.0",
+    "eslint-config-google": "^0.7.1",
+    "grunt": "^1.0.1",
+    "grunt-angular-gettext": "^2.1.14",
+    "grunt-byte-order-mark": "^0.1.0",
+    "gulp": "^3.9.1",
+    "gulp-bom": "^1.0.0",
+    "gulp-clean": "^0.3.2",
+    "gulp-cleanhtml": "^1.0.1",
+    "gulp-copy": "0.0.2",
+    "gulp-debug": "^2.1.2",
+    "gulp-ignore": "^2.0.1",
+    "gulp-inject": "^4.0.0",
+    "gulp-minify": "0.0.5",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-rimraf": "^0.2.0",
+    "gulp-strip-debug": "^1.1.0",
+    "gulp-tsc": "^1.2.4",
+    "gulp-tslint": "^4.3.4",
+    "gulp-typescript": "^3.0.2",
+    "gulp-uglify": "^1.5.3",
+    "gulp-zip": "^3.2.0",
+    "mocha": "^2.4.5",
+    "moment": "^2.18.1",
+    "run-sequence": "^1.1.5",
+    "tslint": "^3.15.1",
+    "typescript": "^2.7.2",
+    "unit.js": "^2.0.0"
+  },
+  "dependencies": {
+    "@types/angular": "^1.6.14",
+    "@types/jquery": "^3.3.0",
+    "eslint": "^3.19.0",
+    "grunt-angular-gettext": "^2.3.4",
+    "gulp-cleanhtml": "^1.0.3",
+    "gulp-group": "^1.0.0",
+    "gulp-ignore": "^2.0.2",
+    "gulp-inject": "^4.2.0",
+    "gulp-rimraf": "^0.2.1",
+    "gulp-tsc": "^1.3.2",
+    "gulp-typescript": "^3.1.6",
+    "main-bower-files": "^2.13.1",
+    "marked": "^0.3.6",
+    "moment": "^2.18.1"
+  }
+}

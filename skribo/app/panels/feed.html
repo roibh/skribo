@@ -1,0 +1,125 @@
+﻿
+<div class="list-group" ng-show="SidebarMode == 2 && commentedItem !== null" set-height="420">
+    <div class="list-group-item" data-ng-repeat="item in [commentedItem] | orderBy: 'Date':reverse"
+         ng-class="{'list-group-item-success': item.Url === PageUrl}">
+
+
+
+        <label>{{item.Date | displaydate}}<br /><abbr>{{item.UserId | username}}</abbr></label>
+        <div class="btn-toolbar btn-group-xs pull-right" role="toolbar" aria-label="...">
+            <div class="btn-group btn btn-default" role="group" aria-label="" title="{{'close item' | translate}}" ng-click="comment(null)"><span class="fa fa-close" ng-click="comment(null)"></span></div>
+
+
+            <div class="btn-group btn" role="group" aria-label="" title="{{'Open in new window' | translate}}" ng-click="PopUrl(item,true)"><span class="fa fa-external-link" ng-click="PopUrl(item,true)"></span></div>
+            <div class="btn-group btn btn-info" role="group" aria-label="like" title="{{'Like' | translate}}" ng-click="Like(item)"><span class="fa fa-star"></span> {{item.Likes.length}}</div>
+
+            <div class="btn-group btn btn-success" role="group" aria-label="comment" title="{{'Comment' | translate}}" ng-click="comment(item)">
+                <i class="fa fa-comments"></i>
+                {{item.Comments.length}}
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+            <div class="btn-group btn btn-danger" ng-if="item.UserId === User._id" role="group" aria-label="delete" title="{{'Delete' | translate}}" ng-click="DeleteHistory(item)"><span class="fa fa-remove"></span></div>
+        </div>
+
+        <div class="feed-btn btn-default" ng-click="PopUrl(item,false)">
+
+            <span class="text-center">
+
+
+                <juntas-loader></juntas-loader>
+                <img ng-src="{{item.Thumb | imageurl: 'slide_images'}}" imageonload class="img-rounded url-image" />
+
+
+            </span>
+            <label> {{item.Title}}</label>
+        </div>
+
+
+        <div class="list-group content-scroll-item" id="chatscrollItem">
+            <!--set-height="700"-->
+
+            <a href="#" class="list-group-item" ng-class="{'new-message': item.isNew}"
+               data-ng-repeat="citem in Comments | filter: {ItemId:item._id } | orderBy: 'Date':reverse">
+
+
+                <div class="comment-header">
+                    <div class="avatar-frame pull-left">
+                        <img ng-src="{{citem.UserId | picture}}" />
+                    </div>
+                    <div class="pull-right">
+                        <small class="pull-right">{{citem.Date | displaydate}}</small><br />
+                        <small class="pull-right">{{citem.UserId | username}}</small>
+                    </div>
+                    <div class="pull-left">
+                        <div ng-bind-html="citem.Message | properalign"></div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </a>
+        </div>
+
+
+    </div>
+
+
+
+
+
+</div>
+
+
+
+
+
+<div class="list-group content-scroll navigation-scroll" id="navigationscroll" set-height="420" ng-show="SidebarMode == 2 && commentedItem === null">
+
+
+    <a href="#" class="list-group-item" data-ng-repeat="item in History | orderBy: '-Date':reverse"
+       ng-class="{'list-group-item-success': item.Url === PageUrl}">
+
+        <label>{{item.Date | displaydate}}<br /><abbr>{{item.UserId | username}}</abbr></label>
+        <div class="btn-toolbar btn-group-xs pull-right" role="toolbar" aria-label="...">
+            <div class="btn-group btn" role="group" aria-label="" title="{{'Open in new window' | translate}}" ng-click="PopUrl(item,true)"><span class="fa fa-external-link" ng-click="PopUrl(item,true)"></span></div>
+            <div class="btn-group btn btn-info" role="group" aria-label="like" title="{{'Like' | translate}}" ng-click="Like(item)"><span class="fa fa-star"></span> {{item.Likes.length}}</div>
+
+            <div class="btn-group btn btn-success" role="group" aria-label="comment" title="{{'Comment' | translate}}" ng-click="comment(item)">
+                <i class="fa fa-comments"></i>
+                {{$filter('filter')(Comments, {ItemId: item._id}).length}}
+            </div>
+
+
+
+
+
+            <div class="btn-group btn btn-danger" ng-if="item.UserId === User._id" role="group" aria-label="delete" title="{{'Delete' | translate}}" ng-click="DeleteHistory(item)"><span class="fa fa-remove"></span></div>
+        </div>
+        <p class="clear">
+            <div class="feed-btn btn-default" ng-click="PopUrl(item,false)">
+
+                <span class="text-center">
+                    <juntas-loader></juntas-loader>
+                    <img ng-src="{{item.Thumb | imageurl: 'slide_images'}}" class="img-rounded url-image" imageonload />
+                </span>
+                <label> {{item.Title}}</label>
+            </div>
+        </p>
+        <div class="clear"></div>
+    </a>
+
+    <!--<a href="#" class="list-group-item" ng-click="loadHistory()">
+        <span class="fa fa-angle-double-down"></span> {{"Load more"| translate}}
+
+    </a>-->
+</div>

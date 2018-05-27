@@ -1,0 +1,560 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+
+#: app/popup.html:288
+#: app/popup.html:631
+#: app/sidebar.html:270
+msgid "Adults only"
+msgstr ""
+
+#: app/popup.html:287
+#: app/popup.html:630
+#: app/sidebar.html:269
+msgid "All ages"
+msgstr ""
+
+#: app/popup.html:600
+#: app/popup.html:641
+#: app/sidebar.html:326
+msgid "Allow pop"
+msgstr ""
+
+#: app/popup.html:352
+#: app/popup.html:474
+#: app/popup.html:501
+#: app/popup.html:692
+#: app/sidebar.html:133
+msgid "by"
+msgstr ""
+
+#: app/popup.html:666
+#: app/sidebar.html:426
+#: app/video.html:101
+msgid "Cancel"
+msgstr ""
+
+#: app/sidebar.html:163
+msgid "Chat"
+msgstr ""
+
+#: app/options.html:74
+#: app/popup.html:575
+#: app/popup.html:605
+#: app/popup.html:646
+#: app/popup.html:710
+#: app/sidebar.html:340
+#: app/sidebar.html:374
+#: app/sidebar.html:402
+msgid "Close"
+msgstr ""
+
+#: app/sidebar.html:83
+msgid "collapse"
+msgstr ""
+
+#: app/indication.html:75
+#: app/sidebar.html:477
+msgid "Comment"
+msgstr ""
+
+#: app/popup.html:469
+#: app/popup.html:507
+msgid "Configure"
+msgstr ""
+
+#: app/popup.html:667
+#: app/sidebar.html:427
+#: app/video.html:102
+msgid "Confirm"
+msgstr ""
+
+#: app/popup.html:661
+#: app/sidebar.html:421
+#: app/video.html:93
+msgid "Confirm deletion?"
+msgstr ""
+
+#: app/popup.html:86
+msgid "connected as"
+msgstr ""
+
+#: app/popup.html:227
+#: app/popup.html:518
+msgid "Contacts"
+msgstr ""
+
+#: app/sidebar.html:377
+#: app/sidebar.html:405
+msgid "Copied!"
+msgstr ""
+
+#: app/sidebar.html:378
+#: app/sidebar.html:406
+msgid "Copy"
+msgstr ""
+
+#: app/popup.html:224
+#: app/popup.html:235
+msgid "Create"
+msgstr ""
+
+#: app/popup.html:506
+msgid "Delete"
+msgstr ""
+
+#: app/strings.html:22
+msgid "Delete group"
+msgstr ""
+
+#: app/popup.html:256
+#: app/sidebar.html:243
+msgid "Description"
+msgstr ""
+
+#: app/strings.html:6
+msgid "DIALOGS_CLOSE"
+msgstr ""
+
+#: app/strings.html:13
+msgid "DIALOGS_CONFIRMATION"
+msgstr ""
+
+#: app/strings.html:14
+msgid "DIALOGS_CONFIRMATION_MSG"
+msgstr ""
+
+#: app/strings.html:4
+msgid "DIALOGS_ERROR"
+msgstr ""
+
+#: app/strings.html:5
+msgid "DIALOGS_ERROR_MSG"
+msgstr ""
+
+#: app/strings.html:17
+msgid "DIALOGS_NO"
+msgstr ""
+
+#: app/strings.html:11
+msgid "DIALOGS_NOTIFICATION"
+msgstr ""
+
+#: app/strings.html:12
+msgid "DIALOGS_NOTIFICATION_MSG"
+msgstr ""
+
+#: app/strings.html:15
+msgid "DIALOGS_OK"
+msgstr ""
+
+#: app/strings.html:10
+msgid "DIALOGS_PERCENT_COMPLETE"
+msgstr ""
+
+#: app/strings.html:7
+msgid "DIALOGS_PLEASE_WAIT"
+msgstr ""
+
+#: app/strings.html:8
+msgid "DIALOGS_PLEASE_WAIT_ELIPS"
+msgstr ""
+
+#: app/strings.html:9
+msgid "DIALOGS_PLEASE_WAIT_MSG"
+msgstr ""
+
+#: app/strings.html:16
+msgid "DIALOGS_YES"
+msgstr ""
+
+#: app/sidebar.html:143
+msgid "Disconnect from tab"
+msgstr ""
+
+#: app/popup.html:123
+#: app/popup.html:156
+#: app/popup.html:189
+msgid "Email"
+msgstr ""
+
+#: app/popup.html:213
+msgid "Facebook or Google login"
+msgstr ""
+
+#: app/sidebar.html:164
+msgid "Feed"
+msgstr ""
+
+#: app/sidebar.html:145
+#: app/sidebar.html:215
+msgid "Feed configuration"
+msgstr ""
+
+#: app/popup.html:427
+msgid "Filter"
+msgstr ""
+
+#: app/popup.html:309
+msgid "Find"
+msgstr ""
+
+#: app/popup.html:313
+msgid "Find groups & users"
+msgstr ""
+
+#: app/popup.html:721
+#: app/popup.html:740
+msgid "Finish"
+msgstr ""
+
+#: app/popup.html:181
+msgid "First name"
+msgstr ""
+
+#: app/popup.html:133
+msgid "Forgot password?"
+msgstr ""
+
+#: app/sidebar.html:167
+msgid "Games"
+msgstr ""
+
+#: app/options.html:61
+#: app/popup.html:562
+msgid "General settings"
+msgstr ""
+
+#: app/sidebar.html:223
+msgid "Group settings"
+msgstr ""
+
+#: app/popup.html:329
+msgid "Groups"
+msgstr ""
+
+#: app/popup.html:212
+msgid "i want to use email and password for registration or login"
+msgstr ""
+
+#: app/sidebar.html:280
+#: app/sidebar.html:364
+msgid "Image"
+msgstr ""
+
+#: app/popup.html:225
+#: app/popup.html:303
+msgid "Join"
+msgstr ""
+
+#: app/popup.html:62
+#: app/sidebar.html:127
+#: app/video.html:45
+msgid "juntas"
+msgstr ""
+
+#: app/popup.html:222
+msgid "juntas_slogen"
+msgstr ""
+
+#: app/popup.html:758
+msgid "JuntasOnline 2016"
+msgstr ""
+
+#: app/popup.html:431
+msgid "Just my groups"
+msgstr ""
+
+#: app/options.html:65
+#: app/popup.html:566
+#: app/popup.html:590
+#: app/sidebar.html:311
+msgid "Language"
+msgstr ""
+
+#: app/popup.html:185
+msgid "Last name"
+msgstr ""
+
+#: app/indication.html:66
+#: app/sidebar.html:473
+msgid "Like"
+msgstr ""
+
+#: app/sidebar.html:305
+msgid "Local settings"
+msgstr ""
+
+#: app/sidebar.html:165
+msgid "Members"
+msgstr ""
+
+#: app/popup.html:226
+#: app/popup.html:422
+msgid "My groups"
+msgstr ""
+
+#: app/popup.html:244
+#: app/sidebar.html:231
+msgid "Name"
+msgstr ""
+
+#: app/popup.html:717
+#: app/popup.html:718
+#: app/popup.html:719
+#: app/popup.html:720
+#: app/popup.html:728
+#: app/popup.html:731
+#: app/popup.html:734
+#: app/popup.html:737
+#: app/popup.html:739
+msgid "Next"
+msgstr ""
+
+#: app/popup.html:440
+msgid "No Followed Groups"
+msgstr ""
+
+#: app/popup.html:550
+msgid "online"
+msgstr ""
+
+#: app/popup.html:64
+#: app/sidebar.html:127
+#: app/video.html:45
+msgid "online together"
+msgstr ""
+
+#: app/popup.html:127
+#: app/popup.html:193
+msgid "Password"
+msgstr ""
+
+#: app/popup.html:149
+msgid "Password reminder"
+msgstr ""
+
+#: app/popup.html:272
+#: app/popup.html:624
+#: app/sidebar.html:255
+msgid "Peer"
+msgstr ""
+
+#: app/sidebar.html:188
+msgid "Pop"
+msgstr ""
+
+#: app/sidebar.html:185
+msgid "Post"
+msgstr ""
+
+#: app/popup.html:263
+#: app/popup.html:620
+#: app/sidebar.html:249
+msgid "Presence"
+msgstr ""
+
+#: app/video.html:67
+msgid "Prime"
+msgstr ""
+
+#: app/popup.html:271
+#: app/popup.html:623
+#: app/sidebar.html:254
+msgid "Private"
+msgstr ""
+
+#: app/popup.html:270
+#: app/popup.html:622
+#: app/sidebar.html:253
+msgid "Public"
+msgstr ""
+
+#: app/popup.html:281
+#: app/popup.html:628
+#: app/sidebar.html:263
+msgid "Rating"
+msgstr ""
+
+#: app/popup.html:470
+#: app/popup.html:508
+msgid "Reconnect"
+msgstr ""
+
+#: app/strings.html:20
+msgid "Remove group"
+msgstr ""
+
+#: app/strings.html:1
+msgid "Remove item"
+msgstr ""
+
+#: app/popup.html:197
+msgid "Repeat Password"
+msgstr ""
+
+#: app/popup.html:162
+msgid "Reset password"
+msgstr ""
+
+#: app/popup.html:748
+msgid "Restart"
+msgstr ""
+
+#: app/sidebar.html:342
+msgid "Save"
+msgstr ""
+
+#: app/options.html:75
+#: app/popup.html:576
+#: app/popup.html:606
+#: app/popup.html:647
+msgid "Save changes"
+msgstr ""
+
+#: app/sidebar.html:144
+#: app/sidebar.html:397
+#: app/sidebar.html:91
+#: app/sidebar.html:92
+msgid "Share url"
+msgstr ""
+
+#: app/sidebar.html:106
+#: app/sidebar.html:89
+msgid "show annotations"
+msgstr ""
+
+#: app/popup.html:117
+#: app/popup.html:137
+msgid "Sign in"
+msgstr ""
+
+#: app/popup.html:105
+msgid "Sign in with Facebook"
+msgstr ""
+
+#: app/popup.html:108
+msgid "Sign in with Google"
+msgstr ""
+
+#: app/popup.html:78
+msgid "Sign out"
+msgstr ""
+
+#: app/popup.html:175
+#: app/popup.html:200
+msgid "Sign up"
+msgstr ""
+
+#: app/popup.html:716
+#: app/popup.html:724
+msgid "Start"
+msgstr ""
+
+#: app/popup.html:296
+msgid "Start your new feed"
+msgstr ""
+
+#: app/popup.html:762
+msgid "Take the tour"
+msgstr ""
+
+#: app/options.html:69
+#: app/popup.html:570
+#: app/popup.html:594
+#: app/popup.html:635
+#: app/sidebar.html:315
+msgid "Theme"
+msgstr ""
+
+#: app/strings.html:23
+msgid "this will delete the entire group, continue?"
+msgstr ""
+
+#: app/strings.html:2
+msgid "this will remove"
+msgstr ""
+
+#: app/strings.html:21
+msgid "this will remove the group from your group list, continue?"
+msgstr ""
+
+#: app/popup.html:718
+msgid "tour - login - facebook"
+msgstr ""
+
+#: app/popup.html:721
+msgid "tour - login - finish"
+msgstr ""
+
+#: app/popup.html:719
+msgid "tour - login - google"
+msgstr ""
+
+#: app/popup.html:717
+msgid "tour - login - login tour"
+msgstr ""
+
+#: app/popup.html:720
+msgid "tour - login - registration"
+msgstr ""
+
+#: app/popup.html:716
+msgid "tour - login - Welcome to juntas"
+msgstr ""
+
+#: app/popup.html:735
+msgid "tour - manage - contacts"
+msgstr ""
+
+#: app/popup.html:729
+msgid "tour - manage - create"
+msgstr ""
+
+#: app/popup.html:740
+msgid "tour - manage - finish"
+msgstr ""
+
+#: app/popup.html:725
+msgid "tour - manage - join"
+msgstr ""
+
+#: app/popup.html:732
+msgid "tour - manage - mygroups"
+msgstr ""
+
+#: app/popup.html:738
+msgid "tour - manage - settings"
+msgstr ""
+
+#: app/popup.html:724
+msgid "tour - manage - Welcome to juntas"
+msgstr ""
+
+#: app/popup.html:468
+msgid "Unsubscribe"
+msgstr ""
+
+#: app/popup.html:330
+msgid "Users"
+msgstr ""
+
+#: app/sidebar.html:146
+msgid "Video"
+msgstr ""
+
+#: app/popup.html:265
+msgid "You must select a discovery level."
+msgstr ""
+
+#: app/popup.html:247
+#: app/sidebar.html:234
+msgid "You must select a name."
+msgstr ""
+
+#: app/popup.html:283
+#: app/sidebar.html:265
+msgid "You must select a rating."
+msgstr ""

@@ -1,0 +1,474 @@
+<!doctype html>
+<html data-ng-app="JuntasApp" data-ng-csp>
+
+<head>
+    <title></title>
+    <link href="css/sidebar.css" rel="stylesheet" />
+    <link href="../css/themes/paper/bootstrap.min.css" rel="stylesheet" id="mainthemefile" />
+
+
+
+    <!-- inject:style:css -->
+    <link rel="stylesheet" href="/bower_components/components-font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/bower_components/simplemde/src/css/simplemde.css">
+    <!-- endinject -->
+    <!-- inject:head:js -->
+    <script src="/bower_components/moment/moment.js"></script>
+    <script src="/bower_components/recordrtc/RecordRTC.js"></script>
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/bower_components/angular-aria/angular-aria.js"></script>
+    <script src="/bower_components/angular-gettext/dist/angular-gettext.js"></script>
+    <script src="/bower_components/angular-base64-upload/src/angular-base64-upload.js"></script>
+    <script src="/bower_components/angular-tour/dist/angular-tour-tpls.min.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/simplemde/src/js/simplemde.js"></script>
+    <script src="/bower_components/simplemde-angular/dist/simplemde-angular.js"></script>
+    <!-- endinject -->
+
+
+
+
+
+
+    <link href="../js/imageresizer/css/component.css" rel="stylesheet" />
+    <script src="../js/oauth2/oauth2.js"></script>
+
+    <script src="config/config.js"></script>
+
+    <script src="../js/clipboard.min.js"></script>
+    <script src="../js/ngclipboard.min.js"></script>
+
+    <script type="text/javascript" src="../languages/translations.js"></script>
+    <script type="text/javascript" src="../js/ZeroClipboard.js"></script>
+    <script type="text/javascript" src="../js/ng-clip.js"></script>
+    <script type="text/javascript" src="../js/dialogs.js"></script>
+
+
+    <script src="../games/russian roulette/game.js"></script>
+    <script type="text/javascript" src="js/common/fp.js"></script>
+    <script type="text/javascript" src="js/sidebar.js"></script>
+    <script type="text/javascript" src="panels/chat.js"></script>
+    <script type="text/javascript" src="panels/feed.js"></script>
+    <script type="text/javascript" src="panels/members.js"></script>
+    <script type="text/javascript" src="panels/games.js"></script>
+    <script type="text/javascript" src="panels/annotations.js"></script>
+
+    <script type="text/javascript" src="toolbars/owner.js"></script>
+    <script type="text/javascript" src="toolbars/viewer.js"></script>
+
+    <script type="text/javascript" src="services/languageservice.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
+
+
+    <!--<script type="text/javascript" src="../js/imageresizer/js/component.js"></script>-->
+    <script type="text/javascript" src="directives/progress-bar.js"></script>
+
+
+
+    <link rel="stylesheet" href="" id="rtlfile">
+</head>
+
+<body>
+    <div data-ng-controller="JuntassidebarCtrl" id="JuntasCtrl" ng-init="init()" class="container-fluid pull-left" ng-show="ThemeSet"
+         ng-class="{'body-expand': SidebarCollapseMode == 0}">
+
+
+
+        <div class='loader' ng-show="!CheckComplete">
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--text'></div>
+        </div>
+
+
+
+
+        <div class="slider-full" ng-cloak ng-show="SidebarCollapseMode == 0">
+            <div class="navbar navbar-inverse no-margin">
+                <div class="container">
+                    <div class="navbar-header">
+
+
+                        <owner-toolbar></owner-toolbar>
+                        <viewer-toolbar></viewer-toolbar>
+
+
+                        <div class="navbar-brand col-md-6 col-sm-6 col-xs-6">
+                            <span class="label label-success">
+                                {{ActiveFeedInformation.Name}}
+                            </span>
+                        </div>
+                        <!--<abbr>
+                            <span ng-if="ActiveFeedInformation.UserId === User._id" class="fa fa-gamepad"></span>
+                            <span ng-if="ActiveFeedInformation.UserId !== User._id"><br />{{"by" | translate }} {{ActiveFeedInformation.Manager.FirstName + " " +ActiveFeedInformation.Manager.LastName }}</span>
+                        </abbr>-->
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="feed-background">
+                <img ng-src="data:image/jpeg;base64,{{ActiveFeedInformation.Image.base64}}" ng-if="ActiveFeedInformation.Image.base64" class="feed-background-image" />
+                <img ng-src="https://s3-eu-west-1.amazonaws.com/juntas/{{ActiveFeedInformation.Image}}" ng-if="!ActiveFeedInformation.Image.base64"
+                     class="feed-background-image" />
+                <!--<a class="btn btn-primary feed-background-edit btn-xs" data-toggle="modal" data-target="#myCanvas"><span class="fa fa-edit"></span></a>-->
+                
+            </div>
+
+            <ul class="nav nav-tabs juntas-tabs  panel" role="tablist">
+                <li role="presentation" ng-class="{'active': SidebarMode==1}"><a ng-click="SidebarMode=1" aria-controls="home" role="tab" data-toggle="tab"><span class="fa fa-comment"></span> {{"Chat" | translate}}</a></li>
+                <li role="presentation" ng-class="{'active': SidebarMode==2}"><a ng-click="SidebarMode=2" role="tab" data-toggle="tab"><span class="fa fa-feed"></span> {{"Feed" | translate}}</a></li>
+                <li role="presentation" ng-class="{'active': SidebarMode==3}"><a ng-click="SidebarMode=3" role="tab" data-toggle="tab"><span class="fa fa-users"></span> {{"Members" | translate}}</a></li>
+
+                <li role="presentation" ng-class="{'active': SidebarMode==4}"><a ng-click="SidebarMode=4" role="tab" data-toggle="tab"><span class="fa fa-gamepad"></span> {{"Games" | translate}}</a></li>
+
+            </ul>
+
+
+            <div class="panel panel-primary margin-2">
+                <div class="panel-body">
+                    <chat ng-show="SidebarMode == 1"></chat>
+                    <feed ng-show="SidebarMode == 2"></feed>
+                    <members ng-show="SidebarMode == 3"></members>
+                    <games ng-show="SidebarMode == 4"></games>
+                </div>
+                <div class="panel-footer">
+                    <div class="padding-bottom">
+                        <div>
+                            <div class="textarea  postarea">
+                                <textarea ng-model="UserInput.Message" class="form-control " id="chattextbox" data-my-enter="Post()"></textarea>
+                                <div class="row">
+                                    <div class="col-xs-8">
+                                        <a class="btn btn-primary form-control" data-ng-click="Post()"><i class="fa fa-comment"></i> {{"Post" | translate}}</a>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <a class="btn btn-warning    form-control" data-ng-click="PopMembers()"><i class="fa fa-bullhorn"></i>  {{"Pop" | translate}}</a>
+                                    </div>
+
+
+                                </div>
+                                <div ng-repeat="item in Followers | filter: {isTyping:true }">
+                                    <small ng-if="item._id!= User._id">   {{item.FirstName}} {{"is typing..."}}</small>
+                                </div>
+                                <div class="clear"></div>
+
+
+
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal fade" id="configModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title"><span class="fa fa-cogs"></span> {{"Feed configuration" | translate}}</h4>
+                            </div>
+                            <div class="modal-body">
+
+
+                                <div class="panel panel-primary" ng-show="ActiveFeedInformation.UserId === User._id || ActiveFeedInformation.UserId.indexOf(User._id) > -1">
+                                    <div class="panel-heading">
+                                        <i class="fa fa-gamepad"></i> {{"Group settings" | translate}}
+
+                                    </div>
+                                    <div class="panel-body">
+                                        <form name="FeedForm">
+
+                                            <div class="form-group" ng-class="{'has-error':(submitted || FeedForm.FeedName.$touched) && FeedForm.FeedName.$error.required }">
+                                                <label for="FeedName">{{"Name" | translate}}:</label>
+
+                                                <label class="pull-right text-danger" ng-show="submitted || FeedForm.FeedName.$touched">
+                                                    <span ng-show="FeedForm.FeedName.$error.required">{{"You must select a name." | translate}}</span>
+                                                    <!--<span ng-show="CoBrowseForm.Rating.$error.email">This is not a valid email.</span>-->
+                                                </label>
+
+                                                <input type="text" class="form-control" id="FeedName" name="FeedName" required="" data-ng-model="ActiveFeedInformation.Name">
+
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Description">{{"Description" | translate}}:</label>
+                                                <input type="text" class="form-control" id="Description" name="Description" data-ng-model="ActiveFeedInformation.Description">                                               
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="Discovery">{{"Presence"| translate}}:</label>
+
+
+                                                <select name="Discovery" data-ng-model="EditSettings.Discovery" required="" class="form-control">
+                                                    <option value="public">{{"Public"| translate}}</option>
+                                                    <option value="private">{{"Private"| translate}}</option>
+                                                    <option value="p2p">{{"Peer"| translate}}</option>
+                                                </select>
+
+
+                                            </div>
+
+
+                                            <div ng-class="{'has-error':(submitted || FeedForm.Rating.$touched) && FeedForm.Rating.$error.required }">
+                                                <label>{{"Rating"| translate}}</label>
+                                                <label class="text-danger pull-right" ng-show="submitted || FeedForm.Rating.$touched">
+                                                    <span ng-show="FeedForm.Rating.$error.required">{{"You must select a rating." | translate}}</span>
+                                                    <!--<span ng-show="CoBrowseForm.Rating.$error.email">This is not a valid email.</span>-->
+                                                </label>
+                                                <select data-ng-model="EditSettings.Rating" name="Rating" required="" class="form-control">
+                                                    <option value="all">{{"All ages"| translate}}</option>
+                                                    <option value="adult">{{"Adults only"| translate}}</option>
+                                                </select>
+
+
+
+                                            </div>
+
+
+
+                                            <div class="form-group">
+                                                <label for="FeedImage">{{"Image" | translate}}:</label>
+                                                <input type="file" ng-model="ActiveFeedInformation.Image" base-sixty-four-input>
+
+
+
+                                                <img ng-src="https://s3-eu-west-1.amazonaws.com/juntas/{{ActiveFeedInformation.Image}}" ng-if="!ActiveFeedInformation.Image.base64"
+                                                     class="feed-image img-circle" />
+
+
+                                                <img ng-src="data:image/jpeg;base64,{{ActiveFeedInformation.Image.base64}}" ng-if="ActiveFeedInformation.Image.base64" class="feed-image img-circle" />
+
+
+
+                                            </div>
+
+
+
+
+                                        </form>
+                                    </div>
+                                </div>
+
+
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        <i class="fa fa-cog"></i> {{"Local settings" | translate}}
+
+
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label>{{"Language"| translate}}</label>
+                                            <select data-ng-model="InterfaceLanguage" ng-options="language as language.name for language in Languages" class="form-control"></select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>{{"Theme"| translate}}</label>
+                                            <select data-ng-model="Theme" ng-options="theme as theme for theme in Themes" class="form-control"></select>
+                                        </div>
+
+
+
+
+
+                                        <div class="form-group">
+                                            <label>
+                                                <input type="checkbox" data-ng-model="EditSettings.AllowPop" />
+                                                {{"Allow pop"| translate}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+                            </div>
+                            <div class="modal-footer">
+
+                                <button class="btn btn-primary" ng-click="SaveConfiguration()" data-dismiss="modal">
+                                    {{"Save" | translate}} <juntas-loader ng-if="LoaderState['save_configuration']"></juntas-loader>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+
+
+
+
+
+                <div class="modal fade" id="myCanvas">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title"><span class="fa fa-send"></span> Edit image</h4>
+                            </div>
+                            <div class="modal-body">
+
+
+                                <div class="form-group">
+                                    <label for="FeedImage">{{"Image" | translate}}:</label>
+                                    <input type="file" ng-model="ActiveFeedInformation.Image" base-sixty-four-input>
+                                </div>
+
+
+                                {{ActiveFeedInformation.Image}}
+                                <image-resize  ng-if="ActiveFeedInformation.Image" image-data="ActiveFeedInformation.Image"></image-resize>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-default" data-dismiss="modal">{{"Close" | translate}}</button>
+                                <button class="btn btn-primary" ngclipboard ngclipboard-success="onCopySuccess(e);" data-clipboard-text="{{ShareUrl}}" data-trigger="manual"
+                                        data-placement="bottom" data-title="{{'Copied!'| translate}}">
+                                    {{"Copy" | translate}}
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+
+
+
+
+                <div class="modal fade" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title"><span class="fa fa-send"></span> Juntas share</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>{{"Share url" | translate}}:</label>
+                                    <textarea data-ng-model="ShareUrl" id="ShareUrl" class="form-control sharebox"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-default" data-dismiss="modal">{{"Close" | translate}}</button>
+                                <button class="btn btn-primary" ngclipboard ngclipboard-success="onCopySuccess(e);" data-clipboard-text="{{ShareUrl}}" data-trigger="manual"
+                                        data-placement="bottom" data-title="{{'Copied!'| translate}}">
+                                    {{"Copy" | translate}}
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <div class="modal fade" id="ConfirmDialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title"><span class="fa fa-send"></span> Confirm operation</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>{{"Confirm deletion?" | translate}}:</label>
+                                    <textarea data-ng-model="ShareUrl" id="ShareUrl" class="form-control sharebox"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-default" data-dismiss="modal">{{"Cancel" | translate}}</button>
+                                <button class="btn btn-primary" clip-copy="ShareUrl">{{"Confirm" | translate}}</button>
+                            </div>
+
+
+
+
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+            </div>
+        </div>
+
+
+
+
+        <div class="slider-full ng-cloak bg-primary vertical center-block" ng-show="SidebarCollapseMode == '1'">
+            <div class="btn-group-vertical">
+                <a class="">
+                    <img src="../icons/icon48.png" />
+                </a>
+                <a ng-click="togglecollapse();" class="btn btn-lg btn-info vertical-box ">
+                    <i class="fa fa-toggle-left f20"></i>
+                </a>
+
+
+                <a class="top-btn-1 btn btn-lg btn-default">
+                    <div class="avatar-frame">
+                        <img ng-src="{{ActiveFeedInformation.UserId | picture}}" />
+                    </div>
+                </a>
+                <a class="top-btn-2 btn btn-lg btn-default">
+
+                    <div class="feed-frame">
+                        <img ng-src="data:image/jpeg;base64,{{ActiveFeedInformation.Image.base64}}" ng-if="ActiveFeedInformation.Image.base64" />
+                        <img ng-src="https://s3-eu-west-1.amazonaws.com/juntas/{{ActiveFeedInformation.Image}}" ng-if="!ActiveFeedInformation.Image.base64" />
+
+
+
+                    </div>
+                </a>
+
+                <a class="btn btn-lg btn-default   vertical-container">
+                    <div class="vertical-text">{{ActiveFeedInformation.Name}}</div>
+                </a>
+                <a class="btn btn-lg btn-info vertical-box bottom-btn-3" ng-if="ActiveFeedInformation.UserId === User._id">
+                    <i class="fa fa-gamepad"></i>
+                </a>
+
+
+                <a class="btn btn-lg btn-success vertical-box bottom-btn-2" aria-label="like" title="{{'Like' | translate}}" ng-click="Like(ActiveFeedInformation.ActivePage)">
+                    <i class="fa fa-star"></i> {{ActiveFeedInformation.ActivePage.Likes.length}}
+                </a>
+
+                
+                <a class="btn btn-lg btn-success vertical-box bottom-btn-1" aria-label="comment" title="{{'Comment' | translate
+                }}" ng-click="toggleAnnotations()">
+                    <i class="fa fa-comments"></i> {{ActiveFeedInformation.Annotations.length}}
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+</body>
+
+</html>

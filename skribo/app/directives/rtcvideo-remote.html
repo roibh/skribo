@@ -1,0 +1,30 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        <span class="avatar-frame">
+            <img ng-src="{{user._id | picture}}" />
+        </span>
+        
+            <label> {{user._id | username}}</label>
+         
+    </div>
+    <div class="panel-body">
+        <video autoplay id="remote_{{user._id}}"></video>
+    </div>
+    <div class="panel-footer"></div>
+</div>
+
+
+
+
+
+
+
+
+
+<!--<ul class="juntas-tabs nav nav-tabs">
+    <li><a id="startButton" ng-click="setup_video();" class="btn btn-primary btn-sm">start</a></li>
+
+    <li><a class="btn btn-primary btn-sm" id="callButton" ng-click="start_video(true)">call</a></li>
+
+    <li><a id="hangupButton" class="btn btn-primary btn-sm">hangup</a> </li>
+</ul>-->

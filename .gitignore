@@ -1,0 +1,6 @@
+skriboGateway/node_modules/
+*.js
+*.map
+*.d.ts
+*.log
+*.lock

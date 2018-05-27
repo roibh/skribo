@@ -1,0 +1,119 @@
+<!doctype html>
+<html data-ng-app="JuntasApp" data-ng-csp>
+
+<head>
+    <title></title>
+    <link href="css/sidebar.css" rel="stylesheet" />
+    <link href="css/indication.css" rel="stylesheet" />
+
+    <link href="../css/themes/paper/bootstrap.min.css" rel="stylesheet" id="mainthemefile" />
+    <!-- inject:style:css -->
+    <link rel="stylesheet" href="/bower_components/components-font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/bower_components/simplemde/src/css/simplemde.css">
+    <!-- endinject -->
+    <!-- inject:head:js -->
+    <script src="/bower_components/moment/moment.js"></script>
+    <script src="/bower_components/recordrtc/RecordRTC.js"></script>
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/bower_components/angular-aria/angular-aria.js"></script>
+    <script src="/bower_components/angular-gettext/dist/angular-gettext.js"></script>
+    <script src="/bower_components/angular-base64-upload/src/angular-base64-upload.js"></script>
+    <script src="/bower_components/angular-tour/dist/angular-tour-tpls.min.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/simplemde/src/js/simplemde.js"></script>
+    <script src="/bower_components/simplemde-angular/dist/simplemde-angular.js"></script>
+    <!-- endinject -->
+
+
+    <script src="../js/oauth2/oauth2.js"></script>
+    <script src="config/config.js"></script>
+    <script type="text/javascript" src="../languages/translations.js"></script>
+    <script type="text/javascript" src="../js/dialogs.js"></script>
+    <script type="text/javascript" src="js/indication.js"></script>
+    <script type="text/javascript" src="services/languageservice.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
+    <script type="text/javascript" src="toolbars/actions.js"></script>
+    <link rel="stylesheet" href="" id="rtlfile">
+</head>
+
+<body>
+    <div data-ng-controller="JuntassidebarCtrl" id="JuntasCtrl" ng-init="init()" class="container-fluid" ng-show="ThemeSet">
+        <div class='loader' ng-show="!CheckComplete">
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--text'></div>
+        </div>
+        <div class="indication-full ng-cloak bg-primary vertical center-block" ng-show="IndicationCollapseMode == 1">
+            <div class="navbar navbar-inverse no-margin">
+                <div class="container">
+                    <div class="navbar-header">
+                        <actions-toolbar></actions-toolbar>
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item" ng-repeat="item in IndicationGroups">
+                                        <img class="avatar-frame" ng-src="https://s3-eu-west-1.amazonaws.com/juntas/{{item.Image}}" ng-if="item.Image" />                                        {{item.Name}}
+                                        <abbr>{{item.Description}}</abbr>
+
+
+                                        <button class="pull-right badge feed-badge">
+                                         <span class="fa fa-gamepad icon-big"></span> {{"by" | translate}} <label>{{item.User.Name}}</label>
+                                        </button>
+
+                                        <button class="btn btn-info btn-sm pull-right" data-ng-click="Connect(item)" title="{{'Connect' | translate}}"><span class="fa fa-eye icon-big"></span> </button>
+
+
+
+
+
+
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="indication-collapse ng-cloak bg-primary vertical center-block" ng-show="IndicationCollapseMode == 0">
+            <div class="btn-group-vertical">
+
+                <a class="btn btn-primary" ng-click="toggleIndication()">
+                    <span class="fa fa-expand"></span>
+                </a>
+
+                <a class="">
+                    <img src="../icons/icon48.png" width="35" height="35" />
+                </a>
+                <!--<a class="btn btn-success" aria-label="like" title="{{'Like' | translate}}" ng-click="Like(ActiveFeedInformation.ActivePage)">
+                    <i class="fa fa-star"></i>
+                    {{ActiveFeedInformation.ActivePage.Likes.length}}
+                </a>-->
+
+
+                <button class="btn btn-success" aria-label="comment" title="{{'Comment' | translate}}" ng-click="toggleAnnotations()">
+                    <i class="fa fa-comments"></i> {{AnnotationsCount}}
+                </button>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+﻿<div class="list-group content-scroll comments-scroll" ng-show="SidebarMode == 3" set-height="420">
+    <a class="list-group-item" data-ng-repeat="item in Followers | orderBy: 'LastName':reverse">
+        <div class="avatar-frame pull-right">
+            <img ng-src="{{item._id | picture}}" />
+        </div>
+        <label>
+            <i class="fa fa-desktop" ng-if="item.online"></i>
+            {{item.FirstName}} {{item.LastName}}
+        </label>
+
+        <span ng-if="ActiveFeedInformation.UserId === item._id" class="fa fa-gamepad"></span>
+    </a>
+</div>

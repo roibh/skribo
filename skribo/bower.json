@@ -1,0 +1,35 @@
+{
+  "name": "juntas-chrome",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "roibh <roi@ewave.co.il>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "moment": "~2.10.6",
+    "recordrtc": "^5.4.0",
+    "jquery": "^3.1.0",
+    "angular": "^1.5.8",
+    "angular-resource": "^1.5.8",
+    "angular-sanitize": "^1.5.8",
+    "bootstrap": "^3.3.7",
+    "components-font-awesome": "^4.6.3",
+    "angular-bootstrap": "^2.0.1",
+    "angular-aria": "^1.5.8",
+    "angular-gettext": "^2.3.7",
+    "angular-base64-upload": "^0.1.19",
+    "angular-tour": "^0.2.5",
+    "angular-animate": "^1.5.8",
+    "simplemde": "^1.11.2",
+    "simplemde-angular": "^0.0.3"
+  }
+}

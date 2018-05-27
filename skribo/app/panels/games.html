@@ -1,0 +1,25 @@
+﻿<div class="list-group content-scroll navigation-scroll" id="navigationscroll" set-height="420" ng-show="SidebarMode == 4">
+
+
+    <a href="#" class="list-group-item" data-ng-repeat="item in Games">
+
+        <label>{{item.name}}<br /></label>
+
+        <p class="clear">
+
+
+            <!--<russian-roulette></russian-roulette>-->
+            <div class="feed-btn btn-default" ng-click="LoadGame(item)">
+
+                <span class="text-center">
+                    
+                    <img ng-src="{{item.thumb}}" class="img-rounded url-image" />
+                </span>
+                <label> {{item.name}}</label>
+            </div>
+        </p>
+        <div class="clear"></div>
+    </a>
+
+
+</div>

@@ -1,0 +1,67 @@
+<form #infoForm="ngForm">
+
+  <div class="form-group" *ngIf="info">
+    <label for="NameInput">Script Name:</label>
+    <input type="text" required class="form-control" name="NameInput" [(ngModel)]="info.Name" id="NameInput" aria-describedby="nameHelp"
+      placeholder="Enter a name">
+    <small id="emailHelp" class="form-text text-muted">every thing needs a name.</small>
+  </div>
+  <div class="form-group" *ngIf="info">
+    <label for="NameInput">Description:</label>
+    <textarea class="form-control" name="DescriptionInput" [(ngModel)]="info.Description" id="DescriptionInput" aria-describedby="DescriptionHelp"
+      placeholder="Enter a description"></textarea>
+
+    <small id="emailHelp" class="form-text text-muted">it will help you understand what you're doing.</small>
+  </div>
+
+
+
+  <div class="form-group" *ngIf="code">
+    <textarea class="form-control">{{code}}</textarea>
+    <small id="codeHelp" class="form-text text-muted">This is the code of the script.</small>
+
+  </div>
+
+  <div class="form-group" *ngIf="variables">
+
+    <fieldset>
+      <legend>Variables</legend>
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Value</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let variable of variables">
+            <td scope="row">
+              {{variable.name}} </td>
+            <td>
+              {{variable.value}}
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+    </fieldset>
+
+
+
+
+  </div>
+
+
+
+  <!-- <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div> -->
+
+</form>

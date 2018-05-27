@@ -4,3 +4,5 @@ skriboGateway/node_modules/
 *.d.ts
 *.log
 *.lock
+@skribo/
+adwords-mock/node_modules/

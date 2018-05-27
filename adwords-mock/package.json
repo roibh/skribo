@@ -1,0 +1,15 @@
+{
+  "name": "adwords-mock",
+  "version": "1.0.0",
+  "description": "",
+  "main": "mock.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "set DEV_SERVER_PORT=4000 && set DEV_SERVER_ROOT=C:\\projects\\skribo\\adwords-mock\\ && dev-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "serve": "^6.5.8"
+  }
+}

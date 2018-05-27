@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-md-4">
+    <input *ngIf="config.filtering" placeholder="Filter all columns" class="form-control" (tableChanged)="onChangeTable(config)"
+    />
+  </div>
+</div>
+<br>
+
+
+<ngx-datatable class="bootstrap" [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'"
+  [headerHeight]="40" [summaryRow]="true" [summaryPosition]="'bottom'" [footerHeight]="40" [limit]="10" [rowHeight]="'auto'"
+  [reorderable]="reorderable">
+
+  <ngx-datatable-column name="name">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      {{column.name}}
+    </ng-template>
+    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+
+      <a [routerLink]="[row.id, 'details']" (click)="edit(value)">{{value}}</a>
+    </ng-template>
+  </ngx-datatable-column>
+  <!-- <ngx-datatable-column name="Gender">
+    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+      <span (click)="sort()">{{column.name}}</span>
+    </ng-template>
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      My name is:
+      <i [innerHTML]="row['name']"></i> and
+      <i>{{value}}</i>
+      <div>{{joke}}</div>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Age">
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <div style="border:solid 1px #ddd;margin:5px;padding:3px">
+        <div style="background:#999;height:10px" [style.width]="value + '%'"></div>
+      </div>
+    </ng-template> 
+   </ngx-datatable-column>-->
+
+</ngx-datatable>
+
+
+<!-- <ng-table [config]="config" [ngTableFiltering]="config.filtering" (tableChanged)="onChangeTable(config)" (cellClicked)="onCellClick($event)"
+  [rows]="rows" [columns]="columns">
+</ng-table> -->
+<!-- <pagination *ngIf="config.paging"
+            class="pagination-sm"
+            [(ngModel)]="page"
+            [totalItems]="length"
+            [itemsPerPage]="itemsPerPage"
+            [maxSize]="maxSize"
+           
+            [rotate]="false"
+            (pageChanged)="onChangeTable(config, $event)"
+            (numPages)="numPages = $event">
+</pagination>
+<pre *ngIf="config.paging" class="card card-block card-header">Page: {{page}} / {{numPages}}</pre> -->

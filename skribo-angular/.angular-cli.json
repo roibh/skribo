@@ -9,7 +9,7 @@
       "outDir": "../OurWork/options/dist",
       "assets": [
         "assets",
-        "favicon.ico",
+       
         "dynamic-table.component.css"
       ],
       "index": "index.html",

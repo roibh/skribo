@@ -7,12 +7,12 @@
   "version": "0.0.5",
   "content_security_policy": "default-src *;child-src * http://localhost:4200; img-src * data:;font-src *;media-src * blob: ;style-src 'unsafe-inline' *;connect-src *; script-src 'self'   'unsafe-eval'  https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com  https://cdn.quilljs.com/ https://cdnjs.cloudflare.com/ https://cdn.webrtc-experiment.com/ https://webrtcexperiment-webrtc.netdna-ssl.com https://graph.facebook.com https://static.ak.facebook.com/ https://connect.facebook.net https://ssl.google-analytics.com/ga.js https://www.google-analytics.com/analytics.js; object-src 'self'  blob: ",
   "icons": {
-    "16": "icons/ourwork_16.png",
-    "48": "icons/ourwork_48.png",
-    "128": "icons/ourwork_128.png"
+    "16": "icons/skribo_16.png",
+    "48": "icons/skribo_48.png",
+    "128": "icons/skribo_128.png"
   },
   "browser_action": {
-    "default_icon": "icons/ourwork_48.png",
+    "default_icon": "icons/skribo_48.png",
     "default_popup": "app/app-frame.html"
   },
   "web_accessible_resources": [

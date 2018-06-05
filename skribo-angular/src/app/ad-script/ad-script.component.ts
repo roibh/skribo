@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { FireService } from '../fire.service';
 import { ActivatedRoute } from '@angular/router';
 
 import { EditorComponent } from '../editor/editor.component';
 import { InfoComponent } from '../info/info.component';
 import { Scripts, ScriptModel } from '@skribo/client';
+import { UserService } from '../user.context.service';
 
-
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
   selector: 'app-ad-script',
@@ -17,7 +18,8 @@ import { Scripts, ScriptModel } from '@skribo/client';
 })
 export class AdScriptComponent implements OnInit {
 
-  constructor(public fireService: FireService, private route: ActivatedRoute) {
+  constructor(public toastr: ToastsManager, vcr: ViewContainerRef, public userService: UserService, private route: ActivatedRoute) {
+    this.toastr.setRootViewContainerRef(vcr);
 
 
   }
@@ -68,13 +70,15 @@ export class AdScriptComponent implements OnInit {
 
   async _Save() {
     const saveObj: ScriptModel = Object.assign(this.info, { Code: this.code }, { Variables: this.variables });
-
     let id: any = this.route.snapshot.paramMap.get('id');
     if (id) {
       await Scripts.update(id, saveObj);
     } else {
+      saveObj.Owner = this.userService.getUser().id;
       await Scripts.create(saveObj);
     }
+    this.toastr.success('You are awesome!', 'Success!');
+
 
     // if (id) {
     //   await this.fireService.update('Script', id, saveObj);

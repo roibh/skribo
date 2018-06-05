@@ -17,12 +17,12 @@ export class VariablesComponent implements OnInit, OnChanges {
   @Input()
   public variables: any[];
 
-  
+
   ngOnInit() {
   }
 
   ngOnChanges() {
-    
+
     this.notify.emit(this.variables);
   }
   public addRow() {
@@ -30,6 +30,13 @@ export class VariablesComponent implements OnInit, OnChanges {
     this.variables.push({ name: 'name', value: 'value' });
     this.notify.emit(this.variables);
   }
+  public delRow(index) {
+    this.variables.splice(index, 1);
+    this.notify.emit(this.variables);
+  }
+
+
+
   public tableColumns = [
     { title: 'Name', name: 'name', sort: 'asc', },
     { title: 'Value', name: 'value', },

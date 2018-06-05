@@ -1,6 +1,7 @@
 {
     "/scripts/*": {
-      "target": "http://localhost:6200",
+      "target": "https://skribo.herokuapp.com",
+      "localtarget": "http://localhost:6200",
       "secure": false,
       "logLevel": "debug",
       "changeOrigin": true,

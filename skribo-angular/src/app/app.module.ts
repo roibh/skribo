@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DynamicFormsCoreModule } from "@ng-dynamic-forms/core";
 import { FormsModule } from '@angular/forms';
 import { DynamicFormsBootstrapUIModule } from "@ng-dynamic-forms/ui-bootstrap";
@@ -25,8 +26,23 @@ import { InfoComponent } from './info/info.component';
 import { FireService } from './fire.service';
 import { StorageService } from './storage.service';
 import { Scripts } from '@skribo/client';
+
 Scripts.base = 'http://localhost:6200';
+//Scripts.base = 'https://skribo.herokuapp.com';
+
 import * as M from '@methodus/client';
+import { LoginComponent } from './login/login.component';
+import { GoogleSignInComponent } from 'angular-google-signin';
+import { InstallComponent } from './install/install.component';
+import { UserService } from './user.context.service';
+import { ToastModule } from 'ng2-toastr/ng2-toastr';
+import { ToastOptions } from 'ng2-toastr';
+
+class CustomOption extends ToastOptions {
+  animate = 'flyRight'; // you can override any options available
+  newestOnTop = false;
+  showCloseButton = true;
+}
 
 
 const appRoutes: Routes = [
@@ -50,7 +66,10 @@ const appRoutes: Routes = [
     EditorComponent,
     VariablesComponent,
     ManageComponent,
-    InfoComponent
+    InfoComponent,
+    LoginComponent,
+    GoogleSignInComponent,
+    InstallComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -67,9 +86,11 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     AceEditorModule,
     DynamicFormsCoreModule.forRoot(),
-    DynamicFormsBootstrapUIModule
+    DynamicFormsBootstrapUIModule,
+    BrowserAnimationsModule,
+    ToastModule.forRoot()
   ],
-  providers: [FireService, StorageService],
+  providers: [FireService, StorageService, UserService, { provide: ToastOptions, useClass: CustomOption }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

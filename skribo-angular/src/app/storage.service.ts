@@ -8,7 +8,7 @@ import { debug } from 'util';
 export class StorageService {
 
   config = {
-    name: 'OurWork'
+    name: 'Skribo'
   };
   storage: any;
   db: Dexie;
@@ -18,7 +18,7 @@ export class StorageService {
 
   Script: Dexie.Table<IScript, string>;
   constructor() {
-    this.db = new Dexie('OurWork', {  autoOpen: true });
+    this.db = new Dexie('Skribo', {  autoOpen: true });
 
 
     this.db.version(1).stores({

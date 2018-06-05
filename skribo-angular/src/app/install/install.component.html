@@ -1,0 +1,21 @@
+<a class="btn btn-primary" (click)="installDialog(template, script)">
+  <i class="oi oi-data-transfer-download text-white"></i>
+</a>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left"> {{script.Name}}</h4>
+
+
+
+
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <textarea class="form-control">{{embedCode}}</textarea>
+    <a class="btn btn-md btn-primary">Eval</a>
+
+  </div>
+</ng-template>

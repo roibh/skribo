@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { FireService } from '../fire.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { EditorComponent } from '../editor/editor.component';
 import { InfoComponent } from '../info/info.component';
@@ -18,7 +18,9 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 })
 export class AdScriptComponent implements OnInit {
 
-  constructor(public toastr: ToastsManager, vcr: ViewContainerRef, public userService: UserService, private route: ActivatedRoute) {
+  constructor(public toastr: ToastsManager,
+    private router: Router, vcr: ViewContainerRef,
+    public userService: UserService, private route: ActivatedRoute) {
     this.toastr.setRootViewContainerRef(vcr);
 
 
@@ -77,6 +79,8 @@ export class AdScriptComponent implements OnInit {
       saveObj.Owner = this.userService.getUser().id;
       await Scripts.create(saveObj);
     }
+
+    this.router.navigate(['adscript/manage']);
     this.toastr.success('You are awesome!', 'Success!');
 
 

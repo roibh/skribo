@@ -1,0 +1,49 @@
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left"> {{script.Name}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="NameInput">Installation Name:</label>
+      <textarea class="form-control" [(ngModel)]="embed.Name"></textarea>
+      <small id="emailHelp" class="form-text text-muted">it will help you understand what you're doing.</small>
+    </div>
+
+    <app-variables [mode]="set" [variables]="embed.Variables"></app-variables>
+    <a class="btn btn-md btn-primary" (click)="saveEmbed()">Create embed script</a>
+
+  </div>
+</ng-template>
+
+
+<a class="btn btn-primary btn-xs white" (click)="newEmbed(template)">
+  <i class="oi oi-plus white"></i> New Installation
+</a>
+
+<div class="card border-primary mb-3 " *ngFor="let embed of list;let i=index;">
+  <div class="card-header">{{embed.Name}}
+    <span class="float-right">
+      <a class="btn btn-danger btn-xs">
+        <i class="oi oi-trash white" (click)="deleteEmbed(embed, i)"></i>
+      </a>
+      <a class="btn btn-success btn-xs" (click)="editEmbed(embed,template)">
+        <i class="oi oi-pencil white"></i>
+      </a>
+      <a class="btn btn-primary btn-xs" (click)="createEmbed(embed)">
+        <i class="oi oi-data-transfer-download white"></i>
+      </a>
+    </span>
+  </div>
+  <div class="card-body text-primary">
+    <ul class="card-text">
+      <li *ngFor="let item of embed.Variables">
+        <b> {{item.name}}</b>: {{item.value}}
+      </li>
+
+    </ul>
+
+  </div>
+</div>

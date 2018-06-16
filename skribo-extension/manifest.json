@@ -1,11 +1,10 @@
 {
   "manifest_version": 2,
-  "key": "kemciimocjgkgcfbnpelpihkbkpicdhb",
   "name": "__MSG_appName__",
   "description": "__MSG_appDesc__",
   "default_locale": "en",
-  "version": "0.0.5",
-  "content_security_policy": "default-src *;child-src * http://localhost:4200; img-src * data:;font-src *;media-src * blob: ;style-src 'unsafe-inline' *;connect-src *; script-src 'self'   'unsafe-eval'  https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com  https://cdn.quilljs.com/ https://cdnjs.cloudflare.com/ https://cdn.webrtc-experiment.com/ https://webrtcexperiment-webrtc.netdna-ssl.com https://graph.facebook.com https://static.ak.facebook.com/ https://connect.facebook.net https://ssl.google-analytics.com/ga.js https://www.google-analytics.com/analytics.js; object-src 'self'  blob: ",
+  "version": "0.0.13",
+  "content_security_policy": "default-src *;child-src * https://skribo.herokuapp.com http://localhost:4200; img-src * data:;font-src *;media-src * blob: ;style-src 'unsafe-inline' *;connect-src *; script-src * 'self' 'unsafe-eval' https://apis.google.com  https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com  https://cdn.quilljs.com/ https://cdnjs.cloudflare.com/ https://cdn.webrtc-experiment.com/ https://webrtcexperiment-webrtc.netdna-ssl.com https://graph.facebook.com https://static.ak.facebook.com/ https://connect.facebook.net https://ssl.google-analytics.com/ga.js https://www.google-analytics.com/analytics.js https://apis.google.com/*  https://mojo.com https://apis.google.com/js/platform.js  ; object-src 'self'  blob: ",
   "icons": {
     "16": "icons/skribo_16.png",
     "48": "icons/skribo_48.png",

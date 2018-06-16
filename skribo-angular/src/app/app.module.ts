@@ -25,10 +25,11 @@ import { ManageComponent } from './manage/manage.component';
 import { InfoComponent } from './info/info.component';
 import { FireService } from './fire.service';
 import { StorageService } from './storage.service';
-import { Scripts } from '@skribo/client';
+import { Scripts, Embed } from '@skribo/client';
 
-Scripts.base = 'http://localhost:6200';
-//Scripts.base = 'https://skribo.herokuapp.com';
+
+Embed.base = 'https://skribo.herokuapp.com';
+Scripts.base = 'https://skribo.herokuapp.com';
 
 import * as M from '@methodus/client';
 import { LoginComponent } from './login/login.component';
@@ -37,6 +38,7 @@ import { InstallComponent } from './install/install.component';
 import { UserService } from './user.context.service';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { ToastOptions } from 'ng2-toastr';
+import { EmbedListComponent } from './embed-list/embed-list.component';
 
 class CustomOption extends ToastOptions {
   animate = 'flyRight'; // you can override any options available
@@ -69,7 +71,8 @@ const appRoutes: Routes = [
     InfoComponent,
     LoginComponent,
     GoogleSignInComponent,
-    InstallComponent
+    InstallComponent,
+    EmbedListComponent
   ],
   imports: [
     RouterModule.forRoot(

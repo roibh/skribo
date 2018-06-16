@@ -9,7 +9,7 @@ export class UserService {
   @Output()
   public user: any;
 
-  public setUser(user: any) {    
+  public setUser(user: any) {
     localStorage.setItem('user', JSON.stringify(user));
   }
 

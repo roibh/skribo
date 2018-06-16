@@ -2,5 +2,15 @@
 input.textbox {
     width: 100%;
     border: 1px solid #eeddee;
-    padding: 6px;
+    padding: 3px;
+    font-size: 12px;
+    background-color:  black;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-xs{
+    margin: 0px;
+    padding: 3px 9px;
+    font-size: 10px;
 }

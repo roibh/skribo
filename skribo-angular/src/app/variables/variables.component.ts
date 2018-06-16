@@ -1,11 +1,20 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { debug } from 'util';
 
+export const enum VariablesMode {
+  Set = 'set',
+  Edit = 'edit'
+}
+
+
 @Component({
   selector: 'app-variables',
   templateUrl: './variables.component.html',
   styleUrls: ['./variables.component.css']
 })
+
+
+
 export class VariablesComponent implements OnInit, OnChanges {
 
   constructor() {
@@ -16,7 +25,8 @@ export class VariablesComponent implements OnInit, OnChanges {
 
   @Input()
   public variables: any[];
-
+  @Input()
+  public mode: VariablesMode;
 
   ngOnInit() {
   }

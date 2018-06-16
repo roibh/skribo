@@ -1,4 +1,4 @@
-<a class="btn btn-primary xs white" (click)="addRow()">
+<a class="btn btn-primary xs white" (click)="addRow()" *ngIf="mode==='edit'">
 
   + Add Variable</a>
 
@@ -9,20 +9,26 @@
       <th scope="col">Name</th>
       <th scope="col">Value</th>
       <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let variable of variables; let i=index;">
       <th scope="row">
-        <input type="text" class="textbox" [(ngModel)]="variable.name"> </th>
+        <input type="text" *ngIf="mode==='edit'" class="form-control textbox input-sm" [(ngModel)]="variable.name">
+
+        <label *ngIf="mode!=='edit'">{{variable.name}}</label>
+      </th>
       <td>
-        <input type="text" class="textbox" [(ngModel)]="variable.value">
+        <input type="text" class="form-control input-sm textbox text-small" [(ngModel)]="variable.value">
       </td>
-      <td>   
-          <a class="btn btn-success xs" (click)="options(i)">
-              <i class="oi oi-list white"></i>
-            </a>   
-        <a class="btn btn-danger xs" (click)="delRow(i)">
+      <td>
+        <a class="btn btn-success btn-xs" (click)="options(i)">
+          <i class="oi oi-list white"></i>
+        </a>
+      </td>
+      <td>
+        <a class="btn btn-danger btn-xs" (click)="delRow(i)">
           <i class="oi oi-trash white"></i>
         </a>
       </td>

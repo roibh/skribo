@@ -79,7 +79,7 @@ export class CustomerComponent implements OnInit {
   async list() {
     const result = await this.fireService.fetch('Project');
     this.collectionData = [];
-    result.forEach((item) => { this.collectionData.push(Object.assign(item.data(), { id: item.id })) })
+    result.forEach((item) => { this.collectionData.push(Object.assign(item.data(), { id: item.id })); })
   }
   async submit(data) {
     let body = {};

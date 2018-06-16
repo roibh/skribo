@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VariablesComponent } from './variables.component';
+import { EmbedListComponent } from './embed-list.component';
 
-describe('VariablesComponent', () => {
-  let component: VariablesComponent;
-  let fixture: ComponentFixture<VariablesComponent>;
+describe('EmbedListComponent', () => {
+  let component: EmbedListComponent;
+  let fixture: ComponentFixture<EmbedListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VariablesComponent ]
+      declarations: [ EmbedListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VariablesComponent);
+    fixture = TestBed.createComponent(EmbedListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

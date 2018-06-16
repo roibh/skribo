@@ -9,7 +9,7 @@
       <app-editor [code]="code" (notify)="onCode($event)"></app-editor>
     </tab>
     <tab heading="Variables" id="tab_variables">
-      <app-variables [variables]="variables" (notify)="onvariables($event)"></app-variables>
+      <app-variables [mode]="'edit'" [variables]="variables" (notify)="onvariables($event)"></app-variables>
     </tab>
   </tabset>
   <div class="toolbar">

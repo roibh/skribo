@@ -66,8 +66,14 @@ export class EmbedListComponent implements OnInit {
     const scriptPipe = await fetch('assets/pipe.js');
     let templateString = await scriptPipe.text();
     const user = this.userService.getUser();
-    const scriptUrl = 'serve/' + embed.ScriptId + '/' + embed.UserId + '/' + embed.EmbedId;
-    templateString = templateString.replace(/\$SCRIPTURL\$/g, scriptUrl);
+    const dataUrl = embed.ScriptId + '/' + embed.UserId + '/' + embed.EmbedId;
+    templateString = templateString.replace(/\$SCRIPTURL\$/g, `serve/${dataUrl}`);
+    templateString = templateString.replace(/\$LOGURL\$/g, `log/${dataUrl}`);
+    templateString = templateString.replace(/\$RESULTURL\$/g, `results/${dataUrl}/`);
+    templateString = templateString.replace(/\$SERVERURL\$/g, `https://skribo.herokuapp.com/`);
+    templateString = templateString.replace(/\$SYNCURL\$/g, `sync/${dataUrl}/accounts`);
+
+
 
     templateString = templateString.replace(/\$SKRIBODATA\$/g, `'` + JSON.stringify({
       'user_id': user.id,

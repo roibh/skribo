@@ -1,0 +1,31 @@
+<ng-template #template>
+
+  <div class="modal-header">
+    <h4 class="modal-title pull-left"> {{resultData.Date}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div style="height: 500px;width: 50%;overflow: auto;" class="float-left">
+      <table class="table table-responsive table-condensed">
+
+        <tr *ngFor="let d of Data">
+          <td>{{d.label}}</td>
+          <td>{{d.value}}</td>
+        </tr>
+      </table>
+
+
+
+    </div>
+    <div style="height: 500px;width: 50%;overflow: auto;" class="float-right">
+    <app-chart [data]="Data"></app-chart>
+    </div>
+
+  </div>
+</ng-template>
+
+
+
+<a class="btn" (click)="showResults(template)">{{resultData.Date}}</a>

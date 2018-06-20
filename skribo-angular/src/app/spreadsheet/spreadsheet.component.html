@@ -1,0 +1,53 @@
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left"> {{script.Name}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col"></th>
+          <th scope="col">
+
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of collectionData">
+          <th scope="row">
+            <td>
+            <app-result-viewer [resultData]="row"></app-result-viewer>
+            <!-- <a [routerLink]="[row.ScriptId,row.EmbedId, row.ID, 'spreadsheet']">{{row.Date}}</a>
+
+            <td> -->
+
+
+            </td>
+            <td>
+              <a class="btn btn-danger" (click)="remove(row.ID)">
+                <i class="oi oi-trash white"></i>
+              </a>
+
+
+
+
+            </td>
+
+
+
+
+        </tr>
+
+      </tbody>
+    </table>
+
+  </div>
+</ng-template>
+
+<a class="btn btn-success" (click)="spreadsheet(script, template)">
+  <span class="oi oi-spreadsheet white"></span>
+</a>

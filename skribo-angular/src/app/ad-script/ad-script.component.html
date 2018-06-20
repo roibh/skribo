@@ -16,7 +16,11 @@
     <a class="btn btn-primary btn-xs" (click)="_Save()">
       <span class="oi oi-loop-square"></span> Save</a>
     <a class="btn btn-success btn-xs" (click)="_Execute()">
-      <span class="oi oi-media-play"></span> Execute</a>
+      <span class="oi oi-media-play"></span> Test Execution</a>
+  </div>
+  <div *ngIf="testResult">
+    <div>{{testResult.message}}</div>
+    <div>{{testResult.stack}}</div>
   </div>
 </div>
 

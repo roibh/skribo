@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DynamicFormsCoreModule } from "@ng-dynamic-forms/core";
 import { FormsModule } from '@angular/forms';
 import { DynamicFormsBootstrapUIModule } from "@ng-dynamic-forms/ui-bootstrap";
+import { ChartsModule } from 'ng2-charts';
 import { ModalModule, } from 'ngx-bootstrap/modal';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { AppComponent } from './app.component';
@@ -25,11 +26,14 @@ import { ManageComponent } from './manage/manage.component';
 import { InfoComponent } from './info/info.component';
 import { FireService } from './fire.service';
 import { StorageService } from './storage.service';
-import { Scripts, Embed } from '@skribo/client';
+import { Scripts, Embed, Results } from '@skribo/client';
 
 
 Embed.base = 'https://skribo.herokuapp.com';
 Scripts.base = 'https://skribo.herokuapp.com';
+Results.base = 'https://skribo.herokuapp.com';
+
+
 
 import * as M from '@methodus/client';
 import { LoginComponent } from './login/login.component';
@@ -39,6 +43,9 @@ import { UserService } from './user.context.service';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { ToastOptions } from 'ng2-toastr';
 import { EmbedListComponent } from './embed-list/embed-list.component';
+import { SpreadsheetComponent } from './spreadsheet/spreadsheet.component';
+import { ChartComponent } from './chart/chart.component';
+import { ResultViewerComponent } from './result-viewer/result-viewer.component';
 
 class CustomOption extends ToastOptions {
   animate = 'flyRight'; // you can override any options available
@@ -53,6 +60,7 @@ const appRoutes: Routes = [
   { path: 'customer', component: CustomerComponent },
   { path: 'adscript/manage/create', component: AdScriptComponent },
   { path: 'adscript/manage/:id/details', component: AdScriptComponent },
+  { path: 'adscript/manage/:script_id/:embed_id/:id/spreadsheet', component: ResultViewerComponent },
   { path: 'adscript/manage', component: ManageComponent },
 ];
 
@@ -72,7 +80,10 @@ const appRoutes: Routes = [
     LoginComponent,
     GoogleSignInComponent,
     InstallComponent,
-    EmbedListComponent
+    EmbedListComponent,
+    SpreadsheetComponent,
+    ChartComponent,
+    ResultViewerComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -88,6 +99,7 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     AceEditorModule,
+    ChartsModule,
     DynamicFormsCoreModule.forRoot(),
     DynamicFormsBootstrapUIModule,
     BrowserAnimationsModule,

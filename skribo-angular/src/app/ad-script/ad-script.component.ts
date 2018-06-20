@@ -25,6 +25,7 @@ export class AdScriptComponent implements OnInit {
 
 
   }
+  public testResult: any;
   public code: string;
   public variables: any;
   public info: { Name: string, Description: string };
@@ -53,7 +54,7 @@ export class AdScriptComponent implements OnInit {
     }
     else {
       this.info = { Name: '', Description: '' };
-      this.code = `function main(){
+      this.code = `function skribo(){
       }`;
       this.variables = [];
     }
@@ -93,7 +94,13 @@ export class AdScriptComponent implements OnInit {
   }
 
   async _Execute() {
-    //send execution script to adwords
-    (window.parent as any).postMessage('syncTo', '*');
+    //load and eval script
+    try {
+      debugger;
+      eval(this.code);
+    } catch (error) {
+      this.testResult = error;
+    };
+
   }
 }

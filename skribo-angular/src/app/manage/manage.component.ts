@@ -28,6 +28,17 @@ export class ManageComponent implements OnInit {
   }
 
 
+  
+
+  async spreadsheet(id: number) {
+    try {
+      await Scripts.remove(id);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+
 
   async remove(id: number) {
     try {

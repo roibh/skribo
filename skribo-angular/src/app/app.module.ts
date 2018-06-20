@@ -25,7 +25,10 @@ import { VariablesComponent } from './variables/variables.component';
 import { ManageComponent } from './manage/manage.component';
 import { InfoComponent } from './info/info.component';
 import { FireService } from './fire.service';
+import { MotivationService } from './motivation.service';
+
 import { StorageService } from './storage.service';
+
 import { Scripts, Embed, Results } from '@skribo/client';
 
 
@@ -105,7 +108,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     ToastModule.forRoot()
   ],
-  providers: [FireService, StorageService, UserService, { provide: ToastOptions, useClass: CustomOption }],
+  providers: [FireService, StorageService, UserService, MotivationService, { provide: ToastOptions, useClass: CustomOption }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

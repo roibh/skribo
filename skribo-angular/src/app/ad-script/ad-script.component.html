@@ -13,10 +13,33 @@
     </tab>
   </tabset>
   <div class="toolbar">
-    <a class="btn btn-primary btn-xs" (click)="_Save()">
-      <span class="oi oi-loop-square"></span> Save</a>
-    <a class="btn btn-success btn-xs" (click)="_Execute()">
-      <span class="oi oi-media-play"></span> Test Execution</a>
+    <div class="btn-group">
+      <button type="button" class="btn btn-success btn-xs">Action</button>
+      <button type="button" class="btn btn-success btn-xs dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        <span class="sr-only">Toggle Dropdown</span>
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item">
+          <span class="btn btn-success btn-xs" (click)="_Save(false)">Save</span>
+        </a>
+        <a class="dropdown-item">
+          <span class="btn btn-primary btn-xs" (click)="_Save(true)">Save & finish</span>
+        </a>
+        <a class="dropdown-item">
+          <span class="btn btn-success btn-xs" (click)="_Execute()">
+            <span class="oi oi-media-play"></span> Test Execution</span>
+          </a>
+        <!-- <a class="dropdown-item" href="#">Something else here</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Separated link</a> -->
+      </div>
+    </div>
+
+
+    <!-- <a class="btn btn-primary btn-xs" (click)="_Save()">
+      <span class="oi oi-loop-square"></span> Save</a> -->
+
   </div>
   <div *ngIf="testResult">
     <div>{{testResult.message}}</div>

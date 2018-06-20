@@ -30,7 +30,7 @@ export class ResultViewerComponent implements OnInit {
   };
 
   async showResults(template) {
-   
+
     const userId = this.userService.getUser().id;
     const id = this.resultData.ID;
     const embed_id = this.resultData.EmbedId;
@@ -41,7 +41,12 @@ export class ResultViewerComponent implements OnInit {
 
 
     const data = JSON.parse(result.Data);
-    this.Data = JSON.parse(data.results);
+    try {
+      this.Data = JSON.parse(data.results);
+    } catch (error) {
+      this.Data = [{ label: 'url', value: data.results }];
+    }
+
   }
   //
   async ngOnInit() {

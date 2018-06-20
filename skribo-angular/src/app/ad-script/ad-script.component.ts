@@ -8,6 +8,7 @@ import { Scripts, ScriptModel } from '@skribo/client';
 import { UserService } from '../user.context.service';
 
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { MotivationService } from '../motivation.service';
 
 @Component({
   selector: 'app-ad-script',
@@ -20,6 +21,7 @@ export class AdScriptComponent implements OnInit {
 
   constructor(public toastr: ToastsManager,
     private router: Router, vcr: ViewContainerRef,
+    private motivationService: MotivationService,
     public userService: UserService, private route: ActivatedRoute) {
     this.toastr.setRootViewContainerRef(vcr);
 
@@ -71,7 +73,7 @@ export class AdScriptComponent implements OnInit {
     }
   }
 
-  async _Save() {
+  async _Save(navigate: boolean) {
     const saveObj: ScriptModel = Object.assign(this.info, { Code: this.code }, { Variables: this.variables });
     let id: any = this.route.snapshot.paramMap.get('id');
     if (id) {
@@ -80,9 +82,12 @@ export class AdScriptComponent implements OnInit {
       saveObj.Owner = this.userService.getUser().id;
       await Scripts.create(saveObj);
     }
+    this.toastr.success(this.motivationService.goodOne(), 'Success!');
+    if (navigate) {
+      this.router.navigate(['adscript/manage']);
 
-    this.router.navigate(['adscript/manage']);
-    this.toastr.success('You are awesome!', 'Success!');
+    }
+
 
 
     // if (id) {
@@ -96,8 +101,8 @@ export class AdScriptComponent implements OnInit {
   async _Execute() {
     //load and eval script
     try {
-      debugger;
       eval(this.code);
+      this.toastr.success(this.motivationService.goodOne(), 'It compiles!');
     } catch (error) {
       this.testResult = error;
     };

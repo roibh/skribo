@@ -12,7 +12,8 @@
 
         <tr *ngFor="let d of Data">
           <td>{{d.label}}</td>
-          <td>{{d.value}}</td>
+          <td *ngIf="d.label==='url'"><a href="{{d.value}}" target="_blank">click to view</a></td>
+          <td *ngIf="d.label!=='url'">{{d.value}}</td>
         </tr>
       </table>
 

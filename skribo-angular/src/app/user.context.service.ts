@@ -4,7 +4,14 @@ import { Injectable, Output } from '@angular/core';
 @Injectable()
 export class UserService {
 
-  constructor() { }
+  constructor() {
+
+
+  }
+  @Output()
+  public group;
+
+  public groupChanges: Function[] = [];
 
   @Output()
   public user: any;
@@ -18,5 +25,20 @@ export class UserService {
     if (str) {
       return JSON.parse(str);
     }
+  }
+
+  public setGroup(group) {
+  
+    this.group = group;
+    this.groupChanges.forEach(func => func(group));
+  }
+
+
+
+  public onGroupChange(callback) {
+    this.groupChanges.push(callback);
+  }
+  public getGroup() {
+    return this.group;
   }
 }

@@ -4,22 +4,22 @@
       <th scope="col">Name</th>
       <th scope="col">Description</th>
       <th scope="col">
-        <button class="btn btn-primary btn-xs" routerLink="/adscript/manage/create">
-          + New Script</button>
+        <a class="btn btn-primary btn-xs" routerLink="/adscript/manage/create">
+          + New Script</a>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let row of collectionData">
       <th scope="row">
-        <a [routerLink]="[row.ID, 'details']">{{row.Name}}</a>
+        <a href="#" [routerLink]="[row.ScriptId, 'details']">{{row.Name}}</a>
 
         <td>
           {{row.Description}}
 
         </td>
         <td>
-          <a class="btn btn-danger" (click)="remove(row.ID)">
+          <a class="btn btn-danger" (click)="remove(row.ScriptId, template)">
             <i class="oi oi-trash white"></i>
           </a>
 
@@ -36,7 +36,13 @@
   </tbody>
 </table>
 
-
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>The script will be deleted.</p>
+    <button type="button" class="btn btn-default" (click)="confirm()">Continue</button>
+    <button type="button" class="btn btn-primary" (click)="decline()">Cancel</button>
+  </div>
+</ng-template>
 
 <!-- 
  

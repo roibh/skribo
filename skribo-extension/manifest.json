@@ -1,9 +1,10 @@
 {
   "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnMbhQ5OkVfEIkkrctEwSJ5yIR+QBTne9Pn3NUQBZCP7dFGsy4ZpgHS5rL72EVJ2jSnZHLq6fP06I1kYM4Q2TiBzCK/p+OcV/X7fx1FjqnuRUxMB4MLeUr88H+gcGr+KRfS9qyPsJOWEOLfd65Q0+iOymZWeaBIIzIfOlbp0XG/zfOWFt6t75+Vm1CaisWArtTQmg52IDRbWmhuXkMUMiTn072V0CTqFk5JUAJWsxkF+Ov/GWKvf+PLKWCOK2ZHjnQDf+PC5jW7XuBqZSuJnlA5SkGmfzs0gn3x2UrkbSW3kRSzY108SDVzvEKqHrrXyQzcjsCNT+ebRedy+X/QIKpQIDAQAB",
   "name": "__MSG_appName__",
   "description": "__MSG_appDesc__",
   "default_locale": "en",
-  "version": "0.0.17",
+  "version": "0.0.23",
   "content_security_policy": "default-src *;child-src * https://skribo.herokuapp.com http://localhost:4200; img-src * data:;font-src *;media-src * blob: ;style-src 'unsafe-inline' *;connect-src *; script-src * 'self' 'unsafe-eval' https://apis.google.com  https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com  https://cdn.quilljs.com/ https://cdnjs.cloudflare.com/ https://cdn.webrtc-experiment.com/ https://webrtcexperiment-webrtc.netdna-ssl.com https://graph.facebook.com https://static.ak.facebook.com/ https://connect.facebook.net https://ssl.google-analytics.com/ga.js https://www.google-analytics.com/analytics.js https://apis.google.com/*  https://mojo.com https://apis.google.com/js/platform.js  ; object-src 'self'  blob: ",
   "icons": {
     "16": "icons/skribo_16.png",
@@ -11,32 +12,19 @@
     "128": "icons/skribo_128.png"
   },
   "browser_action": {
-    "default_icon": "icons/skribo_48.png",
-    "default_popup": "app/app-frame.html"
-  },
-  "web_accessible_resources": [
-    "app/css/juntas.css",
-    "app/sidebar.html",
-    "app/games/pong/index.html",
-    "app/indication.html",
-    "js/config.js",
-    "app/config/config.json",
-    "app/modules/blogs/blog.html",
-    "js/quill/quill.js"
-  ],
-  "options_ui": {
-    "page": "app/app-frame.html",
-    "chrome_style": true,
-    "open_in_tab": true
+    "default_icon": "icons/skribo_48.png"
   },
   "background": {
     "pages": "app/background.html",
-    "persistent": true,
     "scripts": [
-      "app/js/common/fp.js",
-      "app/js/common/chrome.js",
       "app/js/background.js"
     ]
+  },
+  "web_accessible_resources": [],
+  "options_ui": {
+    "page": "options/dist/index.html",
+    "chrome_style": true,
+    "open_in_tab": true
   },
   "permissions": [
     "activeTab",
@@ -60,19 +48,5 @@
       "https://www.googleapis.com/auth/userinfo.profile",
       "https://www.googleapis.com/auth/userinfo.email"
     ]
-  },
-  "content_scripts": [
-    {
-      "matches": [
-        "http://*/*",
-        "https://*/*"
-      ],
-      "match_about_blank": true,
-      "js": [
-        "app/js/scripterQuery.js",
-        "app/js/skribo.js"
-      ],
-      "run_at": "document_end"
-    }
-  ]
+  }
 }

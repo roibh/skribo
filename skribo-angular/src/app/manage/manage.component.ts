@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ChangeDetectorRef } from '@angular/core';
 import { FireService } from '../fire.service';
 import { Scripts } from '@skribo/client';
 import { UserService } from '../user.context.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
   selector: 'app-manage',
@@ -11,28 +13,56 @@ import { UserService } from '../user.context.service';
 })
 export class ManageComponent implements OnInit {
   user: any;
-  constructor(private userService: UserService) {
+  modalRef: BsModalRef;
+  modalPromise: Function = null;
+  message: string;
 
+  constructor(private ref: ChangeDetectorRef, private modalService: BsModalService, private userService: UserService) {
     this.user = userService.getUser();
-
   }
   collectionData: any = [];
 
 
   async ngOnInit() {
-    await this.list();
-  }
-  async list() {
-    this.collectionData = await Scripts.list(this.user.id);
-    //this.collectionData = await this.fireService.fetch('Script');
+
+    this.userService.onGroupChange(async (group) => {
+
+      this.collectionData = await Scripts.list(group.GroupId);
+      this.ref.detectChanges();
+     
+    });
+
+    if (this.collectionData.length === 0 && this.userService.getGroup()) {
+
+      this.collectionData = await Scripts.list(this.userService.getGroup().GroupId);
+      this.ref.detectChanges();
+      
+    }
   }
 
+  async openModal(template: TemplateRef<any>) {
+    return new Promise<boolean>((resolve, reject) => {
+      this.modalPromise = resolve;
+      this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+    });
+  }
 
-  
+  confirm(): void {
+    this.modalPromise(true);
+    this.message = 'Confirmed!';
+    this.modalRef.hide();
+  }
+
+  decline(): void {
+    this.modalPromise(false);
+    this.message = 'Declined!';
+    this.modalRef.hide();
+  }
 
   async spreadsheet(id: number) {
     try {
-      await Scripts.remove(id);
+      const group_id = this.userService.getGroup().GroupId;
+      await Scripts.remove(group_id, id);
     } catch (error) {
       console.error(error);
     }
@@ -40,9 +70,21 @@ export class ManageComponent implements OnInit {
 
 
 
-  async remove(id: number) {
+  async remove(id: number, template) {
     try {
-      await Scripts.remove(id);
+      const modalResult = await this.openModal(template);
+      if (modalResult) {
+
+
+        if (this.userService.getGroup()) {
+          const group_id = this.userService.getGroup().GroupId;
+          await Scripts.remove(group_id, id);
+          this.collectionData = await Scripts.list(group_id);
+        }
+
+
+
+      }
     } catch (error) {
       console.error(error);
     }
@@ -50,10 +92,6 @@ export class ManageComponent implements OnInit {
   }
 
 
-  public tableColumns = [
-    { title: 'Name', name: 'name', sort: 'asc', filtering: { filterString: '', placeholder: 'Filter by name' } },
-    { title: '#ID', name: 'id', sort: 'asc', filtering: { filterString: '', placeholder: 'Filter by id' } }
 
-  ];
 
 }

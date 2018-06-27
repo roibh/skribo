@@ -1,12 +1,10 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { FireService } from '../fire.service';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { EditorComponent } from '../editor/editor.component';
 import { InfoComponent } from '../info/info.component';
 import { Scripts, ScriptModel } from '@skribo/client';
 import { UserService } from '../user.context.service';
-
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { MotivationService } from '../motivation.service';
 
@@ -24,13 +22,14 @@ export class AdScriptComponent implements OnInit {
     private motivationService: MotivationService,
     public userService: UserService, private route: ActivatedRoute) {
     this.toastr.setRootViewContainerRef(vcr);
-
-
   }
+
   public testResult: any;
   public code: string;
   public variables: any;
+  id: string;
   public info: { Name: string, Description: string };
+
   onCode($event) {
     this.code = $event;
   }
@@ -41,20 +40,11 @@ export class AdScriptComponent implements OnInit {
     this.variables = $event;
   }
 
-
   async ngOnInit() {
-    let id = this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-
       await this._Get(id);
-      // let result = await this.fireService.get('Script', id);
-      // if (result) {
-      //   this.info = result;
-      //   this.code = result.code;
-      //   this.variables = result.variables;
-      // }
-    }
-    else {
+    } else {
       this.info = { Name: '', Description: '' };
       this.code = `function skribo(){
       }`;
@@ -64,7 +54,7 @@ export class AdScriptComponent implements OnInit {
 
   async _Get(id) {
     if (id) {
-      const script: ScriptModel = await Scripts.get(id);
+      const script: ScriptModel = await Scripts.get(this.userService.getGroup().GroupId, id);
       if (script.Variables) {
         this.variables = JSON.parse(script.Variables);
       }
@@ -76,36 +66,30 @@ export class AdScriptComponent implements OnInit {
   async _Save(navigate: boolean) {
     const saveObj: ScriptModel = Object.assign(this.info, { Code: this.code }, { Variables: this.variables });
     let id: any = this.route.snapshot.paramMap.get('id');
+    if (this.id) {
+      id = this.id;
+    }
+    const group_id = this.userService.getGroup().GroupId;
     if (id) {
-      await Scripts.update(id, saveObj);
+      await Scripts.update(group_id, id, saveObj);
     } else {
-      saveObj.Owner = this.userService.getUser().id;
-      await Scripts.create(saveObj);
+      saveObj.GroupId =group_id;
+      const result = await Scripts.create(group_id, saveObj);
+
+      this.id = result.ScriptId;
     }
     this.toastr.success(this.motivationService.goodOne(), 'Success!');
     if (navigate) {
       this.router.navigate(['adscript/manage']);
-
     }
-
-
-
-    // if (id) {
-    //   await this.fireService.update('Script', id, saveObj);
-    // } else {
-    //   await this.fireService.add('Script', saveObj);
-    // }
-
   }
 
   async _Execute() {
-    //load and eval script
     try {
       eval(this.code);
       this.toastr.success(this.motivationService.goodOne(), 'It compiles!');
     } catch (error) {
       this.testResult = error;
-    };
-
+    }
   }
 }

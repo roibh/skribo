@@ -1,0 +1,46 @@
+<form #infoForm="ngForm">
+
+  <div class="form-group" *ngIf="userData">
+    <label for="NameInput">User Name:</label>
+   
+    {{userData.name}}
+   
+  </div>
+  <div class="form-group" *ngIf="userData">
+    <label for="NameInput">Group token:</label>
+    <textarea class="form-control" name="DescriptionInput" [(ngModel)]="userData.Description" id="DescriptionInput" aria-describedby="DescriptionHelp"
+      placeholder="Enter a description"></textarea>
+
+    <small id="emailHelp" class="form-text text-muted">it will help you understand what you're doing.</small>
+  </div>
+  <div class="form-group" *ngIf="userData">
+    <label for="NameInput">Groups:</label>
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Value</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let variable of userData.groups">
+          <td scope="row">
+            {{variable.Name}} </td>
+          <td>
+            {{variable.GroupId}}
+          </td>
+
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+
+
+
+</form>

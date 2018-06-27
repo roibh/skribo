@@ -42,12 +42,11 @@ export class EmbedListComponent implements OnInit {
 
 
   public async saveEmbed() {
-    const user = this.userService.getUser();
-
+    const group = this.userService.getGroup();
     if (!this.embed.EmbedId) {
-      await Embed.create(this.embed, this.script.ID.toString(), user.id);
+      await Embed.create(this.embed, this.script.ScriptId, group.GroupId);
     } else {
-      await Embed.update(this.embed, this.script.ID.toString(), user.id, this.embed.EmbedId);
+      await Embed.update(this.embed, this.script.ScriptId, group.GroupId, this.embed.EmbedId);
     }
     this.modalRef.hide();
   }
@@ -66,7 +65,8 @@ export class EmbedListComponent implements OnInit {
     const scriptPipe = await fetch('assets/pipe.js');
     let templateString = await scriptPipe.text();
     const user = this.userService.getUser();
-    const dataUrl = embed.ScriptId + '/' + embed.UserId + '/' + embed.EmbedId;
+    const group = this.userService.getGroup();
+    const dataUrl = embed.ScriptId + '/' + group.GroupId + '/' + embed.EmbedId;
     templateString = templateString.replace(/\$SCRIPTURL\$/g, `serve/${dataUrl}`);
     templateString = templateString.replace(/\$LOGURL\$/g, `log/${dataUrl}`);
     templateString = templateString.replace(/\$RESULTURL\$/g, `results/${dataUrl}/`);

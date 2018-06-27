@@ -1,12 +1,12 @@
 {
   "name": "our-work",
-  "version": "0.0.17",
+  "version": "0.0.23",
   "description": "",
   "main": "index.js",
   "scripts": {
     "compile": "tsc",
     "build": "tsc && gulp dev",
-    "build:dist": "npm version patch && tsc && gulp production",
+    "build:dist": "tsc && gulp production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "eslintConfig": {

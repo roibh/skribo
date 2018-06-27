@@ -31,12 +31,12 @@ export class ResultViewerComponent implements OnInit {
 
   async showResults(template) {
 
-    const userId = this.userService.getUser().id;
+    const group_id = this.userService.getGroup().GroupId;
     const id = this.resultData.ID;
     const embed_id = this.resultData.EmbedId;
     const script_id = this.resultData.ScriptId;
 
-    const result = await Results.get(userId, script_id, embed_id, id);
+    const result = await Results.get(group_id, script_id, embed_id, id);
     this.modalRef = this.modalService.show(template, this.config);
 
 

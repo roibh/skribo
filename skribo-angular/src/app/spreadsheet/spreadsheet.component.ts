@@ -39,8 +39,7 @@ export class SpreadsheetComponent implements OnInit {
 
   async spreadsheet(row, template) {
     this.modalRef = this.modalService.show(template, this.config);
-    this.userId = this.userService.getUser().id;    
-    this.collectionData = await Results.listByScript(this.userId, row.ID);
+    this.collectionData = await Results.listByScript(row.GroupId, row.ScriptId);
   }
 
 }

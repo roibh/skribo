@@ -41,23 +41,24 @@ export class InstallComponent implements OnInit {
 
 
   public async createEmbed() {
-   // const user = this.userService.getUser();
-   // await Embed.create(this.variables, this.script.ID.toString(), user.id);
-   // const scriptPipe = await fetch('assets/pipe.js');
-   // this.embedCode = await scriptPipe.text();
+    // const user = this.userService.getUser();
+    // await Embed.create(this.variables, this.script.ID.toString(), user.id);
+    // const scriptPipe = await fetch('assets/pipe.js');
+    // this.embedCode = await scriptPipe.text();
   }
 
 
 
 
   public async installDialog(template) {
-    this.embedList = await Embed.list(this.script.ID.toString(), this.user.id);
+
+    this.embedList = await Embed.list(this.script.ScriptId.toString(), this.userService.getGroup().GroupId);
     this.embedList = this.embedList.map((item) => {
       item.Variables = JSON.parse(item.Variables);
       return item;
-    })
-    this.embeded = this.embedList && this.embedList.length > 0;
+    });
 
+    this.embeded = this.embedList && this.embedList.length > 0;
     this.modalRef = this.modalService.show(template, this.config);
   }
 }

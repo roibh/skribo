@@ -26,16 +26,15 @@ import { ManageComponent } from './manage/manage.component';
 import { InfoComponent } from './info/info.component';
 import { FireService } from './fire.service';
 import { MotivationService } from './motivation.service';
-
 import { StorageService } from './storage.service';
+import { Scripts, Embed, Results, User } from '@skribo/client';
 
-import { Scripts, Embed, Results } from '@skribo/client';
+const serverUrl = 'https://skribo.herokuapp.com';
 
-
-Embed.base = 'https://skribo.herokuapp.com';
-Scripts.base = 'https://skribo.herokuapp.com';
-Results.base = 'https://skribo.herokuapp.com';
-
+Embed.base = serverUrl;
+Scripts.base = serverUrl;
+Results.base = serverUrl;
+User.base = serverUrl;
 
 
 import * as M from '@methodus/client';
@@ -49,6 +48,7 @@ import { EmbedListComponent } from './embed-list/embed-list.component';
 import { SpreadsheetComponent } from './spreadsheet/spreadsheet.component';
 import { ChartComponent } from './chart/chart.component';
 import { ResultViewerComponent } from './result-viewer/result-viewer.component';
+import { UserInfoComponent } from './user-info/user-info.component';
 
 class CustomOption extends ToastOptions {
   animate = 'flyRight'; // you can override any options available
@@ -60,6 +60,7 @@ class CustomOption extends ToastOptions {
 const appRoutes: Routes = [
   { path: '', redirectTo: '/adscript/manage', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'user', component: UserInfoComponent },
   { path: 'customer', component: CustomerComponent },
   { path: 'adscript/manage/create', component: AdScriptComponent },
   { path: 'adscript/manage/:id/details', component: AdScriptComponent },
@@ -86,7 +87,8 @@ const appRoutes: Routes = [
     EmbedListComponent,
     SpreadsheetComponent,
     ChartComponent,
-    ResultViewerComponent
+    ResultViewerComponent,
+    UserInfoComponent
   ],
   imports: [
     RouterModule.forRoot(

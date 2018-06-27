@@ -1,6 +1,4 @@
 <div class="container-fluid">
-
-
   <tabset>
     <tab heading="Info" id="tab_info">
       <app-info [info]="info" [code]="code" [variables]="variables" (notify)="onInfo($event)"></app-info>
@@ -14,11 +12,11 @@
   </tabset>
   <div class="toolbar">
     <div class="btn-group">
-      <button type="button" class="btn btn-success btn-xs">Action</button>
-      <button type="button" class="btn btn-success btn-xs dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true"
+      <a type="button" class="btn btn-success btn-xs">Action</a>
+      <a type="button" class="btn btn-success btn-xs dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
         <span class="sr-only">Toggle Dropdown</span>
-      </button>
+      </a>
       <div class="dropdown-menu">
         <a class="dropdown-item">
           <span class="btn btn-success btn-xs" (click)="_Save(false)">Save</span>
@@ -29,7 +27,7 @@
         <a class="dropdown-item">
           <span class="btn btn-success btn-xs" (click)="_Execute()">
             <span class="oi oi-media-play"></span> Test Execution</span>
-          </a>
+        </a>
         <!-- <a class="dropdown-item" href="#">Something else here</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#">Separated link</a> -->

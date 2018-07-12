@@ -4,7 +4,7 @@
     </google-signin> -->
 
 
-    <div class="float-left dropdown" *ngIf="userData">
+    <div class="float-left dropdown" *ngIf="userData && group">
         <a class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
             {{group.Name}}

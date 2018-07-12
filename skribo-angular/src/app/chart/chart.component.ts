@@ -1,4 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ScriptModel } from '@skribo/client';
+
+
+
 
 @Component({
   selector: 'app-chart',
@@ -11,14 +15,19 @@ export class ChartComponent implements OnInit {
   @Input()
   data: any;
 
+  @Input()
+  script: ScriptModel;
+
   public chartData: any;
   public chartLabels: string[];
-  public chartType: string = 'doughnut';
+  public chartType = 'PieChart';
 
   ngOnInit() {
-     
-    this.chartLabels = this.data.map(item => item.label);
-    this.chartData = this.data.map(item => item.value);
+    this.chartData = this.data.map((item) => {
+      return { name: item.label, value: item.value }
+    });
+    // this.chartLabels = this.data.map(item => item.label);
+    // this.chartData = this.data.map(item => item.value);
   }
 
 }

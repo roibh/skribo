@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ChangeDetectorRef, NgZone } from '@angular/core';
 import { FireService } from '../fire.service';
 import { Scripts } from '@skribo/client';
 import { UserService } from '../user.context.service';
@@ -17,26 +17,30 @@ export class ManageComponent implements OnInit {
   modalPromise: Function = null;
   message: string;
 
-  constructor(private ref: ChangeDetectorRef, private modalService: BsModalService, private userService: UserService) {
+  constructor(private _ngZone: NgZone, private modalService: BsModalService, private userService: UserService) {
     this.user = userService.getUser();
   }
   collectionData: any = [];
 
+  busy: boolean;
 
   async ngOnInit() {
 
     this.userService.onGroupChange(async (group) => {
+      this._ngZone.run(async () => {
+        this.busy = true;
+        this.collectionData = await Scripts.list(group.GroupId);
+        this.busy = false;
+      });
 
-      this.collectionData = await Scripts.list(group.GroupId);
-      this.ref.detectChanges();
-     
     });
 
     if (this.collectionData.length === 0 && this.userService.getGroup()) {
-
-      this.collectionData = await Scripts.list(this.userService.getGroup().GroupId);
-      this.ref.detectChanges();
-      
+      this._ngZone.run(async () => {
+        this.busy = true;
+        this.collectionData = await Scripts.list(this.userService.getGroup().GroupId);
+        this.busy = false;
+      });
     }
   }
 

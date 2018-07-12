@@ -4,16 +4,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DynamicFormsCoreModule } from "@ng-dynamic-forms/core";
 import { FormsModule } from '@angular/forms';
 import { DynamicFormsBootstrapUIModule } from "@ng-dynamic-forms/ui-bootstrap";
-import { ChartsModule } from 'ng2-charts';
+
 import { ModalModule, } from 'ngx-bootstrap/modal';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { CustomerComponent } from './customer/customer.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { DynamicTableComponent } from './dynamic-table/dynamic-table.component';
 import { Ng2TableModule, NgTableFilteringDirective, NgTablePagingDirective, NgTableComponent, NgTableSortingDirective } from 'ng2-table';
 import { LoadersCssModule } from 'angular2-loaders-css';
 import { LoaderComponent } from './loader/loader.component';
@@ -39,31 +38,37 @@ User.base = serverUrl;
 
 import * as M from '@methodus/client';
 import { LoginComponent } from './login/login.component';
-import { GoogleSignInComponent } from 'angular-google-signin';
 import { InstallComponent } from './install/install.component';
 import { UserService } from './user.context.service';
-import { ToastModule } from 'ng2-toastr/ng2-toastr';
-import { ToastOptions } from 'ng2-toastr';
+import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
+
 import { EmbedListComponent } from './embed-list/embed-list.component';
 import { SpreadsheetComponent } from './spreadsheet/spreadsheet.component';
 import { ChartComponent } from './chart/chart.component';
 import { ResultViewerComponent } from './result-viewer/result-viewer.component';
 import { UserInfoComponent } from './user-info/user-info.component';
+import { CustomOption } from './customOption';
+import { FullEditorComponent } from './full-editor/full-editor.component';
 
-class CustomOption extends ToastOptions {
-  animate = 'flyRight'; // you can override any options available
-  newestOnTop = false;
-  showCloseButton = true;
-}
+import { MonacoEditorModule, NgxMonacoEditorConfig } from 'ngx-monaco-editor';
 
+
+const monacoConfig: NgxMonacoEditorConfig = {
+  baseUrl: '/options/dist/assets/', // configure base path for monaco editor
+  defaultOptions: { scrollBeyondLastLine: false }, // pass default options to be used
+  onMonacoLoad: () => {
+    console.log((<any>window).monaco);
+  } // here monaco object will be available as window.monaco use this function to extend monaco editor functionality.
+};
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/adscript/manage', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'user', component: UserInfoComponent },
-  { path: 'customer', component: CustomerComponent },
+
   { path: 'adscript/manage/create', component: AdScriptComponent },
   { path: 'adscript/manage/:id/details', component: AdScriptComponent },
+  { path: 'adscript/edit/:id/details', component: FullEditorComponent },
   { path: 'adscript/manage/:script_id/:embed_id/:id/spreadsheet', component: ResultViewerComponent },
   { path: 'adscript/manage', component: ManageComponent },
 ];
@@ -72,9 +77,8 @@ const appRoutes: Routes = [
 
   declarations: [
     AppComponent,
-    CustomerComponent,
+
     DashboardComponent,
-    DynamicTableComponent,
     LoaderComponent,
     AdScriptComponent,
     EditorComponent,
@@ -82,19 +86,20 @@ const appRoutes: Routes = [
     ManageComponent,
     InfoComponent,
     LoginComponent,
-    GoogleSignInComponent,
     InstallComponent,
     EmbedListComponent,
     SpreadsheetComponent,
     ChartComponent,
     ResultViewerComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    FullEditorComponent
   ],
   imports: [
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false } // <-- debugging purposes only
     ),
+    NgxChartsModule,
     NgxDatatableModule,
     TabsModule.forRoot(),
     ModalModule.forRoot(),
@@ -104,11 +109,11 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     AceEditorModule,
-    ChartsModule,
     DynamicFormsCoreModule.forRoot(),
     DynamicFormsBootstrapUIModule,
     BrowserAnimationsModule,
-    ToastModule.forRoot()
+    ToastModule.forRoot(),
+    MonacoEditorModule.forRoot(monacoConfig)
   ],
   providers: [FireService, StorageService, UserService, MotivationService, { provide: ToastOptions, useClass: CustomOption }],
   bootstrap: [AppComponent]

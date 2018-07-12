@@ -1,11 +1,17 @@
 <ng-template #template>
   <div class="modal-header">
-    <h4 class="modal-title pull-left"> {{script.Name}}</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+
+    <h6>Edit Script Installations</h6>
+
+
+
+    <a type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
-    </button>
+    </a>
   </div>
   <div class="modal-body">
+    <h4 class="modal-title"> {{script.Name}}</h4>
+
     <div class="form-group">
       <label for="NameInput">Installation Name:</label>
       <textarea class="form-control" [(ngModel)]="embed.Name"></textarea>
@@ -13,7 +19,10 @@
     </div>
 
     <app-variables [mode]="set" [variables]="embed.Variables"></app-variables>
-    <a class="btn btn-md btn-primary" (click)="saveEmbed()">Create embed script</a>
+
+    <a class="btn btn-md btn-primary" *ngIf="embed.ID" (click)="saveEmbed()">Update embed script</a>
+
+    <a class="btn btn-md btn-primary" *ngIf="!embed.ID" (click)="saveEmbed()">Create embed script</a>
 
   </div>
 </ng-template>
@@ -39,9 +48,9 @@
   </div>
   <div class="card-body text-primary">
     <ul class="card-text">
-      <li *ngFor="let item of embed.Variables">
+      <!-- <li *ngFor="let item of embed.Variables">
         <b> {{item.name}}</b>: {{item.value}}
-      </li>
+      </li> -->
 
     </ul>
 

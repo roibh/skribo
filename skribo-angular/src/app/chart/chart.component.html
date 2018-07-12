@@ -1,9 +1,24 @@
-<div style="display: block">
+<!-- <google-chart [data]="chartData" class="chart"></google-chart>
+    -->
 
-  
-    <canvas baseChart
-                [data]="chartData"
-                [labels]="chartLabels"
-                [chartType]="chartType"
-               ></canvas>
-  </div>
+
+<ngx-charts-pie-chart *ngIf="chartData" class="chart-container" [results]="chartData" [labels]="true" [explodeSlices]="false"
+  [doughnut]="false" [arcWidth]="0.25">
+</ngx-charts-pie-chart>
+
+
+<!-- <ngx-charts-pie-chart class="chart-container" 
+
+
+[view]="view" [scheme]="colorScheme" [results]="single" [animations]="animations"
+  [legend]="showLegend" 
+  [legendTitle]="legendTitle"
+   [explodeSlices]="explodeSlices"
+    [labels]="chartData.labels"
+     [doughnut]="doughnut"
+  [arcWidth]="arcWidth" 
+  (legendLabelClick)="onLegendLabelClick($event)" 
+  [gradient]="gradient" [tooltipDisabled]="tooltipDisabled"
+  [tooltipText]="pieTooltipText" (dblclick)="dblclick($event)" (select)="select($event)"
+  >
+</ngx-charts-pie-chart> -->

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import { FireService } from '../fire.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EditorComponent } from '../editor/editor.component';
@@ -11,13 +11,14 @@ import { MotivationService } from '../motivation.service';
 @Component({
   selector: 'app-ad-script',
   templateUrl: './ad-script.component.html',
-  styleUrls: ['./ad-script.component.css']
+  styleUrls: ['./ad-script.component.css'],
+  encapsulation: ViewEncapsulation.None
 
 
 })
 export class AdScriptComponent implements OnInit {
 
-  constructor(public toastr: ToastsManager,
+  constructor(public toastr: ToastsManager,private ref: ChangeDetectorRef,
     private router: Router, vcr: ViewContainerRef,
     private motivationService: MotivationService,
     public userService: UserService, private route: ActivatedRoute) {
@@ -31,6 +32,7 @@ export class AdScriptComponent implements OnInit {
   public info: { Name: string, Description: string };
 
   onCode($event) {
+     
     this.code = $event;
   }
   onInfo($event) {
@@ -50,6 +52,8 @@ export class AdScriptComponent implements OnInit {
       }`;
       this.variables = [];
     }
+    this.ref.detectChanges();
+    
   }
 
   async _Get(id) {

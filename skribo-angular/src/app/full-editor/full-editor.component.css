@@ -1,0 +1,9 @@
+.editor-container {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    width: 100%;
+    height: calc(100% - 35px)!important;
+  }
+
+  .container-fluid { height: 100%;}

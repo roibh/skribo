@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FireService } from '../fire.service';
 
 
@@ -9,17 +9,14 @@ import { FireService } from '../fire.service';
 })
 export class LoaderComponent implements OnInit {
 
-  constructor(private FireService: FireService) { }
-  
-  
+  constructor() { }
+
+  @Input()
   busy: boolean;
 
   ngOnInit() {
 
-    this.FireService.busy.subscribe((value) => {
-      this.busy = value;
 
-    });
   }
 
 }

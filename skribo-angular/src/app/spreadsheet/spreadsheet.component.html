@@ -1,9 +1,9 @@
 <ng-template #template>
   <div class="modal-header">
     <h4 class="modal-title pull-left"> {{script.Name}}</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <a type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
-    </button>
+    </a>
   </div>
   <div class="modal-body">
     <table class="table">
@@ -20,15 +20,15 @@
         <tr *ngFor="let row of collectionData">
           <th scope="row">
             <td>
-            <app-result-viewer [resultData]="row"></app-result-viewer>
-            <!-- <a [routerLink]="[row.ScriptId,row.EmbedId, row.ID, 'spreadsheet']">{{row.Date}}</a>
+              <app-result-viewer [resultData]="row" [script]="script"></app-result-viewer>
+              <!-- <a [routerLink]="[row.ScriptId,row.EmbedId, row.ID, 'spreadsheet']">{{row.Date}}</a>
 
             <td> -->
 
 
             </td>
             <td>
-              <a class="btn btn-danger" (click)="remove(row.ID)">
+              <a class="btn btn-danger" (click)="remove(row,confirmationTemplate)">
                 <i class="oi oi-trash white"></i>
               </a>
 
@@ -48,6 +48,15 @@
   </div>
 </ng-template>
 
+<ng-template #confirmationTemplate>
+  <div class="modal-body text-center">
+    <p>The script will be deleted.</p>
+    <button type="button" class="btn btn-default" (click)="confirm()">Continue</button>
+    <button type="button" class="btn btn-primary" (click)="decline()">Cancel</button>
+  </div>
+</ng-template>
+
 <a class="btn btn-success" (click)="spreadsheet(script, template)">
+
   <span class="oi oi-spreadsheet white"></span>
 </a>

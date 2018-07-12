@@ -17,6 +17,8 @@ import 'brace/mode/javascript';
        [durationBeforeCallback]="1000"  
        (textChanged)="onChange($event)"
        style="min-height: 376px; width:100%; overflow: auto;"></div>
+      
+       <a (click)="fullEdit()" >Full</a>
   `
 })
 export class EditorComponent implements OnInit, OnChanges {
@@ -35,12 +37,15 @@ export class EditorComponent implements OnInit, OnChanges {
   constructor() {
     this.options = { printMargin: false };
     this.onChange = (data) => {
-      
+
       this.code = data;
       this.notify.emit(this.code);
     }
   }
 
+  fullEdit() {
+    window.open('assets/monaco.html');
+  }
   ngOnChanges() {
     //this.notify.emit(this.code);
   }

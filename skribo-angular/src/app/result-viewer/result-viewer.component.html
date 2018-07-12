@@ -1,32 +1,38 @@
 <ng-template #template>
 
   <div class="modal-header">
-    <h4 class="modal-title pull-left"> {{resultData.Date}}</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <h4 class="modal-title pull-left"> {{resultData.Date| date:'long'}}</h4>
+    <a type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
-    </button>
+    </a>
   </div>
   <div class="modal-body">
-    <div style="height: 500px;width: 50%;overflow: auto;" class="float-left">
-      <table class="table table-responsive table-condensed">
-
-        <tr *ngFor="let d of Data">
-          <td>{{d.label}}</td>
-          <td *ngIf="d.label==='url'"><a href="{{d.value}}" target="_blank">click to view</a></td>
-          <td *ngIf="d.label!=='url'">{{d.value}}</td>
-        </tr>
-      </table>
+    <tabset>
+      <tab heading="Data" id="tab_info">
 
 
+        <ngx-datatable [rowHeight]="'auto'" [headerHeight]="50" [rows]="rows" class="material scroll-vertical ngx-datatable fixed-header fixed-row " [columns]="columns">
+        </ngx-datatable>
 
-    </div>
-    <div style="height: 500px;width: 50%;overflow: auto;" class="float-right">
-    <app-chart [data]="Data"></app-chart>
-    </div>
+        <!-- <google-chart [data]="tableChartData"></google-chart> -->
+        <!-- 
+        <table class="table table-responsive table-condensed">
 
+          <tr *ngFor="let d of Data">
+            <td>{{d.label}}</td>
+            <td *ngIf="d.label==='url'">
+              <a href="{{d.value}}" target="_blank">click to view</a>
+            </td>
+            <td *ngIf="d.label!=='url'">{{d.value}}</td>
+          </tr>
+        </table> -->
+      </tab>
+      <tab heading="Chart" id="tab_editor">
+        <div>
+          <app-chart *ngIf="isChart" [data]="Data" [script]="script"></app-chart>
+        </div>
+      </tab>
+    </tabset>
   </div>
 </ng-template>
-
-
-
-<a class="btn" (click)="showResults(template)">{{resultData.Date}}</a>
+<a class="btn" (click)="showResults(template, script)">{{resultData.Date | date:'long'}}</a>

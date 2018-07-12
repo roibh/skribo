@@ -1,10 +1,17 @@
 <div class="container-fluid">
+  <h1 *ngIf="info">{{info.Name}}</h1>
+
+ 
+
+
   <tabset>
+
+    <tab heading="Code" id="tab_editor">
+      
+        <app-full-editor [code]="code" (notify)="onCode($event)"></app-full-editor>
+    </tab>
     <tab heading="Info" id="tab_info">
       <app-info [info]="info" [code]="code" [variables]="variables" (notify)="onInfo($event)"></app-info>
-    </tab>
-    <tab heading="Code" id="tab_editor">
-      <app-editor [code]="code" (notify)="onCode($event)"></app-editor>
     </tab>
     <tab heading="Variables" id="tab_variables">
       <app-variables [mode]="'edit'" [variables]="variables" (notify)="onvariables($event)"></app-variables>

@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, NgZone, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { UserService } from '../user.context.service';
-import { Results } from '@skribo/client';
+import { Results, Embed, EmbedModel, ResultsModel } from '@skribo/client';
 import { debug } from 'util';
 
 @Component({
@@ -11,7 +11,7 @@ import { debug } from 'util';
 })
 export class SpreadsheetComponent implements OnInit {
 
-  constructor(private modalService: BsModalService, private userService: UserService) { }
+  constructor(private _ngZone: NgZone, private modalService: BsModalService, private userService: UserService) { }
   modalRef: BsModalRef;
   collectionData: any;
 
@@ -28,6 +28,9 @@ export class SpreadsheetComponent implements OnInit {
     backdrop: true,
     ignoreBackdropClick: true
   };
+  modalPromise: Function = null;
+  message: string;
+
 
   async ngOnInit() {
 
@@ -37,9 +40,62 @@ export class SpreadsheetComponent implements OnInit {
 
   }
 
-  async spreadsheet(row, template) {
-    this.modalRef = this.modalService.show(template, this.config);
-    this.collectionData = await Results.listByScript(row.GroupId, row.ScriptId);
+  async openModal(template: TemplateRef<any>) {
+    return new Promise<boolean>((resolve, reject) => {
+      this.modalPromise = resolve;
+      this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+    });
   }
+
+  confirm(): void {
+    this.modalPromise(true);
+    this.message = 'Confirmed!';
+    this.modalRef.hide();
+  }
+
+  decline(): void {
+    this.modalPromise(false);
+    this.message = 'Declined!';
+    this.modalRef.hide();
+  }
+
+  async spreadsheet(row, template) {
+    this._ngZone.run(async () => {
+      this.script = row;
+
+      this.modalRef = this.modalService.show(template, this.config);
+      this.collectionData = await Results.listByScript(row.GroupId, row.ScriptId);
+
+    });
+
+  }
+
+  async remove(result: ResultsModel, template) {
+    this._ngZone.run(async () => {
+      try {
+        const modalResult = await this.openModal(template);
+        if (modalResult) {
+
+
+          if (this.userService.getGroup()) {
+
+            const group_id = this.userService.getGroup().GroupId;
+            await Results.delete(group_id, result.ScriptId, result.EmbedId, result.ID.toString());
+            this.collectionData = await Results.listByScript(group_id, result.ScriptId);
+            
+          }
+
+
+
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    });
+
+  }
+
+
+
 
 }

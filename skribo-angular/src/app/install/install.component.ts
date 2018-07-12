@@ -50,7 +50,7 @@ export class InstallComponent implements OnInit {
 
 
 
-  public async installDialog(template) {
+  public async installDialog(template, script) {
 
     this.embedList = await Embed.list(this.script.ScriptId.toString(), this.userService.getGroup().GroupId);
     this.embedList = this.embedList.map((item) => {

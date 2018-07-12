@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, NgZone } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { Embed } from '@skribo/client';
@@ -11,7 +11,7 @@ import { UserService } from '../user.context.service';
 })
 export class EmbedListComponent implements OnInit {
 
-  constructor(private modalService: BsModalService, private userService: UserService) { }
+  constructor(private _ngZone: NgZone, private modalService: BsModalService, private userService: UserService) { }
   modalRef: BsModalRef;
   @Input()
   public list: any;
@@ -27,6 +27,9 @@ export class EmbedListComponent implements OnInit {
   };
 
   ngOnInit() {
+    if (typeof this.script.Variables === 'string') {
+      this.script.Variables = JSON.parse(this.script.Variables);
+    }
   }
 
   public async deleteEmbed(embed, index) {
@@ -36,8 +39,27 @@ export class EmbedListComponent implements OnInit {
 
 
   public async editEmbed(embed, template) {
-    this.embed = embed;
-    this.modalRef = this.modalService.show(template, this.config);
+    this._ngZone.run(async () => {
+      this.embed = embed;
+
+      const _variables: any = {};
+      this.script.Variables.forEach((item) => {
+        _variables[item.name] = item.value;
+      });
+
+      this.embed.Variables.forEach((item) => {
+        _variables[item.name] = item.value;
+      });
+
+      this.embed.Variables = Object.keys(_variables).map((key) => {
+        return { name: key, value: _variables[key] };
+      });
+
+
+
+
+      this.modalRef = this.modalService.show(template, this.config);
+    });
   }
 
 

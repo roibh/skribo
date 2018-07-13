@@ -10,9 +10,10 @@
       "assets": [
         {
           "glob": "**/*",
-          "input": "./assets/ngx-monaco-editor/assets/monaco",
+          "input": "./assets/ngx-monaco-editor/assets/monaco/",
           "output": "./assets/monaco/"
         },
+        
         "assets",
         "dynamic-table.component.css",
         "monaco.html"

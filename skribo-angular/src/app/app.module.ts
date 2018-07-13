@@ -50,7 +50,7 @@ import { UserInfoComponent } from './user-info/user-info.component';
 import { CustomOption } from './customOption';
 import { FullEditorComponent } from './full-editor/full-editor.component';
 
-import { MonacoEditorModule, NgxMonacoEditorConfig } from 'ngx-monaco-editor';
+import { MonacoEditorModule, NgxMonacoEditorConfig } from '../assets/ngx-monaco-editor';
 
 
 const monacoConfig: NgxMonacoEditorConfig = {

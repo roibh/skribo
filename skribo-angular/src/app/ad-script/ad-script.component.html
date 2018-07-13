@@ -2,8 +2,37 @@
   <h1 *ngIf="info">{{info.Name}}</h1>
 
  
+  <div class="toolbar">
+      <div class="btn-group">
+        <a type="button" class="btn btn-success btn-xs">Action</a>
+        <a type="button" class="btn btn-success btn-xs dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item">
+            <span class="btn btn-success btn-xs" (click)="_Save(false)">Save</span>
+          </a>
+          <a class="dropdown-item">
+            <span class="btn btn-primary btn-xs" (click)="_Save(true)">Save & finish</span>
+          </a>
+          <a class="dropdown-item">
+            <span class="btn btn-success btn-xs" (click)="_Execute()">
+              <span class="oi oi-media-play"></span> Test Execution</span>
+          </a>
+          <!-- <a class="dropdown-item" href="#">Something else here</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Separated link</a> -->
+        </div>
+      </div>
+  
+  
+      <!-- <a class="btn btn-primary btn-xs" (click)="_Save()">
+        <span class="oi oi-loop-square"></span> Save</a> -->
+  
+    </div>
 
-
+  {{code}}
   <tabset>
 
     <tab heading="Code" id="tab_editor">
@@ -17,35 +46,7 @@
       <app-variables [mode]="'edit'" [variables]="variables" (notify)="onvariables($event)"></app-variables>
     </tab>
   </tabset>
-  <div class="toolbar">
-    <div class="btn-group">
-      <a type="button" class="btn btn-success btn-xs">Action</a>
-      <a type="button" class="btn btn-success btn-xs dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false">
-        <span class="sr-only">Toggle Dropdown</span>
-      </a>
-      <div class="dropdown-menu">
-        <a class="dropdown-item">
-          <span class="btn btn-success btn-xs" (click)="_Save(false)">Save</span>
-        </a>
-        <a class="dropdown-item">
-          <span class="btn btn-primary btn-xs" (click)="_Save(true)">Save & finish</span>
-        </a>
-        <a class="dropdown-item">
-          <span class="btn btn-success btn-xs" (click)="_Execute()">
-            <span class="oi oi-media-play"></span> Test Execution</span>
-        </a>
-        <!-- <a class="dropdown-item" href="#">Something else here</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Separated link</a> -->
-      </div>
-    </div>
 
-
-    <!-- <a class="btn btn-primary btn-xs" (click)="_Save()">
-      <span class="oi oi-loop-square"></span> Save</a> -->
-
-  </div>
   <div *ngIf="testResult">
     <div>{{testResult.message}}</div>
     <div>{{testResult.stack}}</div>

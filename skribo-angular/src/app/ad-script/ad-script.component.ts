@@ -31,8 +31,7 @@ export class AdScriptComponent implements OnInit {
   id: string;
   public info: { Name: string, Description: string };
 
-  onCode($event) {
-     
+  onCode($event) {  
     this.code = $event;
   }
   onInfo($event) {

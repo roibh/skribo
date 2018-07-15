@@ -1,0 +1,50 @@
+<ng-template #template>
+  <div class="modal-header">
+
+    <h6>Edit Script Installations</h6>
+
+
+
+    <a type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </a>
+  </div>
+  <div class="modal-body">
+    <h4 class="modal-title"> {{script.Name}}</h4>
+
+    <div class="form-group">
+      <label for="NameInput">Installation Name:</label>
+      <textarea class="form-control" [(ngModel)]="embed.Name"></textarea>
+      <small id="emailHelp" class="form-text text-muted">it will help you understand what you're doing.</small>
+    </div>
+
+    <app-variables [mode]="set" [variables]="embed.Variables"></app-variables>
+
+    <a class="btn btn-md btn-primary" *ngIf="embed.ID" (click)="saveEmbed()">Update embed script</a>
+
+    <a class="btn btn-md btn-primary" *ngIf="!embed.ID" (click)="saveEmbed()">Create embed script</a>
+
+  </div>
+</ng-template>
+
+
+
+
+<table>
+  <tr *ngFor="let account of list;let i=index;">
+    <td>{{account| json}}</td>
+    <td>
+      <a class="btn btn-primary btn-xs" (click)="createEmbed(embed)">
+        Select
+      </a>
+    </td>
+  </tr>
+</table>
+
+
+
+
+<a class="btn btn-success" (click)="browseToSelect(value)">
+
+  <span class="oi oi-spreadsheet white"></span>
+</a>

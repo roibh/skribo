@@ -27,7 +27,7 @@ import { FireService } from './fire.service';
 import { MotivationService } from './motivation.service';
 import { StorageService } from './storage.service';
 import { Scripts, Embed, Results, User } from '@skribo/client';
-
+import { HotTableModule } from '../assets/ng2-handsontable';
 const serverUrl = 'https://skribo.herokuapp.com';
 
 Embed.base = serverUrl;
@@ -51,13 +51,31 @@ import { CustomOption } from './customOption';
 import { FullEditorComponent } from './full-editor/full-editor.component';
 
 import { MonacoEditorModule, NgxMonacoEditorConfig } from '../assets/ngx-monaco-editor';
+import { VariableFieldComponent } from './variable-field/variable-field.component';
+import { AccountSelectorComponent } from './account-selector/account-selector.component';
+import { GridComponent } from './grid/grid.component';
 
 
 const monacoConfig: NgxMonacoEditorConfig = {
   baseUrl: '/options/dist/assets/', // configure base path for monaco editor
   defaultOptions: { scrollBeyondLastLine: false }, // pass default options to be used
   onMonacoLoad: () => {
-    console.log((<any>window).monaco);
+   
+
+    const _monaco = (<any>window).monaco;
+    // validation settings
+    _monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
+      noSemanticValidation: false,
+      noSyntaxValidation: false
+    });
+
+    // compiler options
+    _monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
+      target: monaco.languages.typescript.ScriptTarget.ES5,
+      allowNonTsExtensions: true
+    });
+
+   
   } // here monaco object will be available as window.monaco use this function to extend monaco editor functionality.
 };
 
@@ -77,7 +95,6 @@ const appRoutes: Routes = [
 
   declarations: [
     AppComponent,
-
     DashboardComponent,
     LoaderComponent,
     AdScriptComponent,
@@ -92,7 +109,10 @@ const appRoutes: Routes = [
     ChartComponent,
     ResultViewerComponent,
     UserInfoComponent,
-    FullEditorComponent
+    FullEditorComponent,
+    VariableFieldComponent,
+    AccountSelectorComponent,
+    GridComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -113,6 +133,7 @@ const appRoutes: Routes = [
     DynamicFormsBootstrapUIModule,
     BrowserAnimationsModule,
     ToastModule.forRoot(),
+    HotTableModule,
     MonacoEditorModule.forRoot(monacoConfig)
   ],
   providers: [FireService, StorageService, UserService, MotivationService, { provide: ToastOptions, useClass: CustomOption }],

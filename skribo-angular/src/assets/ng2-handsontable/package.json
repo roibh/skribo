@@ -1,0 +1,30 @@
+{
+  "main": "bundles/ng2-handsontable.umd.js",
+  "version": "2.1.0-rc.3",
+  "description": "Angular4 Handsontable components",
+  "module": "index.js",
+  "typings": "index.d.ts",
+  "keywords": [
+    "angular",
+    "angular2",
+    "angular4",
+    "handsontable",
+    "table"
+  ],
+  "author": {
+    "name": "Vyacheslav Chub",
+    "email": "vyacheslav.chub@valor-software.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/valor-software/ng2-handsontable.git"
+  },
+  "name": "ng2-handsontable",
+  "dependencies": {
+    "handsontable": ">= 0.37 < 1.0"
+  },
+  "_id": "ng2-handsontable@2.1.0-rc.3",
+  "devDependencies": {},
+  "peerDependencies": {}
+}

@@ -9,3 +9,4 @@
 
 .container-fluid,.tab-content,.tab-container,.tab-content { height: 100%!important;}
 #tab_editor {height: 100%;}
+.toolbar { float: right; position: absolute;right:0;}

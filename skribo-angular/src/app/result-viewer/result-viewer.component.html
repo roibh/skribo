@@ -9,10 +9,10 @@
   <div class="modal-body">
     <tabset>
       <tab heading="Data" id="tab_info">
-
-
-        <ngx-datatable [rowHeight]="'auto'" [headerHeight]="50" [rows]="rows" class="material scroll-vertical ngx-datatable fixed-header fixed-row " [columns]="columns">
-        </ngx-datatable>
+        <hot-table *ngIf="rows" [colHeaders]="colHeaders" [data]="rows" [options]="options" [columns]="columns">
+        </hot-table>
+        <!-- <ngx-datatable [rowHeight]="'auto'" [headerHeight]="50" [rows]="rows" class="material scroll-vertical ngx-datatable fixed-header fixed-row " [columns]="columns">
+        </ngx-datatable> -->
 
         <!-- <google-chart [data]="tableChartData"></google-chart> -->
         <!-- 

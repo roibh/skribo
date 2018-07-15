@@ -28,11 +28,19 @@ export class ResultViewerComponent implements OnInit {
 
   tableChartData: any;
   rows: any;
+
   columns: any;
+  colHeaders: any;
+
   isChart: boolean;
+  options = {
+    rowHeaders: true,
+    colHeaders: true,
+    columnSorting: true
+  };
 
   modalRef: BsModalRef;
-  config = {
+  modalConfig = {
     backdrop: true,
     ignoreBackdropClick: true,
     class: 'gray modal-lg'
@@ -68,8 +76,16 @@ export class ResultViewerComponent implements OnInit {
       this.Data = JSON.parse(data.results);
       const objectRow = this.Data[0];
 
+      this.colHeaders = Object.keys(objectRow);
+      this.options.colHeaders = this.colHeaders;
+
       this.columns = Object.keys(objectRow).map((item) => {
-        return { 'prop': item };
+        return {
+          data: item,
+          description: item,
+          renderer: 'text',
+          readOnly: true
+        };
       });
 
       this.tableChartData = {
@@ -101,20 +117,21 @@ export class ResultViewerComponent implements OnInit {
       this.isChart = false;
     }
 
-    this.rows = this.Data.map((item) => {
-      if (item.label === 'url') {
-        item.value = ` <a href="${item.value}" target="_blank">click to view</a>`;
-      }
-      return item;
+    this.rows = this.Data;
 
-    });
-    const objectRow = this.Data[0];
+    // .map((row) => {
+    //   return Object.values(row);
 
-    this.columns = Object.keys(objectRow).map((item) => {
-      return { 'prop': item, 'expanded': true };
-    });
 
-    this.modalRef = this.modalService.show(template, this.config);
+    //   // if (item.label === 'url') {
+    //   //   item.value = ` <a href="${item.value}" target="_blank">click to view</a>`;
+    //   // }
+    //   // return item;
+
+    // });
+
+
+    this.modalRef = this.modalService.show(template, this.modalConfig);
   }
   //
   async ngOnInit() {

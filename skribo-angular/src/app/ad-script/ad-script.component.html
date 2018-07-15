@@ -1,43 +1,28 @@
 <div class="container-fluid">
   <h1 *ngIf="info">{{info.Name}}</h1>
 
- 
-  <div class="toolbar">
-      <div class="btn-group">
-        <a type="button" class="btn btn-success btn-xs">Action</a>
-        <a type="button" class="btn btn-success btn-xs dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
-          <span class="sr-only">Toggle Dropdown</span>
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item">
-            <span class="btn btn-success btn-xs" (click)="_Save(false)">Save</span>
-          </a>
-          <a class="dropdown-item">
-            <span class="btn btn-primary btn-xs" (click)="_Save(true)">Save & finish</span>
-          </a>
-          <a class="dropdown-item">
-            <span class="btn btn-success btn-xs" (click)="_Execute()">
-              <span class="oi oi-media-play"></span> Test Execution</span>
-          </a>
-          <!-- <a class="dropdown-item" href="#">Something else here</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Separated link</a> -->
-        </div>
-      </div>
-  
-  
-      <!-- <a class="btn btn-primary btn-xs" (click)="_Save()">
-        <span class="oi oi-loop-square"></span> Save</a> -->
-  
-    </div>
 
-  {{code}}
+
+
+  <div class="toolbar">
+
+    <a class="btn btn-success btn-xs" (click)="_Save(false)">Save</a>
+
+
+
+    <a class="btn btn-primary btn-xs" (click)="_Save(true)">Save & finish</a>
+
+
+    <a class="btn btn-success btn-xs" (click)="_Execute()">
+      <span class="oi oi-media-play"></span> Test Execution</a>
+
+  </div>
+
   <tabset>
 
     <tab heading="Code" id="tab_editor">
-      
-        <app-full-editor [code]="code" (notify)="onCode($event)"></app-full-editor>
+
+      <app-full-editor [code]="code" (notify)="onCode($event)"  [variables]="variables"></app-full-editor>
     </tab>
     <tab heading="Info" id="tab_info">
       <app-info [info]="info" [code]="code" [variables]="variables" (notify)="onInfo($event)"></app-info>

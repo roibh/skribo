@@ -6,8 +6,10 @@
 <table class="table">
   <thead>
     <tr>
+      <th scope="col">Variable</th>
       <th scope="col">Name</th>
-      <th scope="col">Value</th>
+      <th scope="col">Name in code</th>
+
       <th scope="col"></th>
       <th scope="col"></th>
     </tr>
@@ -15,12 +17,25 @@
   <tbody>
     <tr *ngFor="let variable of variables; let i=index;">
       <th scope="row">
-        <input type="text" *ngIf="mode==='edit'" class="form-control textbox input-sm" [(ngModel)]="variable.name">
-
-        <label *ngIf="mode!=='edit'">{{variable.name}}</label>
+        <app-variable-field [variable]="variable"></app-variable-field>
+        <!-- <input type="text" *ngIf="mode==='edit'" class="form-control textbox input-sm" [(ngModel)]="variable.name"> {{variable|json}}
+        <label *ngIf="mode!=='edit'">{{variable.name}}
+          <i>Skribo_env_{{variable.name}}</i>
+        </label> -->
       </th>
+    
       <td>
-        <input type="text" class="form-control input-sm textbox text-small" [(ngModel)]="variable.value">
+
+        <input type="text" class="form-control input-sm textbox text-small" [(ngModel)]="variable.name">
+
+
+
+      </td>
+      <td>
+
+
+        <i>SkriboEnv.{{variable.name}}</i>
+
       </td>
       <td>
         <a class="btn btn-success btn-xs" (click)="options(i)">

@@ -1,0 +1,36 @@
+<div>
+  <select [(ngModel)]="variable.type" class="float-left">
+    <option *ngFor="let c of propertyTypes" [ngValue]="c">{{c}}</option>
+  </select>
+
+  <div [ngSwitch]="variable.type" class="float-left">
+
+    <div *ngSwitchCase="'string'">
+      <input type="text" class="form-control input-sm textbox text-small" [(ngModel)]="variable.value">
+    </div>
+
+    <div *ngSwitchCase="'number'">
+      <input type="number" class="form-control input-sm textbox text-small" [(ngModel)]="variable.value">
+    </div>
+
+    <div *ngSwitchCase="'date'">
+      <input type="date" class="form-control input-sm textbox text-small" [(ngModel)]="variable.value">
+    </div>
+
+    <div *ngSwitchCase="'account'">
+      <app-account-selector [variable]="variable"></app-account-selector>
+    </div>
+
+    <div *ngSwitchCase="'grid'">
+      <app-grid [variable]="variable"></app-grid>
+     
+    </div>
+
+    <div *ngSwitchCase="'url'">
+      <input type="text" class="form-control input-sm textbox text-small" [(ngModel)]="variable.value">
+    </div>
+    <div *ngSwitchDefault>
+      <input type="text" class="form-control input-sm textbox text-small" [(ngModel)]="variable.value">
+    </div>
+  </div>
+</div>

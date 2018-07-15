@@ -28,6 +28,7 @@ export class VariablesComponent implements OnInit, OnChanges {
   @Input()
   public mode: VariablesMode;
 
+
   ngOnInit() {
   }
 
@@ -35,6 +36,8 @@ export class VariablesComponent implements OnInit, OnChanges {
 
     this.notify.emit(this.variables);
   }
+
+
   public addRow() {
     this.variables = this.variables || [];
     this.variables.push({ name: 'name', value: 'value' });

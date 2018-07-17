@@ -48,40 +48,43 @@ export class FullEditorComponent implements OnInit, OnChanges {
   }
 
   onInit(editor) {
-
+    const fileName = 'filename/facts.d.ts';
+    const javascriptDefaults = (window as any).monaco.languages.typescript.javascriptDefaults;
     // extra libraries
-    (window as any).monaco.languages.typescript.javascriptDefaults.addExtraLib([
-      'declare class SkriboEnv {',
-      ...this.variables.map((item) => {
-        return `public static ${item.name}:any;`;
-      }),
-      'declare class Logger {',
-      'static log(item:any):void;',
-      '}',
-      'declare class MccApp {',
-      'static accounts();',
-      'static select(account);',
-      '}',
-      'declare class AdWordsApp {',
-      'static campaigns();',
-      'static keywords();',
-      'static report(query: string)',
-      '};',
-      'declare function SkriboPostResults(objectString:string);',
-      'declare function SkriboLog(obj: any);',
-      'declare function SkriboForAccounts(cb: Function, limit: number);',
-      'declare const SkriboSyncUrl:string;',
-      'declare class UrlFetchApp {',
-      'static fetch(url:string, options: any)',
-      '}',
-      'declare class SpreadsheetApp {',
-      'static create(name:string)',
-      '}'
+    if (!javascriptDefaults._extraLibs[fileName]) {
+
+      javascriptDefaults.addExtraLib([
+        'declare class SkriboEnv {',
+        ...this.variables.map((item) => {
+          return `public static ${item.name}:any;`;
+        }),
+        'declare class Logger {',
+        'static log(item:any):void;',
+        '}',
+        'declare class MccApp {',
+        'static accounts();',
+        'static select(account);',
+        '}',
+        'declare class AdWordsApp {',
+        'static campaigns();',
+        'static keywords();',
+        'static report(query: string)',
+        '};',
+        'declare function SkriboPostResults(objectString:string);',
+        'declare function SkriboLog(obj: any);',
+        'declare function SkriboForAccounts(cb: Function, limit: number);',
+        'declare const SkriboSyncUrl:string;',
+        'declare class UrlFetchApp {',
+        'static fetch(url:string, options: any)',
+        '}',
+        'declare class SpreadsheetApp {',
+        'static create(name:string)',
+        '}'
 
 
-    ].join('\n'), 'filename/facts.d.ts');
+      ].join('\n'), fileName);
 
-
+    }
 
 
     editor.onKeyUp((change) => {

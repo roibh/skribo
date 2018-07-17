@@ -9,8 +9,19 @@
   <div class="modal-body">
     <tabset>
       <tab heading="Data" id="tab_info">
-        <hot-table *ngIf="rows" [colHeaders]="colHeaders" [data]="rows" [options]="options" [columns]="columns">
-        </hot-table>
+
+        {{activeSheet}}
+
+        <tabset>
+          <tab class="tabwidth" (select)="onSelect($event)" *ngFor="let sheet of sheets;let i=index;" id="sheet_{{i}}" heading="{{sheet.name}}">
+
+            <hot-table *ngIf="rows" [data]="sheet.rows" [options]="options" [colHeaders]="sheet.colHeaders" [columns]="sheet.columns">
+            </hot-table>
+
+          </tab>
+        </tabset>
+
+
         <!-- <ngx-datatable [rowHeight]="'auto'" [headerHeight]="50" [rows]="rows" class="material scroll-vertical ngx-datatable fixed-header fixed-row " [columns]="columns">
         </ngx-datatable> -->
 
@@ -31,6 +42,11 @@
         <div>
           <app-chart *ngIf="isChart" [data]="Data" [script]="script"></app-chart>
         </div>
+      </tab>
+      <tab heading="Raw result" id="tab_raw">
+        <pre>
+         {{Data | json}}
+       </pre>
       </tab>
     </tabset>
   </div>

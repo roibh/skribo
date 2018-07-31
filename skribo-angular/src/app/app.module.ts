@@ -29,7 +29,7 @@ import { StorageService } from './storage.service';
 import { Scripts, Embed, Results, User } from '@skribo/client';
 import { HotTableModule } from '../assets/ng2-handsontable';
 const serverUrl = 'https://skribo.herokuapp.com';
-
+ 
 Embed.base = serverUrl;
 Scripts.base = serverUrl;
 Results.base = serverUrl;
@@ -54,6 +54,8 @@ import { MonacoEditorModule, NgxMonacoEditorConfig } from '../assets/ngx-monaco-
 import { VariableFieldComponent } from './variable-field/variable-field.component';
 import { AccountSelectorComponent } from './account-selector/account-selector.component';
 import { GridComponent } from './grid/grid.component';
+import { VariablesFillComponent } from './variables-fill/variables-fill.component';
+import { VariableFieldFillComponent } from './variable-field-fill/variable-field-fill.component';
 
 
 const monacoConfig: NgxMonacoEditorConfig = {
@@ -82,7 +84,7 @@ const monacoConfig: NgxMonacoEditorConfig = {
 const appRoutes: Routes = [
   { path: '', redirectTo: '/adscript/manage', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'user', component: UserInfoComponent },
+  { path: 'user/details', component: UserInfoComponent },
 
   { path: 'adscript/manage/create', component: AdScriptComponent },
   { path: 'adscript/manage/:id/details', component: AdScriptComponent },
@@ -112,7 +114,9 @@ const appRoutes: Routes = [
     FullEditorComponent,
     VariableFieldComponent,
     AccountSelectorComponent,
-    GridComponent
+    GridComponent,
+    VariablesFillComponent,
+    VariableFieldFillComponent
   ],
   imports: [
     RouterModule.forRoot(

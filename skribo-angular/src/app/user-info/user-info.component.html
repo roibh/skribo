@@ -1,10 +1,12 @@
-<form #infoForm="ngForm">
+<!-- <form #infoForm="ngForm"> -->
+
+<div class="container">
 
   <div class="form-group" *ngIf="userData">
     <label for="NameInput">User Name:</label>
-   
+
     {{userData.name}}
-   
+
   </div>
   <div class="form-group" *ngIf="userData">
     <label for="NameInput">Group token:</label>
@@ -13,6 +15,7 @@
 
     <small id="emailHelp" class="form-text text-muted">it will help you understand what you're doing.</small>
   </div>
+
   <div class="form-group" *ngIf="userData">
     <label for="NameInput">Groups:</label>
     <table class="table table-sm">
@@ -37,10 +40,7 @@
     </table>
   </div>
 
+</div>
 
-
-
-
-
-
-</form>
+<!-- 
+</form> -->

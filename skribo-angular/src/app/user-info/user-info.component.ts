@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { UserService } from '../user.context.service';
 import { User } from '@skribo/client';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-info',
@@ -10,22 +11,29 @@ import { User } from '@skribo/client';
 })
 export class UserInfoComponent implements OnInit {
 
-  constructor(private userService: UserService) { }
-  userData: any;
+  userData: any = false;
 
-  async ngOnInit() {
-   
-    this.userData = this.userService.getUser();
+  constructor(private _ngZone: NgZone,
+    private userService: UserService,
+    private route: ActivatedRoute, private changeDetector: ChangeDetectorRef) {
 
-    if (!this.userData) {
-      setTimeout(() => { this.ngOnInit(); }, 500);
-      return;
-    }
-  
-    if (!this.userData.groups || this.userData.groups.length === 0) {
-      await User.attachToGroup(this.userData.id, { 'Name': this.userData.name });
-      this.userData = this.userService.getUser();
-    }
+
+    this.route.params.subscribe((data) => {
+      this._ngZone.run(async () => {
+        this.userData = this.userService.getUser();
+        if (!this.userData.groups || this.userData.groups.length === 0) {
+          await User.attachToGroup(this.userData.id, { 'Name': this.userData.name });
+          this.userData = this.userService.getUser();
+        }
+        this.changeDetector.detectChanges();
+      });
+    });
+
+  }
+
+
+  ngOnInit() {
+
   }
 
 }

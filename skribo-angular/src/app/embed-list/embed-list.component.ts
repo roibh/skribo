@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, NgZone } from '@angular/core';
+import { Component, OnInit, Input, Output, NgZone, EventEmitter } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { Embed } from '@skribo/client';
@@ -13,11 +13,16 @@ export class EmbedListComponent implements OnInit {
 
   constructor(private _ngZone: NgZone, private modalService: BsModalService, private userService: UserService) { }
   modalRef: BsModalRef;
+  modalConfirmRef: BsModalRef;
   @Input()
   public list: any;
 
   @Input()
   public script: any;
+
+  @Output()
+  notify: EventEmitter<string> = new EventEmitter<string>();
+
 
   @Output()
   embed: any;
@@ -32,11 +37,12 @@ export class EmbedListComponent implements OnInit {
     }
   }
 
-  public async deleteEmbed(embed, index) {
-    await Embed.delete(embed.ScriptId, embed.UserId.toString(), embed.EmbedId);
-    this.list.splice(index, 1);
+  public async deleteEmbed(embed, index, template) {
+    this._ngZone.run(async () => {
+      this.embed = embed;
+      this.modalConfirmRef = this.modalService.show(template, { class: 'modal-md' });
+    });
   }
-
 
   public async editEmbed(embed, template) {
     this._ngZone.run(async () => {
@@ -62,6 +68,16 @@ export class EmbedListComponent implements OnInit {
     });
   }
 
+  public async confirm() {
+    await Embed.delete(this.embed.ScriptId, this.embed.GroupId.toString(), this.embed.EmbedId);
+    this.list.splice(this.list.indexOf(this.embed), 1);
+    this.modalConfirmRef.hide();
+  }
+
+  public async decline() {
+    this.modalConfirmRef.hide();
+  }
+
 
   public async saveEmbed() {
     const group = this.userService.getGroup();
@@ -71,6 +87,7 @@ export class EmbedListComponent implements OnInit {
       await Embed.update(this.embed, this.script.ScriptId, group.GroupId, this.embed.EmbedId);
     }
     this.modalRef.hide();
+    this.notify.emit(this.embed);
   }
 
 
@@ -80,6 +97,7 @@ export class EmbedListComponent implements OnInit {
     }
     this.embed = { Name: null, Variables: this.script.Variables };
     this.modalRef = this.modalService.show(template, this.config);
+    this.notify.emit(this.embed);
 
   }
 

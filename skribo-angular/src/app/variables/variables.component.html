@@ -17,7 +17,7 @@
   <tbody>
     <tr *ngFor="let variable of variables; let i=index;">
       <th scope="row">
-        <app-variable-field [variable]="variable"></app-variable-field>
+        <app-variable-field [variable]="variable" [mode]="mode"></app-variable-field>
         <!-- <input type="text" *ngIf="mode==='edit'" class="form-control textbox input-sm" [(ngModel)]="variable.name"> {{variable|json}}
         <label *ngIf="mode!=='edit'">{{variable.name}}
           <i>Skribo_env_{{variable.name}}</i>

@@ -1,19 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-export const enum VariableField {
-  String = 'string',
-  Number = 'number',
-}
-
-
-
 @Component({
-  selector: 'app-variable-field',
-  templateUrl: './variable-field.component.html',
-  styleUrls: ['./variable-field.component.css']
+  selector: 'app-variable-field-fill',
+  templateUrl: './variable-field-fill.component.html',
+  styleUrls: ['./variable-field-fill.component.css']
 })
-
-export class VariableFieldComponent implements OnInit {
+export class VariableFieldFillComponent implements OnInit {
 
   constructor() { }
   VariableField: any;
@@ -21,6 +13,7 @@ export class VariableFieldComponent implements OnInit {
   public propertyTypes: string[] = ['string', 'number', 'date', 'account', 'grid', 'url'];
   @Input()
   variable: any;
+
   @Input()
   mode: string;
 

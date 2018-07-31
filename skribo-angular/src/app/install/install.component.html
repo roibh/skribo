@@ -9,18 +9,12 @@
       <span aria-hidden="true">&times;</span>
     </a>
   </div>
-  <div class="modal-body">
-
-    <textarea class="form-control" id="InstallScript"></textarea>
+  <div class="modal-body"> 
+    <textarea class="form-control" id="InstallScript" *ngIf="embedList.length > 0"></textarea>
     <div style="overflow: auto; height: 450px;">
-      <app-embed-list [list]="embedList" [script]="script"></app-embed-list>
-
+      <app-embed-list [list]="embedList" (notify)="onList($event)" [script]="script"></app-embed-list>
       <!-- embeded -->
     </div>
-   
-
-
-
     <!-- <a class="btn btn-md btn-primary" (click)="createEmbed()">Create embed script</a> -->
 
   </div>

@@ -22,7 +22,9 @@
           <a class="btn btn-danger" (click)="remove(row.ScriptId, template)">
             <i class="oi oi-trash white"></i>
           </a>
-
+          <a class="btn btn-info" [routerLink]="[row.ScriptId, 'details']">
+              <i class="oi oi-pencil white"></i>
+            </a>
           <app-install [script]="row"></app-install>
           <app-spreadsheet [script]="row"></app-spreadsheet>
 

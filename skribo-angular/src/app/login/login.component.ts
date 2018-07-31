@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter, ChangeDetectorRef, NgZone } from '@angular/core';
 import { UserService } from '../user.context.service';
 import { GoogleSignInSuccess } from 'angular-google-signin';
 import { User } from '@skribo/client';
@@ -32,8 +32,10 @@ export class LoginComponent {
    */
   constructor(private ref: ChangeDetectorRef,
     private modalService: BsModalService,
-    private userService: UserService, private router: Router) {
+    private userService: UserService, private router: Router, private _ngZone: NgZone) {
     const win = window as any;
+
+
     if (win.chrome) {
       const interval = setInterval(() => {
 
@@ -49,20 +51,22 @@ export class LoginComponent {
     }
 
     this.user.subscribe(async ($event) => {
-      const groups = await User.getGroups($event.id);
+      this._ngZone.run(async () => {
+        const groups = await User.getGroups($event.id);
 
-      const userRecord = $event;
-      Object.assign(userRecord, { groups: groups });
-      this.userService.setUser(userRecord);
-      this.userData = userRecord;
-      if (groups.length === 0) {
-        this.router.navigateByUrl('/user');
-      } else {
-        this.userService.setGroup(groups[0]);
-      }
+        const userRecord = $event;
+        Object.assign(userRecord, { groups: groups });
+        this.userService.setUser(userRecord);
+        this.userData = userRecord;
+        if (groups.length === 0) {
+          this.router.navigateByUrl('/user/details');
+        } else {
+          this.userService.setGroup(groups[0]);
+        }
 
-      this.group = groups[0];
-      this.ref.detectChanges();
+        this.group = groups[0];
+        this.ref.detectChanges();
+      });
     });
   }
 
@@ -76,6 +80,9 @@ export class LoginComponent {
     this.userService.setGroup(group);
   }
 
+  public decline() {
+    this.modalRef.hide();
+  }
 
   public JoinGroup(template) {
     this.modalRef = this.modalService.show(template, { class: 'modal-md' });
@@ -89,7 +96,10 @@ export class LoginComponent {
 
 
   public ShareGroup(template) {
-    this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+    this._ngZone.run(async () => {
+      this.modalRef = this.modalService.show(template, { class: 'modal-md' });
+
+    });
   }
 
   onGoogleSignInSuccess(event: GoogleSignInSuccess) {

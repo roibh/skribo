@@ -18,7 +18,7 @@
       <small id="emailHelp" class="form-text text-muted">it will help you understand what you're doing.</small>
     </div>
 
-    <app-variables [mode]="set" [variables]="embed.Variables"></app-variables>
+    <app-variables-fill [variables]="embed.Variables"></app-variables-fill>
 
     <a class="btn btn-md btn-primary" *ngIf="embed.ID" (click)="saveEmbed()">Update embed script</a>
 
@@ -27,6 +27,14 @@
   </div>
 </ng-template>
 
+<ng-template #delete>
+  <div class="modal-body text-center">
+    <p>Delete installed embed?</p>
+    <pre>You will lose all information for the script</pre>
+    <a type="button" class="btn btn-danger" (click)="confirm()">Continue</a>
+    <a type="button" class="btn btn-default" (click)="decline()">Cancel</a>
+  </div>
+</ng-template>
 
 <a class="btn btn-primary btn-xs white" (click)="newEmbed(template)">
   <i class="oi oi-plus white"></i> New Installation
@@ -35,8 +43,8 @@
 <div class="card border-primary mb-3 " *ngFor="let embed of list;let i=index;">
   <div class="card-header">{{embed.Name}}
     <span class="float-right">
-      <a class="btn btn-danger btn-xs">
-        <i class="oi oi-trash white" (click)="deleteEmbed(embed, i)"></i>
+      <a class="btn btn-danger btn-xs" (click)="deleteEmbed(embed, i,delete)">
+        <i class="oi oi-trash white"></i>
       </a>
       <a class="btn btn-success btn-xs" (click)="editEmbed(embed,template)">
         <i class="oi oi-pencil white"></i>

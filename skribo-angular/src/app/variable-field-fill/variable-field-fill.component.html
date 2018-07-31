@@ -1,11 +1,6 @@
 <div>
-   
-  <select [(ngModel)]="variable.type" class="float-left" *ngIf="mode==='edit'">
-    <option *ngFor="let c of propertyTypes" [ngValue]="c">{{c}}</option>
-  </select>
-
   <div [ngSwitch]="variable.type" class="float-left">
-
+    <label>{{variable.name}}</label>
     <div *ngSwitchCase="'string'">
       <input type="text" class="form-control input-sm textbox text-small" [(ngModel)]="variable.value">
     </div>
@@ -24,7 +19,7 @@
 
     <div *ngSwitchCase="'grid'">
       <app-grid [variable]="variable"></app-grid>
-     
+
     </div>
 
     <div *ngSwitchCase="'url'">

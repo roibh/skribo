@@ -1,14 +1,32 @@
 <div>
-    <!-- <google-signin class="float-right" [clientId]="myClientId" [width]="myWidth" [theme]="myTheme" [scope]="myScope" [longTitle]="myLongTitle"
-        (googleSignInSuccess)="onGoogleSignInSuccess($event)">
-    </google-signin> -->
 
+
+    <ng-template #share>
+        <div class="modal-body text-center">
+
+            <p>Share your group.</p>
+            <pre>{{group.GroupId}}</pre>
+            <a type="button" class="btn btn-primary" (click)="decline()">Cancel</a>
+        </div>
+    </ng-template>
+
+    <ng-template #join>
+        <div class="modal-body text-center">
+            <p>Join a group.</p>
+            <div>
+                <label>Group code</label>
+                <input type="text" class="form-control" #group_code />
+            </div>
+            <a type="button" class="btn btn-primary" (click)="JoinConfirm(group_code.value)">Join</a>
+            <a type="button" class="btn btn-default" (click)="decline()">Cancel</a>
+        </div>
+    </ng-template>
 
     <div class="float-left dropdown" *ngIf="userData && group">
         <a class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
             {{group.Name}}
-    </a>
+        </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="position: absolute">
             <a class="dropdown-item" (click)="setGroup(item)" *ngFor="let item of userData.groups">{{item.Name}}</a>
 
@@ -18,24 +36,3 @@
 
     </div>
 </div>
-
-
-<ng-template #share>
-    <div class="modal-body text-center">
-        <p>Share your group.</p>
-        <pre>{{group.GroupId}}</pre>
-        <a type="button" class="btn btn-primary" (click)="decline()">Cancel</a>
-    </div>
-</ng-template>
-
-<ng-template #join>
-    <div class="modal-body text-center">
-        <p>Join a group.</p>
-        <div>
-            <label>Group code</label>
-            <input type="text" class="form-control" #group_code />
-        </div>
-        <a type="button" class="btn btn-primary" (click)="JoinConfirm(group_code.value)">Join</a>
-        <a type="button" class="btn btn-default" (click)="decline()">Cancel</a>
-    </div>
-</ng-template>

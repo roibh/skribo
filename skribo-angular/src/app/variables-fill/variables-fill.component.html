@@ -1,0 +1,23 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Values</th>
+
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let variable of variables; let i=index;">
+      <th scope="row">
+        <app-variable-field-fill [variable]="variable" [mode]="mode"></app-variable-field-fill>
+        <!-- <input type="text" *ngIf="mode==='edit'" class="form-control textbox input-sm" [(ngModel)]="variable.name"> {{variable|json}}
+          <label *ngIf="mode!=='edit'">{{variable.name}}
+            <i>Skribo_env_{{variable.name}}</i>
+          </label> -->
+      </th>
+      <td>
+      </td>
+    </tr>
+
+  </tbody>
+</table>

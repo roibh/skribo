@@ -6,6 +6,17 @@ import { Component, OnInit, Output, Input, OnChanges, EventEmitter } from '@angu
   styleUrls: ['./info.component.css']
 })
 export class InfoComponent implements OnInit, OnChanges {
+  public chartTypes = ['pie', 'bar', 'line', 'lines'];
+  public config = {
+    //displayKey:"description" //if objects array passed which key to be displayed defaults to description,
+    search: true //enables the search plugin to search in the list
+  }
+
+
+  @Input()
+  public resultsDescriptor: any;
+
+
 
   @Output()
   notify: EventEmitter<any> = new EventEmitter<any>();

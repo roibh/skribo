@@ -18,6 +18,13 @@
       <small id="emailHelp" class="form-text text-muted">it will help you understand what you're doing.</small>
     </div>
 
+    <div class="form-group">
+      <label for="NameInput">Installation Page:</label>
+      <textarea class="form-control" [(ngModel)]="embed.Page"></textarea>
+      <small id="emailHelp" class="form-text text-muted">paste the url of the page the script is installed.</small>
+    </div>
+
+
     <app-variables-fill [variables]="embed.Variables"></app-variables-fill>
 
     <a class="btn btn-md btn-primary" *ngIf="embed.ID" (click)="saveEmbed()">Update embed script</a>
@@ -41,7 +48,11 @@
 </a>
 
 <div class="card border-primary mb-3 " *ngFor="let embed of list;let i=index;">
-  <div class="card-header">{{embed.Name}}
+  <div class="card-header">
+
+    {{embed.Name}}
+
+
     <span class="float-right">
       <a class="btn btn-danger btn-xs" (click)="deleteEmbed(embed, i,delete)">
         <i class="oi oi-trash white"></i>
@@ -56,6 +67,7 @@
   </div>
   <div class="card-body text-primary">
     <ul class="card-text">
+      <a href="{{embed.Page}}" *ngIf="embed.Page" target="{{embed.Page}}">Open installation page</a>
       <!-- <li *ngFor="let item of embed.Variables">
         <b> {{item.name}}</b>: {{item.value}}
       </li> -->

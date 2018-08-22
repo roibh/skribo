@@ -1,5 +1,5 @@
 <form #infoForm="ngForm">
-
+ 
   <div class="form-group" *ngIf="info">
     <label for="NameInput">Script Name:</label>
     <input type="text" required class="form-control" name="NameInput" [(ngModel)]="info.Name" id="NameInput" aria-describedby="nameHelp"
@@ -15,11 +15,8 @@
   </div>
 
 
-
-  <div class="form-group" *ngIf="code">
-    <textarea class="form-control">{{code}}</textarea>
-    <small id="codeHelp" class="form-text text-muted">This is the code of the script.</small>
-
+  <div class="form-group" *ngIf="resultsDescriptor && chartTypes">
+    <ngx-select-dropdown [config]="config" [options]="chartTypes" [(value)]="resultsDescriptor.chartType" [multiple]="false"></ngx-select-dropdown>
   </div>
 
   <div class="form-group" *ngIf="variables">

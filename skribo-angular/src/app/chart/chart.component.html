@@ -1,9 +1,18 @@
-<!-- <google-chart [data]="chartData" class="chart"></google-chart>
-    -->
+<select [(ngModel)]="chartLabel" class="float-left" *ngIf="chartType=='bar'" (change)="redraw()">
+  <option *ngFor="let c of chartLabels" [ngValue]="c">{{c}}</option>
+</select>
 
 
-<ngx-charts-pie-chart *ngIf="chartData" class="chart-container" [results]="chartData" [labels]="true" [explodeSlices]="false"
-  [doughnut]="false" [arcWidth]="0.25">
+<select [(ngModel)]="chartValue" class="float-left" *ngIf="chartType=='bar'" (change)="redraw()">
+  <option *ngFor="let c of chartValues" [ngValue]="c">{{c}}</option>
+</select>
+
+
+<ngx-charts-bar-vertical *ngIf="chartData && chartType=='bar'" class="chart-container" [results]="chartData">
+</ngx-charts-bar-vertical>
+
+<ngx-charts-pie-chart *ngIf="chartData && chartType=='pie'" class="chart-container" [results]="chartData" [labels]="true"
+  [explodeSlices]="false" [doughnut]="false" [arcWidth]="0.25">
 </ngx-charts-pie-chart>
 
 

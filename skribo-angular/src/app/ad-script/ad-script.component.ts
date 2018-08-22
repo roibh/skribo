@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ChangeDetectorRef, ViewEncapsulation, Input } from '@angular/core';
 import { FireService } from '../fire.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EditorComponent } from '../editor/editor.component';
@@ -18,7 +18,7 @@ import { MotivationService } from '../motivation.service';
 })
 export class AdScriptComponent implements OnInit {
 
-  constructor(public toastr: ToastsManager,private ref: ChangeDetectorRef,
+  constructor(public toastr: ToastsManager, private ref: ChangeDetectorRef,
     private router: Router, vcr: ViewContainerRef,
     private motivationService: MotivationService,
     public userService: UserService, private route: ActivatedRoute) {
@@ -28,16 +28,21 @@ export class AdScriptComponent implements OnInit {
   public testResult: any;
   public code: string;
   public variables: any;
+  @Input()
+  public resultsDescriptor: { chartType: string[] } = { chartType: ['pie'] };
+
+
+
   id: string;
   public info: { Name: string, Description: string };
 
-  onCode($event) {  
+  onCode($event) {
     this.code = $event;
   }
   onInfo($event) {
     this.info = $event;
   }
-  onvariables($event) {
+  onvariables($event) {   
     this.variables = $event;
   }
 
@@ -49,25 +54,29 @@ export class AdScriptComponent implements OnInit {
       this.info = { Name: '', Description: '' };
       this.code = `function skribo(){
       }`;
+    
       this.variables = [];
     }
     this.ref.detectChanges();
-    
+
   }
 
   async _Get(id) {
     if (id) {
       const script: ScriptModel = await Scripts.get(this.userService.getGroup().GroupId, id);
-      if (script.Variables) {
-        this.variables = JSON.parse(script.Variables);
+
+      if (script.ResultsDescriptor && typeof script.ResultsDescriptor === 'string') {
+        this.resultsDescriptor = JSON.parse(script.ResultsDescriptor);
       }
+      this.variables = script.Variables;
       this.code = script.Code;
       this.info = { Name: script.Name, Description: script.Description };
     }
   }
 
   async _Save(navigate: boolean) {
-    const saveObj: ScriptModel = Object.assign(this.info, { Code: this.code }, { Variables: this.variables });
+    const saveObj: ScriptModel = Object.assign(this.info, { Code: this.code },
+      { Variables: this.variables, ResultsDescriptor: this.resultsDescriptor });
     let id: any = this.route.snapshot.paramMap.get('id');
     if (this.id) {
       id = this.id;
@@ -76,7 +85,7 @@ export class AdScriptComponent implements OnInit {
     if (id) {
       await Scripts.update(group_id, id, saveObj);
     } else {
-      saveObj.GroupId =group_id;
+      saveObj.GroupId = group_id;
       const result = await Scripts.create(group_id, saveObj);
 
       this.id = result.ScriptId;

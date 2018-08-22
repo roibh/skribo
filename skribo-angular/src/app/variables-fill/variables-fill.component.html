@@ -9,6 +9,7 @@
   <tbody>
     <tr *ngFor="let variable of variables; let i=index;">
       <th scope="row">
+        
         <app-variable-field-fill [variable]="variable" [mode]="mode"></app-variable-field-fill>
         <!-- <input type="text" *ngIf="mode==='edit'" class="form-control textbox input-sm" [(ngModel)]="variable.name"> {{variable|json}}
           <label *ngIf="mode!=='edit'">{{variable.name}}

@@ -42,7 +42,7 @@ export class InstallComponent implements OnInit {
   public async onList() {
     this.embedList = await Embed.list(this.script.ScriptId.toString(), this.userService.getGroup().GroupId);
     this.embedList = this.embedList.map((item) => {
-      item.Variables = JSON.parse(item.Variables);
+      // item.Variables = JSON.parse(item.Variables);
       return item;
     });
   }
@@ -61,7 +61,7 @@ export class InstallComponent implements OnInit {
 
     this.embedList = await Embed.list(this.script.ScriptId.toString(), this.userService.getGroup().GroupId);
     this.embedList = this.embedList.map((item) => {
-      item.Variables = JSON.parse(item.Variables);
+      //item.Variables = JSON.parse(item.Variables);
       return item;
     });
 

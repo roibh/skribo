@@ -40,6 +40,9 @@ export class VariablesComponent implements OnInit, OnChanges {
 
   public addRow() {
     this.variables = this.variables || [];
+    if (!Array.isArray(this.variables)) {
+      this.variables = [];
+    }
     this.variables.push({ name: 'name', value: 'value' });
     this.notify.emit(this.variables);
   }

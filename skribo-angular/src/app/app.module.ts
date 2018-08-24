@@ -28,6 +28,9 @@ import { MotivationService } from './motivation.service';
 import { StorageService } from './storage.service';
 import { Scripts, Embed, Results, User } from '@skribo/client';
 import { HotTableModule } from '../assets/ng2-handsontable';
+import { SelectDropDownModule } from 'ngx-select-dropdown';
+
+
 const serverUrl = 'https://skribo.herokuapp.com';
  
 Embed.base = serverUrl;
@@ -124,6 +127,7 @@ const appRoutes: Routes = [
       { enableTracing: false } // <-- debugging purposes only
     ),
     NgxChartsModule,
+    SelectDropDownModule,
     NgxDatatableModule,
     TabsModule.forRoot(),
     ModalModule.forRoot(),

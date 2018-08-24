@@ -49,19 +49,26 @@ export class EmbedListComponent implements OnInit {
       this.embed = embed;
 
       const _variables: any = {};
-      this.script.Variables.forEach((item) => {
-        _variables[item.name] = item;
-      });
+      if (this.script.Variables) {
+        this.script.Variables.forEach((item) => {
+          _variables[item.name] = item;
+        });
 
-      this.embed.Variables.forEach((item) => {
-        if (_variables[item.name]) {
-          Object.assign(_variables[item.name], item);
+        if (this.embed.Variables) {
+          this.embed.Variables.forEach((item) => {
+            if (_variables[item.name]) {
+              Object.assign(_variables[item.name], item);
+            }
+          });
         }
-      });
 
-      this.embed.Variables = Object.keys(_variables).map((key) => {
-        return { name: key, value: _variables[key].value, type: _variables[key].type };
-      });
+        this.embed.Variables = Object.keys(_variables).map((key) => {
+          return { name: key, value: _variables[key].value, type: _variables[key].type };
+        });
+
+      }
+
+
 
       this.modalRef = this.modalService.show(template, this.config);
     });

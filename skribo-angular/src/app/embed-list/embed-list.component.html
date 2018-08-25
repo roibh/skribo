@@ -67,7 +67,10 @@
   </div>
   <div class="card-body text-primary">
     <ul class="card-text">
-      <a href="{{embed.Page}}" *ngIf="embed.Page" target="{{embed.Page}}">Open installation page</a>
+      <a href="{{embed.Page}}" *ngIf="embed.Page" target="{{embed.Page}}">Open installation page</a><br />
+      <a href="{{embed.sourceUrl}}" *ngIf="embed.Page" target="_blank">View sciprt source</a>
+
+
       <!-- <li *ngFor="let item of embed.Variables">
         <b> {{item.name}}</b>: {{item.value}}
       </li> -->

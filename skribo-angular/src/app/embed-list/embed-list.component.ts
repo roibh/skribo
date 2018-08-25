@@ -31,10 +31,15 @@ export class EmbedListComponent implements OnInit {
     ignoreBackdropClick: true
   };
 
-  ngOnInit() {
+  scriptPipe: string;
+  async ngOnInit() {
     if (typeof this.script.Variables === 'string') {
       this.script.Variables = JSON.parse(this.script.Variables);
     }
+    this.scriptPipe = await (await fetch('assets/pipe.js')).text();
+    this.list.forEach((item: any) => {
+      item.sourceUrl = this.getSourceUrl(item);
+    });
   }
 
   public async deleteEmbed(embed, index, template) {
@@ -107,9 +112,17 @@ export class EmbedListComponent implements OnInit {
 
   }
 
+
+  public getSourceUrl(embed) {
+    let templateString = 'https://skribo.herokuapp.com/$SCRIPTURL$';
+    const group = this.userService.getGroup();
+    const dataUrl = embed.ScriptId + '/' + group.GroupId + '/' + embed.EmbedId;
+    templateString = templateString.replace(/\$SCRIPTURL\$/g, `serve/${dataUrl}`);
+    return templateString;
+  }
   public async createEmbed(embed) {
-    const scriptPipe = await fetch('assets/pipe.js');
-    let templateString = await scriptPipe.text();
+
+    let templateString = this.scriptPipe;
     const user = this.userService.getUser();
     const group = this.userService.getGroup();
     const dataUrl = embed.ScriptId + '/' + group.GroupId + '/' + embed.EmbedId;

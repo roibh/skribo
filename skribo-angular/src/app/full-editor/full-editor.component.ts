@@ -53,7 +53,9 @@ export class FullEditorComponent implements OnInit, OnChanges {
       const javascriptDefaults = (window as any).monaco.languages.typescript.javascriptDefaults;
       // extra libraries
       if (!javascriptDefaults._extraLibs[fileName]) {
-
+        if (!this.variables || !Array.isArray(this.variables)) {
+          this.variables = [];
+        }
         javascriptDefaults.addExtraLib([
           'declare class SkriboEnv {',
           ...this.variables.map((item) => {

@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DynamicFormsCoreModule } from "@ng-dynamic-forms/core";
 import { FormsModule } from '@angular/forms';
 import { DynamicFormsBootstrapUIModule } from "@ng-dynamic-forms/ui-bootstrap";
- 
+
 import { ModalModule, } from 'ngx-bootstrap/modal';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { AppComponent } from './app.component';
@@ -31,8 +31,8 @@ import { HotTableModule } from '../assets/ng2-handsontable';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
 
 
-const serverUrl = 'https://skribo.herokuapp.com';
- 
+const serverUrl = (window as any).SkriboUrl;
+
 Embed.base = serverUrl;
 Scripts.base = serverUrl;
 Results.base = serverUrl;
@@ -65,7 +65,7 @@ const monacoConfig: NgxMonacoEditorConfig = {
   baseUrl: '/options/dist/assets/', // configure base path for monaco editor
   defaultOptions: { scrollBeyondLastLine: false }, // pass default options to be used
   onMonacoLoad: () => {
-   
+
 
     const _monaco = (<any>window).monaco;
     // validation settings
@@ -80,7 +80,7 @@ const monacoConfig: NgxMonacoEditorConfig = {
       allowNonTsExtensions: true
     });
 
-   
+
   } // here monaco object will be available as window.monaco use this function to extend monaco editor functionality.
 };
 

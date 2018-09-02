@@ -114,7 +114,7 @@ export class EmbedListComponent implements OnInit {
 
 
   public getSourceUrl(embed) {
-    let templateString = 'https://skribo.herokuapp.com/$SCRIPTURL$';
+    let templateString = (window as any).SkriboUrl + '/$SCRIPTURL$';
     const group = this.userService.getGroup();
     const dataUrl = embed.ScriptId + '/' + group.GroupId + '/' + embed.EmbedId;
     templateString = templateString.replace(/\$SCRIPTURL\$/g, `serve/${dataUrl}`);
@@ -129,14 +129,14 @@ export class EmbedListComponent implements OnInit {
     templateString = templateString.replace(/\$SCRIPTURL\$/g, `serve/${dataUrl}`);
     templateString = templateString.replace(/\$LOGURL\$/g, `log/${dataUrl}`);
     templateString = templateString.replace(/\$RESULTURL\$/g, `results/${dataUrl}/`);
-    templateString = templateString.replace(/\$SERVERURL\$/g, `https://skribo.herokuapp.com/`);
+    templateString = templateString.replace(/\$SERVERURL\$/g, `${(window as any).SkriboUrl}`);
     templateString = templateString.replace(/\$SYNCURL\$/g, `sync/${dataUrl}/accounts`);
 
 
 
     templateString = templateString.replace(/\$SKRIBODATA\$/g, `'` + JSON.stringify({
       'user_id': user.id,
-      'base_url': 'https://skribo.herokuapp.com'
+      'base_url': (window as any).SkriboUrl
     }) + `'`);
 
 

@@ -1,5 +1,5 @@
 <div>
-
+  
   <div [ngSwitch]="variable.type" class="float-left">
     <label>{{variable.name}}</label>
     <div *ngSwitchCase="'string'">
@@ -14,6 +14,13 @@
       <input type="date" class="form-control input-sm textbox text-small" [(ngModel)]="variable.value">
     </div>
 
+   
+    <div *ngSwitchCase="'date-span'">
+    
+      <select class="float-left" [(ngModel)]="variable.value">
+        <option *ngFor="let c of ranges" [ngValue]="c">{{c}}</option>
+      </select>
+    </div>
     <div *ngSwitchCase="'account'">
       <app-account-selector [variable]="variable"></app-account-selector>
     </div>

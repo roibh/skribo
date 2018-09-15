@@ -80,7 +80,7 @@ export class SpreadsheetComponent implements OnInit {
           if (this.userService.getGroup()) {
 
             const group_id = this.userService.getGroup().GroupId;
-            await Results.delete(group_id, result.ScriptId, result.EmbedId, result.ID.toString());
+            await Results.delete(group_id, result.ScriptId, result.EmbedId, result.ScriptId.toString());
             this.collectionData = await Results.listByScript(group_id, result.ScriptId);
             
           }

@@ -1,5 +1,4 @@
 <ng-template #template>
-
   <div class="modal-header">
     <h4 class="modal-title pull-left"> {{resultData.Date| date:'long'}}</h4>
     <a type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -9,18 +8,17 @@
   <div class="modal-body">
     <tabset>
       <tab heading="Data" id="tab_info">
-
         {{activeSheet}}
-
         <tabset>
           <tab class="tabwidth" (select)="onSelect($event)" *ngFor="let sheet of sheets;let i=index;" id="sheet_{{i}}" heading="{{sheet.name}}">
 
+            
+            {{sheet | json}}
+
             <hot-table *ngIf="rows" [data]="sheet.rows" [options]="options" [colHeaders]="sheet.colHeaders" [columns]="sheet.columns">
             </hot-table>
-
           </tab>
         </tabset>
-
 
         <!-- <ngx-datatable [rowHeight]="'auto'" [headerHeight]="50" [rows]="rows" class="material scroll-vertical ngx-datatable fixed-header fixed-row " [columns]="columns">
         </ngx-datatable> -->

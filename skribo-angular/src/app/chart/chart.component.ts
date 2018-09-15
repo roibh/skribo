@@ -37,38 +37,44 @@ export class ChartComponent implements OnInit {
   ngOnInit() {
     this.chartLabels = [];
     this.chartValues = [];
-    let resultObject: any = {};
-    if (typeof this.script.ResultsDescriptor === 'string') {
-      resultObject = JSON.parse(this.script.ResultsDescriptor);
+    this.chartType = this.script.ResultsDescriptor.chartType[0];
+
+    switch (this.chartType) {
+      case 'pie':
+        this.chartLabels.push('label');
+        this.chartValues.push('value');
+        this.chartData = this.data.map((item) => {
+          return { name: item['label'], value: item['value'] };
+        });
+        break;
     }
-    this.chartType = resultObject.chartType;
+    // if (Array.isArray(this.data)) {
+    //   const firstObject = this.data[0];
+    //   this.chartLabels.push('label');
+    //   this.chartValues.push('value');
+    //   // Object.keys(firstObject).forEach((key) => {
+    //   //   if (!Number(firstObject[key])) {
+    //   //     this.chartLabels.push(key);
+    //   //   } else {
+    //   //     this.chartValues.push(key);
+    //   //   }
 
-    if (Array.isArray(this.data)) {
-      const firstObject = this.data[0];
-
-      Object.keys(firstObject).forEach((key) => {
-        if (!Number(firstObject[key])) {
-          this.chartLabels.push(key);
-        } else {
-          this.chartValues.push(key);
-        }
-
-      });
-      this.chartData = this.data.map((item) => {
-        return { name: item['account'], value: item['Impressions'] };
-      });
-    } else {
+    //   // });
+    //   this.chartData = this.data.map((item) => {
+    //     return { name: item['account'], value: item['Impressions'] };
+    //   });
+    // } else {
 
 
-      Object.keys(this.data).forEach((key) => {
-        if (!Number(this.data[key])) {
-          this.chartLabels.push(key);
-        } else {
-          this.chartValues.push(key);
-        }
+    //   Object.keys(this.data).forEach((key) => {
+    //     if (!Number(this.data[key])) {
+    //       this.chartLabels.push(key);
+    //     } else {
+    //       this.chartValues.push(key);
+    //     }
 
-      });
-    }
+    //   });
+    // }
 
 
 

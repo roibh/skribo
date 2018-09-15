@@ -72,13 +72,12 @@ export class ResultViewerComponent implements OnInit {
     this.sheets = [];
     this._ngZone.run(async () => {
       const group_id = this.userService.getGroup().GroupId;
-      const id = this.resultData.ID;
+      const id = this.resultData.ResultId;
       const embed_id = this.resultData.EmbedId;
       const script_id = this.resultData.ScriptId;
       const result = await Results.get(group_id, script_id, embed_id, id);
-      const data = JSON.parse(result.Data);
+      this.Data = result.Data;
       try {
-        this.Data = JSON.parse(data.results);
         if (Array.isArray(this.Data)) {
           const objectRow = this.Data[0];
 

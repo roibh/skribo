@@ -63,7 +63,7 @@ export class ManageComponent implements OnInit {
     this.modalRef.hide();
   }
 
-  async spreadsheet(id: number) {
+  async spreadsheet(id: string) {
     try {
       const group_id = this.userService.getGroup().GroupId;
       await Scripts.remove(group_id, id);
@@ -74,7 +74,7 @@ export class ManageComponent implements OnInit {
 
 
 
-  async remove(id: number, template) {
+  async remove(id: string, template) {
     try {
       const modalResult = await this.openModal(template);
       if (modalResult) {

@@ -1,6 +1,6 @@
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-(window as any).SkriboUrl = 'https://skribo.herokuapp.com/';
+(window as any).SkriboUrl = 'http://localhost:6200';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 

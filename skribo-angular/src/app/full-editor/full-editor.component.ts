@@ -64,6 +64,9 @@ export class FullEditorComponent implements OnInit, OnChanges {
           'declare class Logger {',
           'static log(item:any):void;',
           '}',
+          'declare class Util {',
+          'static timespanToRange(timespan:string):{start: string, end:string};',
+          '}',
           'declare class MccApp {',
           'static accounts();',
           'static select(account);',
@@ -75,7 +78,7 @@ export class FullEditorComponent implements OnInit, OnChanges {
           'declare class AdWordsApp {',
           'static campaigns();',
           'static keywords();',
-          'static report(query: string, options:any);',
+          'static report(query: string, options?:any);',
           'static currentAccount();',
           '};',
           'declare function SkriboPostResults(objectString:string);',
@@ -92,11 +95,17 @@ export class FullEditorComponent implements OnInit, OnChanges {
           '}',
 
           'declare class SpreadsheetApp {',
-          'static create(name:string)',
+          'static create(name:string, cols?:number,rows?:number)',
+          'static open(name:string)',
           'static openByUrl(SPREADSHEET_URL);',
+          '}',
+          'declare class DriveApp {',
+          'static getFileById(name:string)',
+          'static getRootFolder()',
+          '}',
+          'declare class Charts {',
+          'static Position:any',
           '}'
-
-
         ].join('\n'), fileName);
       }
       editor.onKeyUp((change) => {

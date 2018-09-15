@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DynamicFormsCoreModule } from "@ng-dynamic-forms/core";
+import { DynamicFormsCoreModule } from '@ng-dynamic-forms/core';
 import { FormsModule } from '@angular/forms';
-import { DynamicFormsBootstrapUIModule } from "@ng-dynamic-forms/ui-bootstrap";
+import { DynamicFormsBootstrapUIModule } from '@ng-dynamic-forms/ui-bootstrap';
 
 import { ModalModule, } from 'ngx-bootstrap/modal';
 import { TabsModule } from 'ngx-bootstrap/tabs';
@@ -17,7 +17,6 @@ import { Ng2TableModule, NgTableFilteringDirective, NgTablePagingDirective, NgTa
 import { LoadersCssModule } from 'angular2-loaders-css';
 import { LoaderComponent } from './loader/loader.component';
 import { AdScriptComponent } from './ad-script/ad-script.component';
-import { AceEditorDirective } from 'ng2-ace';
 import { EditorComponent } from './editor/editor.component';
 import { AceEditorModule } from 'ng2-ace-editor';
 import { VariablesComponent } from './variables/variables.component';
@@ -59,6 +58,9 @@ import { AccountSelectorComponent } from './account-selector/account-selector.co
 import { GridComponent } from './grid/grid.component';
 import { VariablesFillComponent } from './variables-fill/variables-fill.component';
 import { VariableFieldFillComponent } from './variable-field-fill/variable-field-fill.component';
+import { DateRangeComponent } from './date-range/date-range.component';
+import { DateSpanComponent } from './date-span/date-span.component';
+import { TabsetComponent } from './tabset/tabset.component';
 
 
 const monacoConfig: NgxMonacoEditorConfig = {
@@ -119,7 +121,10 @@ const appRoutes: Routes = [
     AccountSelectorComponent,
     GridComponent,
     VariablesFillComponent,
-    VariableFieldFillComponent
+    VariableFieldFillComponent,
+    DateRangeComponent,
+    DateSpanComponent,
+    TabsetComponent
   ],
   imports: [
     RouterModule.forRoot(

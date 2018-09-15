@@ -5,4 +5,5 @@ skriboGateway/node_modules/
 *.log
 *.lock
 @skribo/
+skriboWeb
 adwords-mock/node_modules/

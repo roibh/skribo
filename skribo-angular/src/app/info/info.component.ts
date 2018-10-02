@@ -31,6 +31,9 @@ export class InfoComponent implements OnInit, OnChanges {
   @Input()
   public variables: string;
 
+  @Input()
+  public resultSample: string;
+
 
   public name: string;
   public description: string;
@@ -39,7 +42,9 @@ export class InfoComponent implements OnInit, OnChanges {
     // this.info = { name: null }
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+
+
   }
 
   ngOnChanges() {

@@ -25,7 +25,7 @@
     "@methodus/client": "^0.0.8",
     "@ng-dynamic-forms/core": "^6.0.2",
     "@ng-dynamic-forms/ui-bootstrap": "^6.0.2",
-    "@skribo/client": "^1.0.11",
+    "@skribo/client": "1.0.60",
     "@swimlane/ngx-charts": "^8.1.0",
     "@swimlane/ngx-datatable": "^12.0.0",
     "angular-google-signin": "^0.1.5",

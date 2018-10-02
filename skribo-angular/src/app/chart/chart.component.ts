@@ -19,6 +19,7 @@ export class ChartComponent implements OnInit {
   script: ScriptModel;
 
   public chartData: any;
+  public chartDataArray: any[];
   public chartLabels: string[];
 
   @Output()
@@ -41,6 +42,14 @@ export class ChartComponent implements OnInit {
 
     switch (this.chartType) {
       case 'pie':
+
+        if (Object.keys(this.data[0])) {
+          this.data.map((item) => {
+            return { name: item['label'], value: item['value'] };
+          });
+        }
+
+
         this.chartLabels.push('label');
         this.chartValues.push('value');
         this.chartData = this.data.map((item) => {

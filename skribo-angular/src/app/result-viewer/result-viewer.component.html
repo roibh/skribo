@@ -10,10 +10,11 @@
       <tab heading="Data" id="tab_info">
         {{activeSheet}}
         <tabset>
-          <tab class="tabwidth" (select)="onSelect($event)" *ngFor="let sheet of sheets;let i=index;" id="sheet_{{i}}" heading="{{sheet.name}}">
+          <tab class="tabwidth" (select)="onSelect($event)" *ngFor="let sheet of sheets;let i=index;" id="sheet_{{i}}"
+            heading="{{sheet.name}}">
 
-            
-            {{sheet | json}}
+
+
 
             <hot-table *ngIf="rows" [data]="sheet.rows" [options]="options" [colHeaders]="sheet.colHeaders" [columns]="sheet.columns">
             </hot-table>

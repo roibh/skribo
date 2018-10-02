@@ -1,24 +1,24 @@
 <form #infoForm="ngForm">
- 
+
   <div class="form-group" *ngIf="info">
     <label for="NameInput">Script Name:</label>
-    <input type="text" required class="form-control" name="NameInput" [(ngModel)]="info.Name" id="NameInput" aria-describedby="nameHelp"
-      placeholder="Enter a name">
+    <input type="text" required class="form-control" name="NameInput" [(ngModel)]="info.Name" id="NameInput"
+      aria-describedby="nameHelp" placeholder="Enter a name">
     <small id="emailHelp" class="form-text text-muted">every thing needs a name.</small>
   </div>
   <div class="form-group" *ngIf="info">
     <label for="NameInput">Description:</label>
-    <textarea class="form-control" name="DescriptionInput" [(ngModel)]="info.Description" id="DescriptionInput" aria-describedby="DescriptionHelp"
-      placeholder="Enter a description"></textarea>
+    <textarea class="form-control" name="DescriptionInput" [(ngModel)]="info.Description" id="DescriptionInput"
+      aria-describedby="DescriptionHelp" placeholder="Enter a description"></textarea>
 
     <small id="emailHelp" class="form-text text-muted">it will help you understand what you're doing.</small>
   </div>
-
+  {{resultSample | json}}
 
   <div class="form-group" *ngIf="resultsDescriptor && chartTypes">
     <ngx-select-dropdown [config]="config" [options]="chartTypes" [(value)]="resultsDescriptor.chartType" [multiple]="false"></ngx-select-dropdown>
   </div>
-
+  {{resultSample | json}}
   <div class="form-group" *ngIf="variables">
 
     <fieldset>

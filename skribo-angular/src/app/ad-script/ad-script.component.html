@@ -1,35 +1,26 @@
 <div class="container-fluid">
   <h1 *ngIf="info">{{info.Name}}</h1>
-
-
-
-
   <div class="toolbar">
-
     <a class="btn btn-success btn-xs" (click)="_Save(false)">Save</a>
-
-
-
     <a class="btn btn-primary btn-xs" (click)="_Save(true)">Save & finish</a>
-
-
+    <app-install [script]="script"></app-install>
+    <app-spreadsheet [script]="script"></app-spreadsheet>
     <a class="btn btn-success btn-xs" (click)="_Execute()">
       <span class="oi oi-media-play"></span> Test Execution</a>
-
   </div>
 
   <tabset>
 
     <tab heading="Code" id="tab_editor">
-     
+
       <app-full-editor [code]="code" (notify)="onCode($event)" [variables]="variables"></app-full-editor>
     </tab>
     <tab heading="Info" id="tab_info">
 
-      <app-info [info]="info" [code]="code" [variables]="variables" [resultsDescriptor]="resultsDescriptor" (notify)="onInfo($event)"></app-info>
+      <app-info [info]="info" [code]="code" [variables]="variables" [resultSample]="resultSample" [resultsDescriptor]="resultsDescriptor" (notify)="onInfo($event)"></app-info>
     </tab>
     <tab heading="Variables" id="tab_variables">
-      
+
       <app-variables [mode]="'edit'" [variables]="variables" (notify)="onvariables($event)"></app-variables>
     </tab>
   </tabset>

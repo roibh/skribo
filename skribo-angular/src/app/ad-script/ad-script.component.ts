@@ -1,9 +1,6 @@
 import { Component, OnInit, ViewContainerRef, ChangeDetectorRef, ViewEncapsulation, Input } from '@angular/core';
-import { FireService } from '../fire.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EditorComponent } from '../editor/editor.component';
-import { InfoComponent } from '../info/info.component';
-import { Scripts, ScriptModel } from '@skribo/client';
+import { Scripts, ScriptModel, Results } from '@skribo/client';
 import { UserService } from '../user.context.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { MotivationService } from '../motivation.service';
@@ -25,9 +22,11 @@ export class AdScriptComponent implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
+  public script: ScriptModel;
   public testResult: any;
   public code: string;
   public variables: any;
+  public resultSample: any;
   @Input()
   public resultsDescriptor: { chartType: string[] } = { chartType: ['pie'] };
 
@@ -42,7 +41,7 @@ export class AdScriptComponent implements OnInit {
   onInfo($event) {
     this.info = $event;
   }
-  onvariables($event) {   
+  onvariables($event) {
     this.variables = $event;
   }
 
@@ -54,7 +53,7 @@ export class AdScriptComponent implements OnInit {
       this.info = { Name: '', Description: '' };
       this.code = `function skribo(){
       }`;
-    
+
       this.variables = [];
     }
     this.ref.detectChanges();
@@ -63,14 +62,15 @@ export class AdScriptComponent implements OnInit {
 
   async _Get(id) {
     if (id) {
-      const script: ScriptModel = await Scripts.get(this.userService.getGroup().GroupId, id);
+      this.script = await Scripts.get(this.userService.getGroup().GroupId, id);
 
-      if (script.ResultsDescriptor && typeof script.ResultsDescriptor === 'string') {
-        this.resultsDescriptor = JSON.parse(script.ResultsDescriptor);
+      if (this.script.ResultsDescriptor && typeof this.script.ResultsDescriptor === 'string') {
+        this.resultsDescriptor = JSON.parse(this.script.ResultsDescriptor);
       }
-      this.variables = script.Variables;
-      this.code = script.Code;
-      this.info = { Name: script.Name, Description: script.Description };
+      this.resultSample = await Results.getSample(this.script.GroupId, this.script.ScriptId);
+      this.variables = this.script.Variables;
+      this.code = this.script.Code;
+      this.info = { Name: this.script.Name, Description: this.script.Description };
     }
   }
 

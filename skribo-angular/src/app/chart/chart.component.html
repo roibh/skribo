@@ -11,6 +11,7 @@
 <ngx-charts-bar-vertical *ngIf="chartData && chartType=='bar'" class="chart-container" [results]="chartData">
 </ngx-charts-bar-vertical>
 
+{{chartData | json}}
 <ngx-charts-pie-chart *ngIf="chartData && chartType=='pie'" class="chart-container" [results]="chartData" [labels]="true"
   [explodeSlices]="false" [doughnut]="false" [arcWidth]="0.25">
 </ngx-charts-pie-chart>

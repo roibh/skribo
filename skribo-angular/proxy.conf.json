@@ -1,12 +1,12 @@
 {
-    "/scripts/*": {
-      "targetss": "https://skribo.herokuapp.com",
-      "target": "http://localhost:6200",
-      "secure": false,
-      "logLevel": "debug",
-      "changeOrigin": true,
-      "pathRewrite": {
-        "^/library": ""
-      }
+  "/scripts/*": {
+    "targetss": "https://skribo.herokuapp.com",
+    "target": "http://localhost:6200",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/library": ""
     }
+  }
 }

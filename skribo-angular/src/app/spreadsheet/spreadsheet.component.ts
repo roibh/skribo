@@ -75,27 +75,16 @@ export class SpreadsheetComponent implements OnInit {
       try {
         const modalResult = await this.openModal(template);
         if (modalResult) {
-
-
           if (this.userService.getGroup()) {
-
             const group_id = this.userService.getGroup().GroupId;
-            await Results.delete(group_id, result.ScriptId, result.EmbedId, result.ScriptId.toString());
+            await Results.delete(group_id, result.ScriptId, result.EmbedId, result.ResultId);
             this.collectionData = await Results.listByScript(group_id, result.ScriptId);
-            
+            debugger;
           }
-
-
-
         }
       } catch (error) {
         console.error(error);
       }
     });
-
   }
-
-
-
-
 }

@@ -48,7 +48,7 @@ export class InfoComponent implements OnInit, OnChanges {
 
   }
 
-  resultDescriptorHandler(descriptor: any) {
+  chartDescriptorHandler(descriptor: any) {
     this._ngZone.run(async () => {
       this.resultsDescriptor.chartDescriptor = descriptor;
     });

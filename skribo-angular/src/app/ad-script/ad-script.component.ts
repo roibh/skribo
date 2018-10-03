@@ -72,7 +72,9 @@ export class AdScriptComponent implements OnInit {
         this.resultsDescriptor = { chartType: ['pie'] };
       }
       const resultSampleData = await Results.getSample(this.script.GroupId, this.script.ScriptId);
-      this.resultSample = Object.keys(resultSampleData[0]);
+      if (resultSampleData && resultSampleData.length > 0) {
+        this.resultSample = Object.keys(resultSampleData[0]);
+      }
 
 
       this.variables = this.script.Variables;

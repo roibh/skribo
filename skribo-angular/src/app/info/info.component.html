@@ -13,14 +13,20 @@
 
     <small id="emailHelp" class="form-text text-muted">it will help you understand what you're doing.</small>
   </div>
-  {{resultSample | json}}
+
+
+
 
   <div class="form-group" *ngIf="resultsDescriptor && chartTypes">
     <ngx-select-dropdown [config]="config" [options]="chartTypes" [(value)]="resultsDescriptor.chartType" [multiple]="false"></ngx-select-dropdown>
   </div>
-  {{resultSample | json}}
-  <div class="form-group" *ngIf="variables">
 
+
+  {{resultsDescriptor | json}}
+  <app-chart-info [resultSample]="resultSample" [chartDescriptor]="resultsDescriptor.chartDescriptor"
+    (chartDescriptorHandler)="chartDescriptorHandler($event)"></app-chart-info>
+
+  <div class="form-group" *ngIf="variables">
     <fieldset>
       <legend>Variables</legend>
       <table class="table table-sm">

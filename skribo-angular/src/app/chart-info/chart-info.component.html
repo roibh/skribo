@@ -1,0 +1,52 @@
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left"> </h4>
+    <a type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </a>
+  </div>
+  <div class="modal-body">
+
+    <div class="row">
+
+
+
+
+      <div class="col-md-3">
+        <bs-sortable [(ngModel)]="resultSample" (onChange)="emitChanges($event)" ngModelOptions="{standalone: true}"
+          itemClass="sortable-item" itemActiveClass="sortable-item-active" placeholderItem="Drag here" placeholderClass="placeholderStyle"
+          wrapperClass="sortable-wrapper"></bs-sortable>
+
+      </div>
+
+      <div class="col-md-3">
+        <bs-sortable [(ngModel)]="measurements" (onChange)="emitChanges($event)" ngModelOptions="{standalone: true}"
+          itemClass="sortable-item" itemActiveClass="sortable-item-active" placeholderItem="Drag here" placeholderClass="placeholderStyle"
+          wrapperClass="sortable-wrapper"></bs-sortable>
+
+      </div>
+      <div class="col-md-3">
+        <bs-sortable [(ngModel)]="identifiers" (onChange)="emitChanges($event)" ngModelOptions="{standalone: true}"
+          itemClass="sortable-item" itemActiveClass="sortable-item-active" placeholderItem="Drag here" placeholderClass="placeholderStyle"
+          wrapperClass="sortable-wrapper"></bs-sortable>
+
+      </div>
+    </div>
+
+    {{chartDescriptor|json}}
+    <!--  <div class="col-xs-6 col-6 col-md-5 col-lg-3">
+        <bs-sortable [(ngModel)]="resultSample" ngModelOptions="{standalone: true}" itemClass="sortable-item"
+          itemActiveClass="sortable-item-active" placeholderItem="Drag here" placeholderClass="sortable-item"
+          wrapperClass="sortable-wrapper"></bs-sortable>
+
+      </div>
+    </div>
+-->
+  </div>
+</ng-template>
+
+
+
+<a class="btn btn-success" (click)="openDialog(resultSample, template)">
+  <span class="oi oi-chart white"></span>
+</a>

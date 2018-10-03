@@ -28,7 +28,7 @@ export class AdScriptComponent implements OnInit {
   public variables: any;
   public resultSample: any;
   @Input()
-  public resultsDescriptor: { chartType: string[] } = { chartType: ['pie'] };
+  public resultsDescriptor: any;
 
 
 
@@ -46,6 +46,7 @@ export class AdScriptComponent implements OnInit {
   }
 
   async ngOnInit() {
+
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       await this._Get(id);
@@ -63,11 +64,17 @@ export class AdScriptComponent implements OnInit {
   async _Get(id) {
     if (id) {
       this.script = await Scripts.get(this.userService.getGroup().GroupId, id);
-
+      this.resultsDescriptor = this.script.ResultsDescriptor;
       if (this.script.ResultsDescriptor && typeof this.script.ResultsDescriptor === 'string') {
         this.resultsDescriptor = JSON.parse(this.script.ResultsDescriptor);
       }
-      this.resultSample = await Results.getSample(this.script.GroupId, this.script.ScriptId);
+      if (!this.resultsDescriptor) {
+        this.resultsDescriptor = { chartType: ['pie'] };
+      }
+      const resultSampleData = await Results.getSample(this.script.GroupId, this.script.ScriptId);
+      this.resultSample = Object.keys(resultSampleData[0]);
+
+
       this.variables = this.script.Variables;
       this.code = this.script.Code;
       this.info = { Name: this.script.Name, Description: this.script.Description };

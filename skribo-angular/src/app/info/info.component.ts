@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, Input, OnChanges, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input, OnChanges, EventEmitter, NgZone } from '@angular/core';
+import { ResultsDescriptor } from '@skribo/client';
 
 @Component({
   selector: 'app-info',
@@ -14,7 +15,7 @@ export class InfoComponent implements OnInit, OnChanges {
 
 
   @Input()
-  public resultsDescriptor: any;
+  public resultsDescriptor: ResultsDescriptor;
 
 
 
@@ -38,7 +39,7 @@ export class InfoComponent implements OnInit, OnChanges {
   public name: string;
   public description: string;
 
-  constructor() {
+  constructor(private _ngZone: NgZone, ) {
     // this.info = { name: null }
   }
 
@@ -47,8 +48,14 @@ export class InfoComponent implements OnInit, OnChanges {
 
   }
 
+  resultDescriptorHandler(descriptor: any) {
+    this._ngZone.run(async () => {
+      this.resultsDescriptor.chartDescriptor = descriptor;
+    });
+  }
+
   ngOnChanges() {
-    this.notify.emit(this.info)
+    this.notify.emit(this.info);
   }
 }
 

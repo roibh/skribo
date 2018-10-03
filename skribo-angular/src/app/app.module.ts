@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DynamicFormsCoreModule } from '@ng-dynamic-forms/core';
 import { FormsModule } from '@angular/forms';
 import { DynamicFormsBootstrapUIModule } from '@ng-dynamic-forms/ui-bootstrap';
-
+import { SortableModule } from 'ngx-bootstrap/sortable';
 import { ModalModule, } from 'ngx-bootstrap/modal';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { AppComponent } from './app.component';
@@ -61,6 +61,7 @@ import { VariableFieldFillComponent } from './variable-field-fill/variable-field
 import { DateRangeComponent } from './date-range/date-range.component';
 import { DateSpanComponent } from './date-span/date-span.component';
 import { TabsetComponent } from './tabset/tabset.component';
+import { ChartInfoComponent } from './chart-info/chart-info.component';
 
 
 const monacoConfig: NgxMonacoEditorConfig = {
@@ -124,7 +125,8 @@ const appRoutes: Routes = [
     VariableFieldFillComponent,
     DateRangeComponent,
     DateSpanComponent,
-    TabsetComponent
+    TabsetComponent,
+    ChartInfoComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -137,6 +139,7 @@ const appRoutes: Routes = [
     TabsModule.forRoot(),
     ModalModule.forRoot(),
     Ng2TableModule,
+    SortableModule.forRoot(),
     LoadersCssModule,
     BrowserModule,
     FormsModule,
